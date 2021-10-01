@@ -23,7 +23,7 @@ Other important reasoning:
 
 ## Usage with k3d
 
-* [More background on k3d at k3d.md](/about-kubernetes/k3d.md)
+* [More background on k3d at k3d.md](/about-k3d/k3d.md)
 
 ### Clusters
 
@@ -35,7 +35,7 @@ Other important reasoning:
 
 Starting a Cluster locally on an, "edge" machine such as a personal linux or MacOS involves the use of k3d.
 
-Further discussion [can be found in the k3d.md documentation](/about-k3d/k3d.md#Launching%a%Cluster%on%Edge%with%k3d).
+Further discussion [can be found in the k3d.md documentation](/about-k3d/k3d.md#launching-a-cluster-on-edge-with-k3d).
 
 
 
