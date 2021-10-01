@@ -6,7 +6,8 @@ Basically, it helps described the structure of an application through charts wit
 
 ## What is the Definition a Kubernetes Package?
 
-Within the context of Kubernetes, a package would essentially be a service or piece of software specifically built for the context of Kuberentes. [ArtifactHub](https://artifacthub.io/) is one website that hosts a collection of Kubernetes packages, for example, "MariaDB for Kubernetes."
+* Within the context of Kubernetes, a package would essentially be "state settings" for virtual machines that are designed to help operate a service or piece of software specifically built for the context of Kubernetes, and possibly specifically customized for certain conditions (such as high useage or low usage). 
+* [ArtifactHub](https://artifacthub.io/) is one website that hosts a collection of Kubernetes packages, for example, "MariaDB for Kubernetes."
 
 ## Overview of Helm
 
@@ -64,8 +65,71 @@ helm package
 
 This allows anyone in your organization to use the same package, or sets of packages for various scenarios under different operating conditions (for example, the holidays are over an a particular ECommerce store doesn't need as many resrouces anymore, you can set up a different helm package for, "low maintainence mode.")
 
+## How to Use Helm, Helmcharts and Tiller
+
+* You can think of Helm as, "apt" or "homebrew" for Kubernetes.
+
+Kubernetes includes:
+
+* pods
+* services
+
+Package Yaml files to control the following, bundled together is known as, "helm charts.":
+
+* Stateful set
+* Configmap
+* k8s User Permissions
+* Secret
+* Services
+
+Well known services all have existing configurations that can be found. The capability to share Helm charts is part of why helm became so popular, through public and private registries.
+
+### Helm Templating Engine
+
+* A kuberentes may have a collection of microservices. 
+* The difference between yaml files between each of these microservices may be a few different values.
+
+A template file is a sort of, "template," that defines configuration values within {{variables}} for a microservice - these variables can be re-set based upon which microservice you are configuring, rather than having to write out many different template files.
+
+In essence, it's:
+
+1) Common blueprint.
+2) Dynamic values replaced by placeholders.
+
+This may come in to use if you have different levels of configuration between development, staging, or production, where different values are needed for the various microservices.
+
+### Example Helm Start Structure
+
+* mychart
+- chart.yml // main info about the chart
+- values.yaml // the values stored
+- /charts/ // where you store charts
+- /templates/ // where you store templates
+
+#### values.yaml
+
+imageName: myapp
+port: 8080
+version: 1.0.0
+
+You can also create overrides with versioning.
+
+### Release Management
+
+* Client is helm CLI
+* Server is "Tiller," 
+
+Whenever you create a new chart execution, the changes are recorded by Tiller, similar to the git paradigm - basically chart execution history.
+
+Downsides of Tiller - there is a security issue in that it has too much power inside the k8s cluster, but beyond Helm version  
+
+# Helm Chart Creation
+
+
 
 
 ## Resources
 
+* [Collection of Helm Tutorials](https://jfrog.com/blog/10-helm-tutorials-to-start-your-kubernetes-journey/)
 * [Introductory Tutorial on Helm](https://www.youtube.com/watch?v=fy8SHvNZGeE)
+* [Helm in Kubernetes](https://www.youtube.com/watch?v=-ykwb1d0DXU)
