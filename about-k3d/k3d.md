@@ -100,20 +100,37 @@ k3d cluster create -a 2
 
 To find this out, [in the context of k3d commands](https://k3d.io/v4.4.8/usage/commands/), we can look at the documentation by using the flags, "k3d cluster -h".
 
-![](/about-kubernetes/img/k3dagentvsserver.png)
+![](/img/k3dagentvsserver.png)
 
-As can be seen in the image, there are two main constructs within k3d.
+As can be seen in the image, there are two main constructs within k3d - Agent and Server.
 
 #### k3s Server
 
 * Servers contain a, "Process," which contains several important components:
 - Database (via SQLite)
 - API Server
-- Tunnel Proxy
+- Tunnel Proxy (connects to the k3s Agent)
 - Scheduler
 - Controller Manager
 
+These components are roughly analogous to a [k8s Control Plane](about-kubernetes/kubernetes.md#control-plane-components)
+
 #### k3s Agent
+
+Agents contain a, "Process" which contains:
+- Tunnel Proxy (to connect to the k3s Server)
+- Kube proxy
+- [Flannel](https://github.com/flannel-io/flannel#flannel) - Flannel is an overlay network that works by assigning a range of subnet addresses (usually IPv4 with a /24 or /16 subnet mask). An overlay network is a computer network that is built on top of another network. Nodes in the overlay network can be thought of as being connected by virtual or logical links, each of which corresponds to a path, perhaps through many physical links, in the underlying network.
+- Kublet, which has a ContainerID as well as various Pods.
+
+These components are roughly analogous to a [k8s Node](about-kubernetes/kubernetes.md#node-components).
+
+##### Flannel Illustrated
+
+![](/img/flanneloverview.png)
+
+
+
 
 # Creating a Setup Deployment
 
@@ -127,3 +144,4 @@ A setup, "hello world," deployment would include:
 # Resources
 
 * [k3d vs minikube vs kind](https://brennerm.github.io/posts/minikube-vs-kind-vs-k3s.html)
+* [k3s + k3d = k8s: perfect match for dev and test](https://en.sokube.ch/post/k3s-k3d-k8s-a-new-perfect-match-for-dev-and-test-1)
