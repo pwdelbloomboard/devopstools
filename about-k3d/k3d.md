@@ -350,7 +350,7 @@ Some prerequisites to review ahead of time:
 
 * [Encrypted Secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets) - these are essentially encrypted environmental variables that we create in an organization, repo or repo environment. These are secrets that will be available to use in Github Actions workflows.
 * [Automated Token Authorization](https://docs.github.com/en/actions/security-guides/automatic-token-authentication) - When you enable GitHub Actions, GitHub installs a GitHub App on your repository. [Github Actions are enabled by setting up an Action within a repo](https://github.com/pwdelbloomboard/dockerreactjs-yarn/actions/new).
-* [Working with Github Packages Registry](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry)
+* [Working with Github Container Registry](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry) is regular, run-of-the-mill tagging and pushing to a particular Container Registry, such as the Docker registry, with a command such as, "docker push ghcr.io/OWNER/IMAGE_NAME:latest" assuming an image has been pre-named/tagged with ghcr.io/OWNER/IMAGE_NAME:latest ," as an example.
 
 
 *Some Quick Definitions for Github Actions*
@@ -388,7 +388,11 @@ buildImage:
         docker push $IMAGE_ID
 
 ```
+A more throurough rundown of the above yaml file [may be found here](https://docs.github.com/en/actions/publishing-packages/publishing-docker-images#publishing-images-to-github-packages).
 
+
+
+One the package is published, you can [connect a repository to a package](https://docs.github.com/en/packages/learn-github-packages/connecting-a-repository-to-a-package) within Github.
 
 
 1. [Authenticate to Github Packages](https://docs.github.com/en/packages/learn-github-packages/introduction-to-github-packages#authenticating-to-github-packages)
