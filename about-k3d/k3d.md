@@ -332,9 +332,9 @@ ghcr.io/OWNER/IMAGE_NAME:version
 So in our case, it will be:
 
 ```
-docker build -t ghcr.io/pwdel/ps-container:0.1 .
+docker build -t ghcr.io/pwdel/ps-container:latest .
 ```
-...where we arbitrarily selected version 0.1 for now. In order to use and push this tagged image to the registry, we can follow Github's documentation.
+...where we arbitrarily selected version "latest" for now. In order to use and push this tagged image to the registry, we can follow Github's documentation.
 
 #### Working with Github Packages
 
@@ -388,14 +388,94 @@ buildImage:
         docker push $IMAGE_ID
 
 ```
-A more throurough rundown of the above yaml file [may be found here](https://docs.github.com/en/actions/publishing-packages/publishing-docker-images#publishing-images-to-github-packages).
+A more throurough rundown of the above yaml file [may be found here at, "Publishing Docker Images to Github Packages](https://docs.github.com/en/actions/publishing-packages/publishing-docker-images#publishing-images-to-github-packages).
+
+
 
 
 
 One the package is published, you can [connect a repository to a package](https://docs.github.com/en/packages/learn-github-packages/connecting-a-repository-to-a-package) within Github.
 
 
-1. [Authenticate to Github Packages](https://docs.github.com/en/packages/learn-github-packages/introduction-to-github-packages#authenticating-to-github-packages)
+1. [Authenticate to Github Packages Container Registry](https://docs.github.com/en/packages/learn-github-packages/introduction-to-github-packages#authenticating-to-github-packages)
+
+You can login using the command:
+
+```
+docker login ghcr.io 
+```
+With ghcr.io being the github container registry. When it prompts you for your username/password, use the access token for both. In theory the token username and password should be different, with the username being the actual username, but in this instance it worked with both plugged in.
+
+You can set up your token as an environmental variable on your machine, like so:
+
+```
+export CR_PAT=YOUR_TOKEN
+```
+Then, the following command will log you in to the ghcr.io using your token.
+```
+echo $CR_PAT | docker login ghcr.io -u USERNAME --password-stdin
+```
+2. Push the container to the container registry [according to this documentation, "Working with a Github Packages Registry."](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry):
+
+We use the following format:
+
+```
+docker push ghcr.io/OWNER/IMAGE-NAME:TAG
+```
+Which in our situation is:
+
+```
+docker push ghcr.io/pwdel/ps-container:latest
+```
+In this case you may get a, "permission deinied," error.
+
+If that is the case, you may need to [Configure Access for the Member](https://github.community/t/unauthorized-error-when-pushing-images/131217) which is discussed within the [Configuring Package Access Control and Visibility Section](https://docs.github.com/en/packages/learn-github-packages/configuring-a-packages-access-control-and-visibility).
+
+Basically, under the free plan, Access Permissions must be set to Public for Images. Public images allow anonymous access and can be pulled without authentication or signing in via the CLI.  Access Permissions seem to be something that is set for an organization, which makes sense because typically, "packages," and releases are something that is built within the context of a team.
+
+So, we set up a seperate organization, [githubpackagetest](https://github.com/orgs/githubpackagestest/repositories) and transfered the repo, [dockerreactjs-yarn](https://github.com/githubpackagestest/dockerreactjs-yarn) over to this organization so that it could hypothetically not have a, "Permission Denied," error for the pwdelbloomboard user.
+
+Notice that when the image was originally tagged, it was tagged with the username, "pwdel," which is not our username, it is actually, "pwdelbloomboard."  So to fix this, we first have to tag the build image correctly with:
+
+```
+docker build -t ghcr.io/pwdelbloomboard/ps-container:latest .
+```
+Then after verifying the build, try the proper push with:
+```
+docker push ghcr.io/pwdelbloomboard/ps-container:latest
+```
+Once this has been properly pushed, you will see a success message with:
+```
+The push refers to repository [ghcr.io/pwdelbloomboard/ps-container]
+3e796ce6091b: Pushed 
+32fc229d0177: Pushed 
+4848bc580068: Pushed 
+62595f19d440: Pushed 
+446ec7c50f08: Pushed 
+b8f0e895f520: Pushed 
+f8700d3a252f: Pushed 
+39982b2a789a: Pushed 
+latest: digest: sha256:8f995...baf20 size: 1998
+```
+Now that we have successfully pushed to a registry, we see that the package is visible under our package menu:
+
+![](/img/packagesview.png)
+
+And clicking further into this specific package we see that we can link it to a repository:
+
+![](/img/linktorepo.png)
+
+Of course, since we had assigned our repo over to the organization above, since we thought that all of this needed to be under an organization, we no longer see the repo available as one we can assign a package to. So, after all of the above, we transferred this back over to [/pwdelbloomboard](https://github.com/pwdelbloomboard/dockerreactjs-yarn).
+
+To connect it to the package, we have the following interface:
+
+![](/img/connecttopackage.png)
+
+To make this package usable and buildable, we're going to need to make its settings visible to the world / non-private. This can be set under [/user/packages/container/NAME/settings](https://github.com/users/pwdelbloomboard/packages/container/ps-container/settings).  At the bottom, go to the, "danger zone," and set to public.
+
+
+
+
 
 2. [Connect a Repo to an Image](https://docs.github.com/en/packages/learn-github-packages/connecting-a-repository-to-a-package) Within Github, go to, "Profile" and then ["Packages."](https://github.com/pwdelbloomboard?tab=packages).  
 
