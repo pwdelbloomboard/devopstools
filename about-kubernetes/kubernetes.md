@@ -53,6 +53,8 @@ The below diagram shows a very abstracted view of the, "worker node," and its in
 
 The below diagram shows an overall view of k8s including a Master Node and individual Worker Nodes. This Master Node has Controllers and Schedulers, discussed further in detail below, but essentially they are, "loops," which are constantly running and checking to make sure everything is in a healthy, running and expected state - like a smart thermostat making sure your house is at the right temperature.
 
+The Control Plane and the Master Node are kind of one in the same, however the Master Node refers to the, "Seperate Server Responsible for Running the Control Plane," so the Master Node could hypothetically include, "other things," along with the Control Plane. You can think of a Venn Diagram with, "Master Node," encompassing the, "Control Plane," which is essentially a suite of tools - as shown in the diagram and discussed below, responsible for keeping the Worker Nodes and the Cluster in the desireable condition.
+
 ![](/img/k8s-model-full.png)
 
 The below diagram shows a model including a load balancer. An, ["External Load Balancer"](https://kubernetes.io/docs/tasks/access-application-cluster/create-external-load-balancer/) is an optional strategy that helps balance traffic from many users in the outside world between different Worker Nodes to keep everything even and steady and prevent any individual Worker from getting too overloaded causing a crash.

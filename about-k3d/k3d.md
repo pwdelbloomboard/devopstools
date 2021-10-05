@@ -474,10 +474,7 @@ To connect it to the package, we have the following interface:
 To make this package usable and buildable, we're going to need to make its settings visible to the world / non-private. This can be set under [/user/packages/container/NAME/settings](https://github.com/users/pwdelbloomboard/packages/container/ps-container/settings).  At the bottom, go to the, "danger zone," and set to public.
 
 
-
-
-
-2. [Connect a Repo to an Image](https://docs.github.com/en/packages/learn-github-packages/connecting-a-repository-to-a-package) Within Github, go to, "Profile" and then ["Packages."](https://github.com/pwdelbloomboard?tab=packages).  
+3. [Connect a Repo to an Image](https://docs.github.com/en/packages/learn-github-packages/connecting-a-repository-to-a-package) Within Github, go to, "Profile" and then ["Packages."](https://github.com/pwdelbloomboard?tab=packages).  
 
 
 You can use [Github Actions](https://docs.github.com/en/actions) to make this process automated, as shown below:
@@ -491,6 +488,43 @@ You can use [Github Actions](https://docs.github.com/en/actions) to make this pr
     IMAGE_ID=ghcr.io/${{ github.repository_owner }}/MyBeautifulContainer:123        
     docker push $IMAGE_ID
 ```
+### Deployment
+
+[Per this Tutorial](https://devopswithkubernetes.com/part-1/1-first-deploy#deployment)
+
+To deploy an application we create a "Deployment," resource with the image.
+
+```
+kubectl create deployment {{METADATANAME}} --image={{IMAGE_NAME}}
+  deployment.apps/{{METADATANAME}} created
+```
+So in our case, this will be:
+
+```
+kubectl create deployment buysellguess-dep --image=ghcr.io/pwdelbloomboard/ps-container
+  deployment.apps/buysellguess-dep created
+```
+However, using the local machine that we're on, we might see an error like the following:
+
+```
+error: failed to create deployment: deployments.apps is forbidden: User "arn:aws:iam::846056206988:user/patrick" cannot create resource "deployments" in API group "apps" in the namespace "default"
+```
+[kubctl](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands) is trying to make a deployment, but some of the settings already on our machine are set up to deploy to AWS via our user.
+
+Create new namespace.
+
+OR
+
+https://kubernetes.io/docs/reference/kubectl/cheatsheet/#kubectl-context-and-configuration
+
+Context and configuration.
+
+https://kubernetes.io/docs/tasks/access-application-cluster/configure-access-multiple-clusters/
+
+Across multiple clusters.
+
+[Play with Kubernetes](https://labs.play-with-k8s.com/)
+
 
 # Creating a Setup Deployment
 
@@ -507,3 +541,4 @@ A setup, "hello world," deployment would include:
 * [k3s + k3d = k8s: perfect match for dev and test](https://en.sokube.ch/post/k3s-k3d-k8s-a-new-perfect-match-for-dev-and-test-1)
 * [Github Now has a Container Registry](https://dev.to/github/github-container-registry-better-than-docker-hub-1o9k)
 * [Documentation on Creating a Github Personal Access Token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)
+* [Devops with Kubernetes Tutorial](https://devopswithkubernetes.com/part-1/1-first-deploy)
