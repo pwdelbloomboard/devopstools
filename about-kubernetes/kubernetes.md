@@ -31,8 +31,6 @@ Starting a Cluster locally on an, "edge" machine such as a personal linux or Mac
 
 Further discussion [can be found in the k3d.md documentation](/about-k3d/k3d.md#launching-a-cluster-on-edge-with-k3d).
 
-
-
 # Kubernetes Components
 
 ### Pods
@@ -52,6 +50,8 @@ The below diagram shows a very abstracted view of the, "worker node," and its in
 ![](/img/k8s-model-workernode.png)
 
 The below diagram shows an overall view of k8s including a Master Node and individual Worker Nodes. This Master Node has Controllers and Schedulers, discussed further in detail below, but essentially they are, "loops," which are constantly running and checking to make sure everything is in a healthy, running and expected state - like a smart thermostat making sure your house is at the right temperature.
+
+The Control Plane and the Master Node are kind of one in the same, however the Master Node refers to the, "Seperate Server Responsible for Running the Control Plane," so the Master Node could hypothetically include, "other things," along with the Control Plane. You can think of a Venn Diagram with, "Master Node," encompassing the, "Control Plane," which is essentially a suite of tools - as shown in the diagram and discussed below, responsible for keeping the Worker Nodes and the Cluster in the desireable condition.
 
 ![](/img/k8s-model-full.png)
 
@@ -168,3 +168,4 @@ Includes various kubernetes monitoring components.
 * [Kubernetes in 3 Diagrams](https://tsuyoshiushio.medium.com/kubernetes-in-three-diagrams-6aba8432541c)
 * [K8s Enterprise Architecture](https://platform9.com/blog/kubernetes-enterprise-chapter-2-kubernetes-architecture-concepts/)
 * [k8s Basics](https://kubernetes.io/docs/tutorials/kubernetes-basics/explore/explore-intro/)
+* [Running Application on Kubernetes](https://medium.com/@m.sedrowski/run-your-first-application-on-kubernetes-e54d5194e84b)

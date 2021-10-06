@@ -1,0 +1,1 @@
+https://docs.aws.amazon.com/solutions/latest/real-time-web-analytics-with-kinesis/welcome.html
