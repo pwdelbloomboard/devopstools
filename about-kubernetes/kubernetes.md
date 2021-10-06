@@ -31,8 +31,6 @@ Starting a Cluster locally on an, "edge" machine such as a personal linux or Mac
 
 Further discussion [can be found in the k3d.md documentation](/about-k3d/k3d.md#launching-a-cluster-on-edge-with-k3d).
 
-
-
 # Kubernetes Components
 
 ### Pods
@@ -170,3 +168,4 @@ Includes various kubernetes monitoring components.
 * [Kubernetes in 3 Diagrams](https://tsuyoshiushio.medium.com/kubernetes-in-three-diagrams-6aba8432541c)
 * [K8s Enterprise Architecture](https://platform9.com/blog/kubernetes-enterprise-chapter-2-kubernetes-architecture-concepts/)
 * [k8s Basics](https://kubernetes.io/docs/tutorials/kubernetes-basics/explore/explore-intro/)
+* [Running Application on Kubernetes](https://medium.com/@m.sedrowski/run-your-first-application-on-kubernetes-e54d5194e84b)

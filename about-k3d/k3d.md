@@ -488,7 +488,7 @@ You can use [Github Actions](https://docs.github.com/en/actions) to make this pr
     IMAGE_ID=ghcr.io/${{ github.repository_owner }}/MyBeautifulContainer:123        
     docker push $IMAGE_ID
 ```
-### Deployment
+### Deployment Strategy
 
 [Per this Tutorial](https://devopswithkubernetes.com/part-1/1-first-deploy#deployment)
 
@@ -502,7 +502,6 @@ So in our case, this will be:
 
 ```
 kubectl create deployment buysellguess-dep --image=ghcr.io/pwdelbloomboard/ps-container
-  deployment.apps/buysellguess-dep created
 ```
 However, using the local machine that we're on, we might see an error like the following:
 
@@ -511,16 +510,165 @@ error: failed to create deployment: deployments.apps is forbidden: User "arn:aws
 ```
 [kubctl](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands) is trying to make a deployment, but some of the settings already on our machine are set up to deploy to AWS via our user.
 
-So, what we have to do in this situation is to create a new context, which is discussed further in [/about-kubernetes/kubectlconfig.md](/about-kubernetes/kubectlconfig.md)
+The idea behind creating a [deployment](/about-kubernetes/kubernetesdeployment.md) is that you're creating a completely seperate, walled off automation infrastructure, you are specifying how Nodes will be set up and used within a cluster. This is typical for K8s usage. Setting up a context is what walls off the deployment, and this is discussed further in [/about-kubernetes/kubectlconfig.md](/about-kubernetes/kubectlconfig.md)
+
+That being said, if you already have a deployment setup, or if you wanted to just set things up as a demo, you could start off by setting up one Node at a time and manually killing it, for a simple application.
+
+#### Running Off of Existing Deployment - Imperative, Terminal-Based Approach
+
+So if we want to set up an app based upon our existing deployment, we can run the following command, which uses the previously registered image, "ghcr.io/pwdelbloomboard/ps-container"
+
+```
+kubectl create deployment buysellguess-dep --image=ghcr.io/pwdelbloomboard/ps-container
+```
+So once this is running, if we check our Docker desktop, we see that additional containers are running with the k3d label:
+
+![](/img/k3d_initialdeploy.png)
+
+Now if we run the "kubectl get deployments" and, "kubectl get pods," command, we see the following:
+
+```
+kubectl get deployments
+
+NAME               READY   UP-TO-DATE   AVAILABLE   AGE
+buysellguess-dep   1/1     1            1           34m
+
+kubectl get pods
+
+NAME                                READY   STATUS    RESTARTS   AGE
+buysellguess-dep-7c476c64cd-trsl8   1/1     Running   0          35m
+```
+
+The above commands show that the deployments and pods are running as expected.
+
+This deployment can be taken down with the following command:
+
+```
+kubectl delete deployment buysellguess-dep
+
+deployment.apps "buysellguess-dep" deleted
+
+```
+Running either, "kubectl get deployments" or "kubectl get pods" should lead to a, "no resources found," message.
+
+#### Declaratively Running Deployment with YAML File
+
+We can create a deployment declaratively rather than through the command line.  Previously all deployments were run iteratively, through a correct series of commands, however that approach is cumbersome and may lead to mistakes, so the new way to do it is to use a yaml file and declaratively show everything that a deployment needs.
+
+Within our [ReactJS Project](https://github.com/pwdelbloomboard/dockerreactjs-yarn/tree/main/app) in the application file, the same file where the Dockerfile resides, we may create a folder called, "manifests" and a file, /app/manifests/deployment.yaml.
+
+To fill out this deployment, we need a container name, which means we first have to run the docker app off of our pre-build image:
+
+```
+sudo docker run -it --rm \
+-v ${PWD}:/app \
+-v /app/node_modules \
+-p 3001:3000 \
+-e CHOKIDAR_USEPOLLING=true \
+--name buysellguessapp \
+ghcr.io/pwdelbloomboard/ps-container
+```
+
+* From this, the, "name" of the container was set as, "buysellguessapp" - so this can be set within the deployment.yaml as, "containers: -name:"
+* For the image itself, the id used is the full, sha256 id number which can be identified with:
+
+```
+docker inspect ghcr.io/pwdelbloomboard/ps-container
+```
+
+* More on what this number is is described at [docker.md](/about-docker/docker.md)
+
+So in essense our manifests file should look like the following:
+
+```
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: buysellguess-dep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: buysellguess
+  template:
+    metadata:
+      labels:
+        app: buysellguess
+    spec:
+      containers:
+        - name: buysellguessapp
+          image: 23f9401d2b7d275acf143295324d8f0bf3870988c3ea8432ce1db6b0e11bd36a
+```
+We then navigate to the application folder within terminal and use, "kubectl apply" to apply the manifest deployment.yaml settings.
+
+```
+kubectl apply -f manifests/deployment.yaml
+
+deployment.apps/buysellguess-dep created
+```
+Now however if we are to run, "kubectl get pods" or "kubectl get deployments" we get the following results:
+
+```
+deployments...
+
+NAME               READY   UP-TO-DATE   AVAILABLE   AGE
+buysellguess-dep   0/1     1            0           38s
+
+pods...
+
+NAME                                READY   STATUS             RESTARTS   AGE
+buysellguess-dep-7bf8648964-jts2k   0/1     InvalidImageName   0          47s
+```
+Which is showing that the deployments are not ready, due to the reason that the imagename is invalid.
+
+This may have been because we set the image id of the container "buysellguessapp" as the original Docker source image id.
+
+* Sha-256 Image ID (source image)
+
+```
+      containers:
+        - name: buysellguessapp
+          image: ghcr.io/pwdelbloomboard/ps-container
+```
+
+After we switched this, we run "kubectl apply -f manifests/deployment.yaml" again and then ran "get pods," and "get deployments" and we find that everything is running. Whew!
+
+Brief note on, "Apply" vs "Create" - in the context of using a .yaml file to create a deployment, "Create" and "Apply" seem to do the same thing.
+
+#### Viewing the App with Port Forwarding
+
+> port-forward command is mainly for debugging, also grants you temporary access to this application on your local machine. If you need to connect to the application under a specific port and you do not want to expose it using the Ingress object, then you should use the port-forward command.
+
+So looking at our pod name with the, "get pods" command, we see the following:
+
+```
+kubectl get pods
+
+NAME                                READY   STATUS    RESTARTS   AGE
+buysellguess-dep-6867c7cfdf-4nlp5   1/1     Running   0          18m
+```
+
+So given the name that has been assigned by the deployment above, we can forward this pod using the, "port forwarding," command, like so:
+
+```
+kubectl port-forward buysellguess-dep-6867c7cfdf-4nlp5 8080:8080
+```
+However, when we try to reach this page at localhost:8080, we get the following error:
+
+```
+Forwarding from [::1]:8080 -> 8080
+Handling connection for 8080
+Handling connection for 8080
+E1006 15:19:53.606951   41216 portforward.go:400] an error occurred forwarding 8080 -> 8080: error forwarding port 8080 to pod 41552e66a350a52b86a5235aa4fea4afb9e85a02ad671db8a89d049472c1c48d, uid : failed to execute portforward in network namespace "/var/run/netns/cni-703a8f70-f3bc-f4f4-7827-b3dc63c26756": failed to dial 8080: dial tcp4 127.0.0.1:8080: connect: connection refused
+```
+
+### One Node at a Time Strategy - No Deployment
+
+* Running one Node at a time is not recommended.
+#### Debugging
 
 
-# Creating a Setup Deployment
 
-A setup, "hello world," deployment would include:
-
-* Kubectl
-* Docker
-* k3d / k3s.
 
 
 # Resources
@@ -531,3 +679,6 @@ A setup, "hello world," deployment would include:
 * [Documentation on Creating a Github Personal Access Token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)
 * [Devops with Kubernetes Tutorial](https://devopswithkubernetes.com/part-1/1-first-deploy)
 * [Play with Kubernetes](https://labs.play-with-k8s.com/)
+* [Create Multi-Node K8s Cluster with K3d](https://mohitgoyal.co/2021/05/28/create-multi-node-kubernetes-cluster-with-k3d/)
+* [YouTube - Cheap Quick Kubernetes Development Cluster Using k3d/k3s](https://www.youtube.com/watch?v=jUPL4ZOlJ0E)
+* [Run Your First App with Kubernetes](https://medium.com/@m.sedrowski/run-your-first-application-on-kubernetes-e54d5194e84b)
