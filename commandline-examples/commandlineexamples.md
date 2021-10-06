@@ -38,3 +38,47 @@ setup:        DNSMASQ_RESTART="sudo brew services restart dnsmasq"
 ```
 
 Basically the above shows how brew is being installed.
+
+# Environmental Variables
+
+On a MacOS environmental variables can be displayed with:
+
+```
+env
+```
+
+MacOS used to use the bash shell so the way to display hard-coded environment variables was:
+
+```
+cat ~/.bash_profile
+```
+However MacOS upgraded to zsh in more recent OS versions so the way to see the zsh env is (within iTerm2):
+
+```
+cat ~/.zshrc
+```
+Of course, editing this could cause a lot of problems depending upon how the machine is set up and configured and there may be a customization warning.
+
+With this warning, and during setup, there may be an alternate location to put zsh customizations.
+
+```
+$HOME/.custom-ohmyzsh     if you want to change any settings for Oh My ZSH
+# $HOME/.custom-zsh         any custom aliases/functions/settings/whatever go here
+```
+
+## Setting an env
+
+```
+export VARIABLE=something
+```
+The above will make it so that when you enter in "echo $VARIABLE" you will get:
+
+```
+something
+```
+
+To add this permanently into the zsh, you use:
+
+```
+echo 'export VARIABLE=something' >> ~/.zshenv
+```

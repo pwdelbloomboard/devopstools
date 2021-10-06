@@ -511,19 +511,7 @@ error: failed to create deployment: deployments.apps is forbidden: User "arn:aws
 ```
 [kubctl](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands) is trying to make a deployment, but some of the settings already on our machine are set up to deploy to AWS via our user.
 
-Create new namespace.
-
-OR
-
-https://kubernetes.io/docs/reference/kubectl/cheatsheet/#kubectl-context-and-configuration
-
-Context and configuration.
-
-https://kubernetes.io/docs/tasks/access-application-cluster/configure-access-multiple-clusters/
-
-Across multiple clusters.
-
-[Play with Kubernetes](https://labs.play-with-k8s.com/)
+So, what we have to do in this situation is to create a new context, which is discussed further in [/about-kubernetes/kubectlconfig.md](/about-kubernetes/kubectlconfig.md)
 
 
 # Creating a Setup Deployment
@@ -542,3 +530,4 @@ A setup, "hello world," deployment would include:
 * [Github Now has a Container Registry](https://dev.to/github/github-container-registry-better-than-docker-hub-1o9k)
 * [Documentation on Creating a Github Personal Access Token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)
 * [Devops with Kubernetes Tutorial](https://devopswithkubernetes.com/part-1/1-first-deploy)
+* [Play with Kubernetes](https://labs.play-with-k8s.com/)
