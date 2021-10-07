@@ -661,13 +661,44 @@ Handling connection for 8080
 Handling connection for 8080
 E1006 15:19:53.606951   41216 portforward.go:400] an error occurred forwarding 8080 -> 8080: error forwarding port 8080 to pod 41552e66a350a52b86a5235aa4fea4afb9e85a02ad671db8a89d049472c1c48d, uid : failed to execute portforward in network namespace "/var/run/netns/cni-703a8f70-f3bc-f4f4-7827-b3dc63c26756": failed to dial 8080: dial tcp4 127.0.0.1:8080: connect: connection refused
 ```
+It could be that 8080 is just being used as a port already. Using port 3003, we do:
+
+```
+kubectl port-forward buysellguess-dep-6867c7cfdf-4nlp5 3003:3000
+```
+And then visiting http://localhost:3003 we see the page up and running.
+
+```
+$ kubectl port-forward buysellguess-dep-6867c7cfdf-4nlp5 3003:3000
+Forwarding from 127.0.0.1:3003 -> 3000
+Forwarding from [::1]:3003 -> 3000
+Handling connection for 3003
+Handling connection for 3003
+Handling connection for 3003
+Handling connection for 3003
+Handling connection for 3003
+```
+Also notable, if we kill the Docker process for this app which had been running on localhost:3001, the deployment pod still works. This is because kubernetes is not drawing anything from the docker process and, "forwarding" it into kubernetes in any way, it is literally spinning up a new node, which contains the docker image (with the app) embedded inside of it, so in a sense, k8s not, "leveraging docker," k8s is running its own new containerized layer inside of a completely seperate system (e.g. within the node).
+
+More of what the port forwarding process looks like is described under [about-networking](/about-networking/networking.md)
+
+Port forwarding might be helpful for debugging, but it will be easier to understand if you set up services and ingress.
+
+#### Set Up a Service and an Ingress
+
+* [Introduction to Networking](https://devopswithkubernetes.com/part-1/3-introduction-to-networking)
+
+
 
 ### One Node at a Time Strategy - No Deployment
 
 * Running one Node at a time is not recommended.
 #### Debugging
 
+Information on debugging has been placed in a couple different locations:
 
+* [about lens](/about-lens/lens.md)
+* [about-kubernetes ](/about-kubernetes/kubernetes.md#)
 
 
 
@@ -682,3 +713,4 @@ E1006 15:19:53.606951   41216 portforward.go:400] an error occurred forwarding 8
 * [Create Multi-Node K8s Cluster with K3d](https://mohitgoyal.co/2021/05/28/create-multi-node-kubernetes-cluster-with-k3d/)
 * [YouTube - Cheap Quick Kubernetes Development Cluster Using k3d/k3s](https://www.youtube.com/watch?v=jUPL4ZOlJ0E)
 * [Run Your First App with Kubernetes](https://medium.com/@m.sedrowski/run-your-first-application-on-kubernetes-e54d5194e84b)
+* [Introduction to Networking](https://devopswithkubernetes.com/part-1/3-introduction-to-networking)
