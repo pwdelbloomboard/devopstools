@@ -16,6 +16,8 @@ The way to check the location and credentials that kubectl knows about with this
 kubectl config view
 ```
 
+kubctl is just a way of conecting to the Kubernetes API, there is no way to turn on and off clusters or resources with kubctl.
+
 
 
 

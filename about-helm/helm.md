@@ -2,9 +2,28 @@
 
 [Helm](https://helm.sh/) is a package manager for Kubernetes.
 
-Basically, it helps described the structure of an application through charts with helmfiles.
+Kubernetes is managed and set up through a series of .yaml objects.  These .yaml objects are used to set up:
+
+* Services
+* Pods
+* Config Maps
+* Secrets
+* Deployments
+* Etc.
+
+Helm allows you to manage all of these automatically.
 
 Allows you to template your yaml file, so rather than having to re-deploy a new app needing to set up new yaml scripts, it applies the template and then you're ready to go.
+
+Rather than writing a script, we tell kubernetes exactly what we want, and kubernetes makes it happen. Basically it does this by making sure that the actual state matches the desired states. The desired states are represented by the yaml files.
+
+
+## Example
+
+An application may have:
+
+* deployment.yaml
+- what container to deploy
 
 
 ## What is the Definition a Kubernetes Package?
