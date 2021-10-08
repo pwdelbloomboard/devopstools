@@ -4,6 +4,9 @@
 
 Basically, it helps described the structure of an application through charts with helmfiles.
 
+Allows you to template your yaml file, so rather than having to re-deploy a new app needing to set up new yaml scripts, it applies the template and then you're ready to go.
+
+
 ## What is the Definition a Kubernetes Package?
 
 * Within the context of Kubernetes, a package would essentially be "state settings" for virtual machines that are designed to help operate a service or piece of software specifically built for the context of Kubernetes, and possibly specifically customized for certain conditions (such as high useage or low usage). 

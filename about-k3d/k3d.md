@@ -287,12 +287,205 @@ The above shows the cluster with certificates, server url and port, name, contex
 
 If we want to delete the cluster finally, we use the command, "stop" and then, "delete."
 
-#### Merging Kubeconfig - kubeconfig merge
+### More Sophisticated Way of Running a k3d Cluster Without a Deployment
 
-##### Useful Flags
+Typically, Clusters are not run without Deployments.  Deployments provide declarative updates for Pods and ReplicaSets. More information about [Kubernetes Deployments](https://github.com/pwdelbloomboard/devopstools/blob/main/about-kubernetes/kubernetesdeployment.md#deployment-vs-no-deployment) 
 
---trace (super verbose)
---verbose
+```
+k3d cluster create mycluster --api-port 127.0.0.1:6445 --servers 3 --agents 2 --volume '/Users/{{username}}/Projects/dockerreactjs-yarn/app:/code@agent[*]' --port '8080:80@loadbalancer'
+```
+* 1 load balancer   [--port '8080:80@loadbalancer']
+* 3 servers (control-plane nodes)   [--servers 3]
+* 2 agents (formerly worker nodes)   [--agents 2]
+* --api-port 127.0.0.1:6445, tells the k3d to map the Kubernetes API Port (6443 internally) to 127.0.0.1/localhost’s port 6445.
+* --volume /Users/{{username}}/Projects/dockerreactjs-yarn/app:/code@agent[*] bind mounts your local directory ../app to the path /code inside all ([*] of your agent nodes). Replace * with an index (here: 0 or 1) to only mount it into one of them.
+* --port '8080:80@loadbalancer ... maps your local host’s port 8080 to port 80 on the load balancer (serverlb), which can be used to forward HTTP ingress traffic to your cluster. For example, you can now deploy a web app into the cluster (Deployment), which is exposed (Service) externally via an Ingress such as myapp.k3d.localhost.
+
+> Note: You have to have some mechanism set up to route to resolve myapp.k3d.localhost to your local host IP (127.0.0.1). The most common way is using entries of the form 127.0.0.1 myapp.k3d.localhost in your /etc/hosts file
+
+If we don't have a way to resolve the localhost IP, or an ingress, or port forwarding, then we won't be able to view the app, even if it is running.  On top of this, the command we used above, points to a file on the local machine, rather than a volume with a running, "container" that could be a pod, so we don't have a way of running the app itself.  We will get one of the following messages:
+
+![](/img/nginx_notfound.png)
+
+Then (provided that everything is set up to resolve that domain to your local host IP), you can point your browser to http://myapp.k3d.localhost:8080 to access your app (assuming ingresses are set up correctly). Traffic then flows from your host through the Docker bridge interface to the load balancer. From there, it’s proxied to the cluster, where it passes via Ingress and Service to your application Pod.
+
+So using the, "whoami" and "pwd" command, we can get an idea of where we are and what the username is. With that information, we can set up a command which creates a, "non-deployment cluster, as shown below:
+
+```
+k3d cluster create nondeploymentcluster --api-port 127.0.0.1:6445 --servers 1 --agents 1 --volume '/Users/patrick.delaneybloomboard.com/Projects/dockerreactjs-yarn/app:/code@agent[*]' --port '8080:80@loadbalancer'
+```
+This should spit out the following:
+
+```
+INFO[0000] Prep: Network                                
+INFO[0000] Created network 'k3d-nondeploymentcluster' (61e6e44237ba7f28aecc083fe471430406bc8e81d9b0ccf5c8f12ca69fa5eed5) 
+INFO[0000] Created volume 'k3d-nondeploymentcluster-images' 
+INFO[0001] Creating node 'k3d-nondeploymentcluster-server-0' 
+INFO[0001] Creating node 'k3d-nondeploymentcluster-agent-0' 
+INFO[0001] Creating LoadBalancer 'k3d-nondeploymentcluster-serverlb' 
+INFO[0001] Starting cluster 'nondeploymentcluster'      
+INFO[0001] Starting servers...                          
+INFO[0001] Starting Node 'k3d-nondeploymentcluster-server-0' 
+INFO[0011] Starting agents...                           
+INFO[0011] Starting Node 'k3d-nondeploymentcluster-agent-0' 
+INFO[0024] Starting helpers...                          
+INFO[0024] Starting Node 'k3d-nondeploymentcluster-serverlb' 
+INFO[0026] (Optional) Trying to get IP of the docker host and inject it into the cluster as 'host.k3d.internal' for easy access 
+INFO[0033] Successfully added host record to /etc/hosts in 3/3 nodes and to the CoreDNS ConfigMap 
+INFO[0033] Cluster 'nondeploymentcluster' created successfully! 
+INFO[0033] --kubeconfig-update-default=false --> sets --kubeconfig-switch-context=false 
+INFO[0033] You can now use it like this:                
+kubectl config use-context k3d-nondeploymentcluster
+kubectl cluster-info
+```
+Running kubctl cluster-info shows the following information:
+
+```
+Kubernetes control plane is running at https://127.0.0.1:6445
+CoreDNS is running at https://127.0.0.1:6445/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
+Metrics-server is running at https://127.0.0.1:6445/api/v1/namespaces/kube-system/services/https:metrics-server:/proxy
+```
+If we run, "kubectl get pods", we get:
+```
+kubectl get pods
+No resources found in default namespace.
+```
+But if we run, "kubectl get nodes" we get:
+```
+$ kubectl get nodes
+NAME                                STATUS   ROLES                  AGE   VERSION
+k3d-nondeploymentcluster-agent-0    Ready    <none>                 23m   v1.21.1+k3s1
+k3d-nondeploymentcluster-server-0   Ready    control-plane,master   23m   v1.21.1+k3s1
+```
+This seems to be showing that the pods are not exposed, while the nodes are. The question is - can we set up port forwarding on these nodes to allow the pod to get exposed so that we can see the application?
+
+```
+kubectl port-forward k3d-nondeploymentcluster-agent-0 3003:3000
+Error from server (NotFound): pods "k3d-nondeploymentcluster-agent-0" not found
+```
+So basically, since k3d-nondeploymentcluster-agent-0 is a node and not a pod, we can't seem to forward it.  How can we have nodes but without pods?  This goes back to the [defnition of nodes and pods](/about-kubernetes/kubernetes.md#diagrams-of-pods-and-nodes) - basically pods are application containers, while nodes are operating system containers. The pods run on top of the nodes, so you could have an empty node running, "no application," because there is no pod inside of it.
+
+IF we look at the resources that our nodes and pods are using, we can see that our nodes take up space, while our pods do not:
+
+```
+kubectl top node
+W1007 14:31:41.403250   76548 top_node.go:119] Using json format to get metrics. Next release will switch to protocol-buffers, switch early by passing --use-protocol-buffers flag
+NAME                                CPU(cores)   CPU%   MEMORY(bytes)   MEMORY%   
+k3d-nondeploymentcluster-agent-0    45m          2%     225Mi           1%        
+k3d-nondeploymentcluster-server-0   172m         8%     636Mi           3%    
+
+kubectl top pod
+W1007 14:36:50.185384   77172 top_pod.go:140] 
+
+No resources found in default namespace.
+```
+So basically what is happening here is not that port forwarding is not being set up correctly, it's that the directory, "/Users/patrick.delaneybloomboard.com/Projects/dockerreactjs-yarn/app" does not point to a volume, but instead to the source code, unbuilt, of the ReactJS app as well as the Dockerfile and everything else, which presumably does nothing for us in terms of building any type of app, because it's not even containerized, it's just source code.
+
+If we want to see which clusters we have available we can use the following handy commands, which are available within k3d:
+
+```
+k3d cluster list
+NAME                   SERVERS   AGENTS   LOADBALANCER
+buysellguess           1/1       0/0      true
+local                  1/1       0/0      true
+nondeploymentcluster   1/1       1/1      true
+```
+
+We can stop, list, and delete / list these clusters with:
+
+```
+k3d cluster stop nondeploymentcluster
+INFO[0000] Stopping cluster 'nondeploymentcluster'      
+
+k3d cluster list
+NAME                   SERVERS   AGENTS   LOADBALANCER
+buysellguess           1/1       0/0      true
+local                  1/1       0/0      true
+nondeploymentcluster   0/1       0/1      true
+
+k3d cluster delete
+
+k3d cluster delete nondeploymentcluster
+
+INFO[0000] Deleting cluster 'nondeploymentcluster'      
+INFO[0000] Deleted k3d-nondeploymentcluster-serverlb    
+INFO[0000] Deleted k3d-nondeploymentcluster-agent-0     
+INFO[0000] Deleted k3d-nondeploymentcluster-server-0    
+INFO[0000] Deleting cluster network 'k3d-nondeploymentcluster' 
+INFO[0001] Deleting image volume 'k3d-nondeploymentcluster-images' 
+INFO[0001] Removing cluster details from default kubeconfig... 
+INFO[0001] Removing standalone kubeconfig file (if there is one)... 
+INFO[0001] Successfully deleted cluster nondeploymentcluster!
+
+k3d cluster list
+
+NAME           SERVERS   AGENTS   LOADBALANCER
+buysellguess   1/1       0/0      true
+local          1/1       0/0      true
+
+```
+
+In order to properly set up a working application using the, "non-deployment," method we need to understand more about [volumes](/about-volumes/volumes.md).
+
+### Creating K3D Cluster and Importing a Docker Image
+
+* [Rancher Blog - Setup k3d high Availability](https://rancher.com/blog/2020/set-up-k3s-high-availability-using-k3d)
+
+There is another way to create a k3d cluster, simply using an image.
+
+```
+k3d cluster create --servers 1 --agents 1 -–image ghcr.io/pwdelbloomboard/ps-container --port '8080:80@loadbalancer' --api-port 127.0.0.1:6445
+```
+However, when we run this we get the error, "FATA[0000] unknown shorthand flag: 'â' in -–image "
+
+* Is this because the, "--image" needs to be a Kubernetes-ready image?
+* Is this because the, "--image" must pull from a registry?  [discussion on registries](/about-registries/registries.md)
+* It may also be because, "--image" is not a flag that is compatible with MacOS yet on k3d
+
+However, it is probably just because it's a docker image, rather than a k3d-compatible image, whatever that may be.
+
+There is another command [k3d image import](https://k3d.io/v5.0.0/usage/commands/k3d_image_import/) which essentially, "imports" a docker image into a k3d cluster.
+
+```
+Flags:
+  -c, --cluster stringArray   Select clusters to load the image to. (default [k3s-default])
+  -h, --help                  help for import
+  -k, --keep-tarball          Do not delete the tarball containing the saved images from the shared volume
+
+Global Flags:
+      --timestamps   Enable Log timestamps
+      --trace        Enable super verbose output (trace logging)
+      --verbose      Enable verbose output (debug logging)
+```
+
+So using this strategy, we first create the cluster, then import our docker image with:
+
+```
+k3d cluster create nondeploymentcluster --api-port 127.0.0.1:6445 --servers 1 --agents 1 --port '8080:80@loadbalancer'
+
+... (info on cluster deployment)
+
+k3d image import ghcr.io/pwdelbloomboard/ps-container:latest -c nondeploymentcluster
+
+INFO[0000] Importing image(s) into cluster 'nondeploymentcluster' 
+INFO[0000] Starting k3d-tools node...                   
+INFO[0001] Pulling image 'docker.io/rancher/k3d-tools:v4.4.6' 
+INFO[0002] Starting Node 'k3d-nondeploymentcluster-tools' 
+INFO[0003] Saving 1 image(s) from runtime...            
+INFO[0050] Importing images into nodes...               
+INFO[0050] Importing images from tarball '/k3d/images/k3d-nondeploymentcluster-images-20211008102755.tar' into node 'k3d-nondeploymentcluster-server-0'... 
+INFO[0050] Importing images from tarball '/k3d/images/k3d-nondeploymentcluster-images-20211008102755.tar' into node 'k3d-nondeploymentcluster-agent-0'... 
+INFO[0114] Removing the tarball(s) from image volume... 
+INFO[0115] Removing k3d-tools node...                   
+INFO[0116] Deleted k3d-nondeploymentcluster-tools       
+INFO[0116] Successfully imported image(s)               
+INFO[0116] Successfully imported 1 image(s) into 1 cluster(s)
+```
+Note that although the documentation says, :latest is assumed, we had to explicitly put, :latest as the tag in order for this to work.
+
+So once the Docker image is successfully imported into the cluster, we should in theory be able to view the pod.
+
+
 
 ## Deploying with k3d
 
@@ -352,7 +545,6 @@ Some prerequisites to review ahead of time:
 * [Automated Token Authorization](https://docs.github.com/en/actions/security-guides/automatic-token-authentication) - When you enable GitHub Actions, GitHub installs a GitHub App on your repository. [Github Actions are enabled by setting up an Action within a repo](https://github.com/pwdelbloomboard/dockerreactjs-yarn/actions/new).
 * [Working with Github Container Registry](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry) is regular, run-of-the-mill tagging and pushing to a particular Container Registry, such as the Docker registry, with a command such as, "docker push ghcr.io/OWNER/IMAGE_NAME:latest" assuming an image has been pre-named/tagged with ghcr.io/OWNER/IMAGE_NAME:latest ," as an example.
 
-
 *Some Quick Definitions for Github Actions*
 
 "Github Actions," is the service in general, but it is also a standalone, one-line command, the smallest building block of the entire workflow.
@@ -389,9 +581,6 @@ buildImage:
 
 ```
 A more throurough rundown of the above yaml file [may be found here at, "Publishing Docker Images to Github Packages](https://docs.github.com/en/actions/publishing-packages/publishing-docker-images#publishing-images-to-github-packages).
-
-
-
 
 
 One the package is published, you can [connect a repository to a package](https://docs.github.com/en/packages/learn-github-packages/connecting-a-repository-to-a-package) within Github.
@@ -702,6 +891,10 @@ Information on debugging has been placed in a couple different locations:
 
 
 
+# Questions Outstanding
+
+* Why did we have to push a container to a container registry?  The 
+
 # Resources
 
 * [k3d vs minikube vs kind](https://brennerm.github.io/posts/minikube-vs-kind-vs-k3s.html)
@@ -714,3 +907,5 @@ Information on debugging has been placed in a couple different locations:
 * [YouTube - Cheap Quick Kubernetes Development Cluster Using k3d/k3s](https://www.youtube.com/watch?v=jUPL4ZOlJ0E)
 * [Run Your First App with Kubernetes](https://medium.com/@m.sedrowski/run-your-first-application-on-kubernetes-e54d5194e84b)
 * [Introduction to Networking](https://devopswithkubernetes.com/part-1/3-introduction-to-networking)
+* [Introduction to k3d on k3s](https://www.suse.com/c/introduction-k3d-run-k3s-docker-src/)
+* [Rancher Blog - Setup k3d high Availability](https://rancher.com/blog/2020/set-up-k3s-high-availability-using-k3d)
