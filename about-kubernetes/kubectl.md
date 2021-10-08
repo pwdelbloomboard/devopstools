@@ -6,6 +6,19 @@ On the command line, api resources can be found with:
 kubectl api-resources
 ```
 
+## Clusters
+
+The way to look at and work with clusters is through the [Kubernetes API](https://kubernetes.io/docs/tasks/administer-cluster/access-cluster-api/).
+
+The way to check the location and credentials that kubectl knows about with this command:
+
+```
+kubectl config view
+```
+
+
+
+
 ## Getting All Resources Under a Namespace
 
 ```
@@ -156,6 +169,28 @@ Search for the keywords to learn more about each warning.
 To ignore, add // eslint-disable-next-line to the line before.
 
 ```
+
+### kubctl cluster-info
+
+"kubectl cluster-info" gives us information about the cluster itself, and the control pane.
+
+```
+Kubernetes control plane is running at https://127.0.0.1:6445
+CoreDNS is running at https://127.0.0.1:6445/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
+Metrics-server is running at https://127.0.0.1:6445/api/v1/namespaces/kube-system/services/https:metrics-server:/proxy
+```
+
+### kubectl get pods
+
+
+
+### kubectl get namespace
+
+
+### kubctl describe pod [ingress]
+
+
+### kubectl get logs -l
 
 
 # Resources

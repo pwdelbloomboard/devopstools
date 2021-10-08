@@ -1,10 +1,10 @@
 # Networking
 
-## Listening to Ports - MacOS
+## Listening to Ports
 
 * The [lsof command](https://en.wikipedia.org/wiki/Lsof), "List Open Files," is for unix-like operating systems. Open files in the system include disk files, named pipes, network sockets and devices opened by all processes.
 
-So while running a pot 
+So while running a pod, we can run the command:
 
 ```
 sudo lsof -i -P | grep LISTEN 
@@ -58,3 +58,10 @@ Forwarding from [::1]:3003 -> 3000
 Handling connection for 3003
 ```
 
+### Cleaned Up Listen to Ports Version
+
+Adding additional flags, "4 -n" cleans up the results and only shows the ipv4 ports, which may be useful if not using ipv6 locally.
+
+```
+sudo lsof -i 4 -n -P | grep LISTEN
+```
