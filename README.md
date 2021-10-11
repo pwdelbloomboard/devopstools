@@ -22,6 +22,8 @@
 * [volumes](/about-volumes/)
 * [gitlab](/about-gitlab/)
 * [newrelic](/about-newrelic/)
+* [chalice](/about-chalice/)
+* [airflow](/about-airflow/)
 
 ## Handy Command Line Tools
 
