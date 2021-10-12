@@ -21,14 +21,28 @@ Rather than writing a script, we tell kubernetes exactly what we want, and kuber
 
 # Helm Conceptual Overview
 
+Helm is a, "package manager," for k8s, and its packages are, "charts," which are essentially sets of yaml files and tempaltes which instruct helm how to send, "releases."  These releases get sent to, "tiller" which operates, installs the chart configuration and deletes old releases in an actual k8s deployment.
 
 ![](/img/helm-architecture.png)
 
+Where Helm fits in a general workflow is at the, "release and operate," stage, wherein a deployment of a set of images is being pushed into operation, (perhaps this could be development, staging or production), and then specifying how a cluster or set of images will behave within operation.
+
 ![](/img/helm-workflow.png)
+
+Reiterating the Helm architecture, the charts may be stored in various locations, one strategy is to put them in a completely seperate repo from the main, "code / project" repo for the application in question. However they may also reside right within the application itself.
 
 ![](/img/helm_repo_description.png)
 
+A developer, perhaps working through a local machine or through a remote server, sends helm commands to a remote cloud server which runs tiller, which then follows through on actions which make the release and delete possible within the k8s deployment. Tiller itself sits on the k8s cluster as well.
+
 ![](/img/helmclient.png)
+
+As far as how a developer actually uses Helm, they physically work on building and writing templates which make up a chart, those charts then get pushed to a repo as a, "chart," and then that repo gets deployed (via either a local machine or remote service such as Rundeck), which then goes to tiller and updates or operates the release on the k8s cluster.
+
+So essentially, developers are:
+
+* Working on the templates
+* Working on pushing commands using the helm CLI which pushes the templates to a particular release.
 
 ![](/img/howdevelopersusehelm.png)
 
