@@ -1223,6 +1223,8 @@ NAME                                READY   STATUS    RESTARTS   AGE
 buysellguess-dep-6867c7cfdf-8h7rg   1/1     Running   0          69m
 ```
 
+This is expected, that we only have one pod, because this is what was set up.
+
 #### Configuring Applications
 
 
