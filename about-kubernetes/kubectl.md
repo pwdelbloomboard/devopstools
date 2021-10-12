@@ -16,10 +16,7 @@ The way to check the location and credentials that kubectl knows about with this
 kubectl config view
 ```
 
-kubctl is just a way of conecting to the Kubernetes API, there is no way to turn on and off clusters or resources with kubctl.
-
-
-
+kubctl is just a way of conecting to the Kubernetes API, there is no way to turn on and off clusters or resources with kubctl, as with k3d.
 
 ## Getting All Resources Under a Namespace
 
@@ -145,6 +142,15 @@ Events:
 
 ```
 
+### kubectl get events -w
+
+* 
+
+### kubectl get pv
+
+* Getting persistent volumes.
+
+
 ### kubectl logs
 
 Gets the logs of a pod.
@@ -186,11 +192,15 @@ Metrics-server is running at https://127.0.0.1:6445/api/v1/namespaces/kube-syste
 
 
 
-### kubectl get namespace
+### kubectl get pods --namespace [default]
+
+### kubectl get pods [namespace]
 
 
 ### kubctl describe pod [ingress]
 
+
+### kubectl get ingress
 
 ### kubectl get logs -l
 

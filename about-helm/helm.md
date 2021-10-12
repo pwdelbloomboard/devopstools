@@ -1,4 +1,6 @@
-# About Helm
+# Helm
+
+## About Helm
 
 [Helm](https://helm.sh/) is a package manager for Kubernetes.
 
@@ -17,6 +19,18 @@ Allows you to template your yaml file, so rather than having to re-deploy a new 
 
 Rather than writing a script, we tell kubernetes exactly what we want, and kubernetes makes it happen. Basically it does this by making sure that the actual state matches the desired states. The desired states are represented by the yaml files.
 
+# Helm Conceptual Overview
+
+
+![](/img/helm-architecture.png)
+
+![](/img/helm-workflow.png)
+
+![](/img/helm_repo_description.png)
+
+![](/img/helmclient.png)
+
+![](/img/howdevelopersusehelm.png)
 
 ## Example
 
@@ -628,9 +642,17 @@ According to [this Stackoverflow discussion](https://stackoverflow.com/questions
 So to diagnose this issue further, we can follow the following procedure:
 
 3.1 Create a template with, "helm template" as in the step above.
+
+```
+helm template buysellguessapp-helmtemplate helm-buysellguessapp
+```
+This puts the actual templatefile within, "/templates/serviceaccount.yaml" where we can debug it.
+
+* [The Helm Docs has a section on, "debugging templates."](https://helm.sh/docs/chart_template_guide/debugging/)
+
 3.2 Check for discrepencies.
 
-
+We will check for discrepencies within the repo we created on, [helm template debugging](/about-helm/helmtemplatedebugging.md).
 
 * The app.kubernetes.io/managed-by must be set to, "Helm" which is why we are getting:
 
@@ -697,3 +719,4 @@ However, this breaks down as you maintain more and more microservices.
 * [Best Way to Manage Helm](https://insights.project-a.com/whats-the-best-way-to-manage-helm-charts-1cbf2614ec40)
 * [helm 3 install for resource that already exists](https://stackoverflow.com/questions/59443834/helm-3-install-for-resouces-that-exist)
 * [Rendered Manifests Contain Resource that Already Exists - Stackoverflow](https://stackoverflow.com/questions/62309223/rendered-manifests-contain-a-resource-that-already-exists-could-not-get-informa)
+* [The Helm Docs has a section on, "debugging templates."](https://helm.sh/docs/chart_template_guide/debugging/)
