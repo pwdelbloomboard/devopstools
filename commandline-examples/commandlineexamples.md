@@ -82,3 +82,14 @@ To add this permanently into the zsh, you use:
 ```
 echo 'export VARIABLE=something' >> ~/.zshenv
 ```
+
+
+# grep
+
+# awk
+
+# sed
+
+# net tools
+
+# shell basics

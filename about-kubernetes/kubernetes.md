@@ -169,3 +169,4 @@ Includes various kubernetes monitoring components.
 * [K8s Enterprise Architecture](https://platform9.com/blog/kubernetes-enterprise-chapter-2-kubernetes-architecture-concepts/)
 * [k8s Basics](https://kubernetes.io/docs/tutorials/kubernetes-basics/explore/explore-intro/)
 * [Running Application on Kubernetes](https://medium.com/@m.sedrowski/run-your-first-application-on-kubernetes-e54d5194e84b)
+* [Deployment of Multiple Apps on Cluster](https://wkrzywiec.medium.com/deployment-of-multiple-apps-on-kubernetes-cluster-walkthrough-e05d37ed63d1)

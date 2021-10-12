@@ -425,7 +425,7 @@ local          1/1       0/0      true
 
 ```
 
-In order to properly set up a working application using the, "non-deployment," method we need to understand more about [volumes](/about-volumes/volumes.md).
+In order to properly set up a working application using the, "non-deployment," method we need to understand more about [volumes](/about-volumes/volumes.md) as well as [registries](/about-registires/registries.md).
 
 ### Creating K3D Cluster and Importing a Docker Image
 
@@ -465,7 +465,7 @@ k3d cluster create nondeploymentcluster --api-port 127.0.0.1:6445 --servers 1 --
 
 ... (info on cluster deployment)
 
-k3d image import ghcr.io/pwdelbloomboard/ps-container:latest -c nondeploymentcluster
+k3d image import ghcr.io/pwdelbloomboard/ps-container:latest -c nondeploymentcluster --trace
 
 INFO[0000] Importing image(s) into cluster 'nondeploymentcluster' 
 INFO[0000] Starting k3d-tools node...                   
@@ -483,9 +483,117 @@ INFO[0116] Successfully imported 1 image(s) into 1 cluster(s)
 ```
 Note that although the documentation says, :latest is assumed, we had to explicitly put, :latest as the tag in order for this to work.
 
-So once the Docker image is successfully imported into the cluster, we should in theory be able to view the pod.
+So once the Docker image is successfully imported into the cluster, we should in theory be able to view the pod. However if we run the kubectl get pods command, we see:
 
+```
+kubectl get pods
+No resources found in default namespace.
+```
+* So, perhaps our Pods were not set up within the, "default" namespace. 
+* Or perhaps our Pods were not set up at all within these Nodes.
 
+Of course, the cluster itself is running:
+
+```
+$ k3d cluster list
+NAME                   SERVERS   AGENTS   LOADBALANCER
+buysellguess           1/1       0/0      true
+local                  1/1       0/0      true
+nondeploymentcluster   1/1       1/1      true
+```
+So if we run a wider scope view of Pods across all Namespaces, we see the following:
+
+```
+kubectl get pods --all-namespaces --output wide
+NAMESPACE     NAME                                      READY   STATUS      RESTARTS   AGE   IP          NODE                                NOMINATED NODE   READINESS GATES
+kube-system   coredns-7448499f4d-d5g2v                  1/1     Running     0          13h   10.42.0.3   k3d-nondeploymentcluster-server-0   <none>           <none>
+kube-system   metrics-server-86cbb8457f-bjs9r           1/1     Running     0          13h   10.42.1.2   k3d-nondeploymentcluster-agent-0    <none>           <none>
+kube-system   helm-install-traefik-crd-25xxg            0/1     Completed   0          13h   10.42.1.3   k3d-nondeploymentcluster-agent-0    <none>           <none>
+kube-system   helm-install-traefik-bfmlw                0/1     Completed   2          13h   10.42.0.2   k3d-nondeploymentcluster-server-0   <none>           <none>
+kube-system   svclb-traefik-4gh6q                       2/2     Running     0          13h   10.42.1.5   k3d-nondeploymentcluster-agent-0    <none>           <none>
+kube-system   svclb-traefik-986lc                       2/2     Running     0          13h   10.42.0.5   k3d-nondeploymentcluster-server-0   <none>           <none>
+kube-system   traefik-97b44b794-xznjc                   1/1     Running     0          13h   10.42.1.4   k3d-nondeploymentcluster-agent-0    <none>           <none>
+kube-system   local-path-provisioner-5ff76fc89d-t4xsx   1/1     Running     1          13h   10.42.0.4   k3d-nondeploymentcluster-server-0   <none>           <none>
+```
+
+Above we can see the various pods on nondeploymentcluster server-0, and agent-0. However, where is our imported application pod?  What other information can we get from our available k3d commands?
+
+* k3d kubeconfig get nondeploymentcluster ... gets the certificate of authority information, context, user, and ip information.
+
+```
+k3d kubeconfig get nondeploymentcluster
+---
+apiVersion: v1
+clusters:
+- cluster:
+    certificate-authority-data: LS0t  ... (very long certificate)
+    server: https://127.0.0.1:6445
+  name: k3d-nondeploymentcluster
+contexts:
+- context:
+    cluster: k3d-nondeploymentcluster
+    user: admin@k3d-nondeploymentcluster
+  name: k3d-nondeploymentcluster
+current-context: k3d-nondeploymentcluster
+kind: Config
+preferences: {}
+users:
+- name: admin@k3d-nondeploymentcluster
+  user:
+    client-certificate-data: LS0t ... (very long certificate)
+    client-key-data: LS
+```
+* k3d node list ... lists out the nodes
+```
+k3d node list
+NAME                                ROLE           CLUSTER                STATUS
+k3d-buysellguess-server-0           server         buysellguess           running
+k3d-buysellguess-serverlb           loadbalancer   buysellguess           running
+k3d-local-server-0                  server         local                  running
+k3d-local-serverlb                  loadbalancer   local                  running
+k3d-nondeploymentcluster-agent-0    agent          nondeploymentcluster   running
+k3d-nondeploymentcluster-server-0   server         nondeploymentcluster   running
+k3d-nondeploymentcluster-serverlb   loadbalancer   nondeploymentcluster   running
+k3d-registry.localhost              registry                              running
+```
+* We see above that there are three nodes specific to the, "nondeploymentcluster," - e.g. the agent, server0, and serverlb (load balancer)  Note that there is also a, "registry" node.
+
+From a comment on a [k3d issue 642](https://github.com/rancher/k3d/issues/642), 
+
+> Since you imported the image and didn't push it to a registry, the image "is just there" in the nodes, so you cannot pull it. Make sure that your imagePullPolicy to ifNotPresent, and not Always, so it doesn't try to pull.  You can use the image name just like you used it for the import command.
+
+In other words, if we were to use the, "import image" command, the image would be just sitting in the Node, rather than being, "pulled," from a registry, where it would presumably go into a pod. The imagePullPolicy default appears to be, "Always" try to pull from a registry, so when it attempts to pull, if there is nothing there, it will not pull into a Pod.  However, this could be in the instance where we are using a .yaml file, and not the command line method.
+
+If we attempt to run the command again, with --trace flag enabled, we get the following:
+
+```
+TRAC[0001] Exec process '[./k3d-tools save-image -d /k3d/images/k3d-nondeploymentcluster-images-20211008120948.tar ghcr.io/pwdelbloomboard/ps-container:latest]' still running in node 'k3d-nondeploymentcluster-tools'.. sleeping for 1 second... 
+```
+
+What might be happening is that we're pulling a, ["k3d-tools," image](https://github.com/rancher/k3d/tree/main/tools) from Docker.io, and not the, "ghcr.io," image because when we look at the output from one of the above "import" commands, we see:
+
+```
+$ k3d image import ghcr.io/pwdelbloomboard/ps-container:latest -c nondeploymentcluster
+INFO[0000] Importing image(s) into cluster 'nondeploymentcluster' 
+INFO[0000] Starting k3d-tools node...                   
+INFO[0001] Pulling image 'docker.io/rancher/k3d-tools:v4.4.6' 
+INFO[0002] Starting Node 'k3d-nondeploymentcluster-tools' 
+INFO[0003] Saving 1 image(s) from runtime...            
+INFO[0050] Importing images into nodes...               
+INFO[0050] Importing images from tarball '/k3d/images/k3d-nondeploymentcluster-images-20211008102755.tar' into node 'k3d-nondeploymentcluster-server-0'... 
+INFO[0050] Importing images from tarball '/k3d/images/k3d-nondeploymentcluster-images-20211008102755.tar' into node 'k3d-nondeploymentcluster-agent-0'... 
+INFO[0114] Removing the tarball(s) from image volume... 
+INFO[0115] Removing k3d-tools node...                   
+INFO[0116] Deleted k3d-nondeploymentcluster-tools       
+INFO[0116] Successfully imported image(s)               
+INFO[0116] Successfully imported 1 image(s) into 1 cluster(s) 
+```
+#### Final Thoughts on Importing Images
+
+* Using the, "import image," command line function is different than using the, "Deployment," command-line function.
+* Importing images through the command line with "k3d import" is like importing an operating system, it's better to just stick with the stock k3d off-the-shelf images provided.
+* Using, "Deployments," is more similar to creating an Application, or a version of an application, installing a, "Deployment," on an existing operating system.
+* When using, "Deployments," you can use a YAML file and specify the, "image" as an independent Docker file on your machine.
 
 ## Deploying with k3d
 
@@ -814,6 +922,8 @@ This may have been because we set the image id of the container "buysellguessapp
 
 * Sha-256 Image ID (source image)
 
+So instead of using that long string of ID number, we use the actual Built Docker image to run the application in the YAML file, as shown below.
+
 ```
       containers:
         - name: buysellguessapp
@@ -877,6 +987,253 @@ Port forwarding might be helpful for debugging, but it will be easier to underst
 
 * [Introduction to Networking](https://devopswithkubernetes.com/part-1/3-introduction-to-networking)
 
+#### Connecting Ports - 8081 to Server and 8082 to Agent port 30080
+
+The objective of this step is to grant access through port 8081 to our server node (actually all nodes) and 8082 to one of our agent nodes port 30080. They will be used to showcase different methods of communicating with the servers.
+
+> K3d has helpfully prepared us a port to access the API in 6443 and, in addition, has opened a port to 80. All requests to the load balancer here will be proxied to the same ports of all server nodes of the cluster. However, for testing purposes, we'll want an individual port open for a single node. Let's delete our old cluster and create a new one with port some ports open.
+
+> K3d documentation tells us how the ports are opened, we'll open local 8081 to 80 in k3d-k3s-default-serverlb and local 8082 to 30080 in k3d-k3s-default-agent-0. The 30080 is chosen almost completely randomly, but needs to be a value between 30000-32767 for the next step:
+
+```
+k3d cluster create --port '8082:30080@agent[0]' -p 8081:80@loadbalancer --agents 2
+
+INFO[0000] Prep: Network                                
+INFO[0000] Re-using existing network 'k3d-k3s-default' (9a13490949d1c8f61699605d5e440e33e01cc18184e16ada6b8ea5c8b58cb380) 
+INFO[0000] Created volume 'k3d-k3s-default-images'      
+INFO[0001] Creating node 'k3d-k3s-default-server-0'     
+INFO[0001] Creating node 'k3d-k3s-default-agent-0'      
+INFO[0001] Creating node 'k3d-k3s-default-agent-1'      
+INFO[0001] Creating LoadBalancer 'k3d-k3s-default-serverlb' 
+INFO[0001] Starting cluster 'k3s-default'               
+INFO[0001] Starting servers...                          
+INFO[0001] Starting Node 'k3d-k3s-default-server-0'     
+INFO[0013] Starting agents...                           
+INFO[0013] Starting Node 'k3d-k3s-default-agent-0'      
+INFO[0027] Starting Node 'k3d-k3s-default-agent-1'      
+INFO[0036] Starting helpers...                          
+INFO[0036] Starting Node 'k3d-k3s-default-serverlb'     
+INFO[0037] (Optional) Trying to get IP of the docker host and inject it into the cluster as 'host.k3d.internal' for easy access 
+INFO[0047] Successfully added host record to /etc/hosts in 4/4 nodes and to the CoreDNS ConfigMap 
+INFO[0047] Cluster 'k3s-default' created successfully!  
+INFO[0047] --kubeconfig-update-default=false --> sets --kubeconfig-switch-context=false 
+INFO[0047] You can now use it like this:                
+kubectl config use-context k3d-k3s-default
+kubectl cluster-info
+
+```
+
+We can apply the settings from our deployment again with:
+
+```
+kubectl apply -f manifests/deployment.yaml
+
+deployment.apps/buysellguess-dep created
+
+```
+> Now we have access through port 8081 to our server node (actually all nodes) and 8082 to one of our agent nodes port 30080. They will be used to showcase different methods of communicating with the servers.
+
+#### What is a Service?
+
+As Deployment resources took care of deployments for us. Service resource will take care of serving the application to connections from outside of the cluster.
+
+![](/img/whatsaservice.png)
+
+To take care of services, we can create a service.yaml file in the [manifest folder](https://github.com/pwdelbloomboard/dockerreactjs-yarn/tree/main/app/manifests) to declare the following:
+
+* Declare that we want a Service
+* Declare which port to listen to
+* Declare the application where the request should be directed to
+* Declare the port where the request should be directed to
+
+```
+apiVersion: v1
+kind: Service
+metadata:
+  name: buysellguess-dep
+spec:
+  type: NodePort
+  selector:
+    app: buysellguess # This is the app as declared in the deployment.
+  ports:
+    - name: http
+      nodePort: 30080 # This is the port that is available outside. Value for nodePort can be between 30000-32767
+      protocol: TCP
+      port: 1234 # This is a port that is available to the cluster, in this case it can be ~ anything
+      targetPort: 3000 # This is the target port
+```
+
+The comments above explain what the declarations mean, including the 1. Matching the name: and the app: to our deployment.yaml, 2. Using port to port to the outside world, with protocol TCP.
+
+Once we have added this file, we can use the, "kubectl apply" command:
+
+```
+kubectl apply -f manifests/service.yaml
+  service/hashresponse-svc created
+```
+> As we've published 8082 as 30080 we can access it now via http://localhost:8082.
+
+![](/img/buysellguessapp_connectedviaservice8082.png)
+
+
+> We've now defined a nodeport with type: NodePort. NodePorts simply ports that are opened by Kubernetes to all of the nodes and the service will handle requests in that port. NodePorts are not flexible and require you to assign a different port for every application. As such NodePorts are not used in production but are helpful to know about.
+
+> What we'd want to use instead of NodePort would be a LoadBalancer type service but this "only" works with cloud providers as it configures a, possibly costly, load balancer for it. We'll get to know them in part 3.
+
+#### What is an Ingress?
+
+![](/img/whatsaningress.png)
+
+Whereas a Service is on Layer 4 of the OSI model, an Ingress is on Layer 7.
+
+![](/img/osi7layer.png)
+
+A more detailed breakdown shows that an ingress is more like the following:
+
+![](/img/ingress_detail.png)
+
+To set up an ingress, first we have to delete our previous service.
+
+```
+kubectl delete -f manifests/service.yaml
+service "buysellguess-dep" deleted
+```
+Instead of the above service which defined a NodePort and Published on 30080, we are setting up on port 2345.
+
+```
+apiVersion: v1
+kind: Service
+metadata:
+  name: buysellguess-svc
+spec:
+  type: ClusterIP
+  selector:
+    app: buysellguess
+  ports:
+    - port: 2345
+      protocol: TCP
+      targetPort: 3000
+```
+So once we have deleted the above previous service and replaced service.yaml with the simplier version, showing up on port 2345 with taretport 3000, 
+
+We now add, "ingress.yaml" - 
+
+```
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: buysellguess-dep-ingress
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /
+        backend:
+          serviceName: buysellguess-dep
+          servicePort: 2345
+```
+
+We apply these new service.yaml and ingress.yaml and get:
+
+```
+kubectl apply -f manifests/service.yaml
+service/buysellguess-dep created
+
+kubectl apply -f manifests/ingress.yaml
+Warning: extensions/v1beta1 Ingress is deprecated in v1.14+, unavailable in v1.22+; use networking.k8s.io/v1 Ingress
+ingress.extensions/buysellguess-dep-ingress created
+```
+Verify that these exist with:
+
+```
+kubectl get svc
+
+NAME               TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)    AGE
+kubernetes         ClusterIP   10.43.0.1      <none>        443/TCP    3m37s
+buysellguess-svc   ClusterIP   10.43.41.146   <none>        2345/TCP   4s
+
+kubectl get ing
+NAME                       CLASS    HOSTS   ADDRESS                            PORTS   AGE
+buysellguess-dep-ingress   <none>   *       172.24.0.2,172.24.0.3,172.24.0.4   80      3m17s
+
+```
+
+> We can see that the ingress is listening on port 80. As we already opened port there we can access the application on http://localhost:8081.
+
+As shown below:
+
+![](/img/buysellguessapp_connectedviaingress8082.png)
+
+![](/img/serviceingresstaxonomy.png)
+#### Networking Between Pods
+
+> Kubernetes includes a DNS service so communication between pods and containers in Kubernetes is as much of a challenge as it was with containers in docker-compose. Containers in a pod share the network. As such every other container inside a pod is accessible from localhost. 
+
+> For communication between Pods a Service is used as they expose the Pods as a network service.
+
+So in short:
+
+* Containers in Pods share a network. Every container inside a pod is accessible from localhost.
+* To communicate **between** Pods, we have to set up a Service and expose the Pods as a Network Service.
+
+> The following creates a cluster-internal IP which will enable other pods in the cluster to access the port 8080 of "example" application from http://example-service. ClusterIP is the default type for a Service.
+
+```
+apiVersion: v1
+kind: Service
+metadata:
+  name: example-service
+spec:
+  type: ClusterIP
+  selector:
+    app: example
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: 8080
+```
+
+You can go into a pod and make a request rather than spinning up a new pod:
+
+```
+kubectl exec -it example_pod
+```
+
+#### Namespaces
+
+Namespaces are useful to organize highly complex K8s systems.
+
+```
+k get namespaces
+NAME              STATUS   AGE
+default           Active   69m
+kube-system       Active   69m
+kube-public       Active   69m
+kube-node-lease   Active   69m
+```
+
+You can tag resources with namespaces.
+
+To get resources under a particular namespace:
+
+```
+kubectl get pods -n default    
+NAME                                READY   STATUS    RESTARTS   AGE
+buysellguess-dep-6867c7cfdf-8h7rg   1/1     Running   0          69m
+```
+
+This is expected, that we only have one pod, because this is what was set up.
+
+#### Configuring Applications
+
+
+#### StatefulSets and Jobs
+
+
+
+#### Monitoring
+
 
 
 ### One Node at a Time Strategy - No Deployment
@@ -889,11 +1246,9 @@ Information on debugging has been placed in a couple different locations:
 * [about lens](/about-lens/lens.md)
 * [about-kubernetes ](/about-kubernetes/kubernetes.md#)
 
-
-
 # Questions Outstanding
 
-* Why did we have to push a container to a container registry?  The 
+* N/A at this time.
 
 # Resources
 
@@ -909,3 +1264,5 @@ Information on debugging has been placed in a couple different locations:
 * [Introduction to Networking](https://devopswithkubernetes.com/part-1/3-introduction-to-networking)
 * [Introduction to k3d on k3s](https://www.suse.com/c/introduction-k3d-run-k3s-docker-src/)
 * [Rancher Blog - Setup k3d high Availability](https://rancher.com/blog/2020/set-up-k3s-high-availability-using-k3d)
+* [k3d issue 642](https://github.com/rancher/k3d/issues/642)
+* [Setup k3d for Local Testing and Development](https://thoughtexpo.com/setup-k3d-cluster-for-local-testing-or-development/)
