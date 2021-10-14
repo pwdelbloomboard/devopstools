@@ -27,6 +27,14 @@
 * [ssm](/about-ssm/)
 * [nginx](/about-nginx)
 * [go](/about-go/)
+* [ec2](/about-ec2)
+* [ansible](/about-ansible)
+* [uppy](/about-uppy)
+* [redash](/about-redash)
+* [prometheus](/about-prometheus/)
+* [grafana](/about-grafana)
+* [celery](/about-celery)
+* [ohmyzsh](/about-ohmyzsh)
 
 ## Devops Evaluation Rubric
 

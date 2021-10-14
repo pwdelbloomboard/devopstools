@@ -191,6 +191,11 @@ Metrics-server is running at https://127.0.0.1:6445/api/v1/namespaces/kube-syste
 ### kubectl get pods
 
 
+### kubectl logs [PODNAME] -f
+
+### kubectl get logs -l
+
+Gets the logs of a particular pod.
 
 ### kubectl get pods --namespace [default]
 
@@ -202,8 +207,9 @@ Metrics-server is running at https://127.0.0.1:6445/api/v1/namespaces/kube-syste
 
 ### kubectl get ingress
 
-### kubectl get logs -l
+### kubctl logs [INGRESSNAME] -f
 
+> This one does not seem to work
 
 # Resources
 
