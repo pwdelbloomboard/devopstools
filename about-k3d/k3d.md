@@ -1239,6 +1239,68 @@ This is expected, that we only have one pod, because this is what was set up.
 ### One Node at a Time Strategy - No Deployment
 
 * Running one Node at a time is not recommended.
+
+### Shutting Down Clusters
+
+The simplest way to shut down k3d clusters is to simply:
+
+1. List them out so you can find the name of the cluster.
+2. Do, "cluster stop" command to stop the clusters.
+3. Finally run, "cluster delete."
+
+```
+$ k3d cluster list
+
+NAME          SERVERS   AGENTS   LOADBALANCER
+k3s-default   1/1       1/2      true
+local         1/1       0/0      true
+```
+
+IF we run the, "stop" cluster command, we see a slight delay, then listing, we see:
+
+```
+k3d cluster stop k3s-default
+
+INFO[0000] Stopping cluster 'k3s-default'
+
+k3d cluster list
+
+NAME          SERVERS   AGENTS   LOADBALANCER
+k3s-default   0/1       0/2      true
+local         1/1       0/0      true
+
+```
+
+* In this above situation, "local" is a pre-defined cluster which was set up by a setup script on our local machine.  Within this local machine setup, we have:
+
+```
+* k3d-registry.localhost - this is a local registry for docker images. After docker images are built locally, those images can be pushed to that registry locally which saves time and space rather than pushing every local build to a remote registry.
+
+* k3d-local-server0 - the local server itself.
+
+* k3d-local-serverlb - a load balancer for the local server.
+
+```
+
+This, "local server," environment can also be stopped and removed.
+
+So, we delete the, "k3s-default" and "local" clusters with:
+
+```
+k3d cluster delete k3s-default
+INFO[0000] Deleting cluster 'k3s-default'               
+INFO[0000] Deleted k3d-k3s-default-serverlb             
+INFO[0003] Deleted k3d-k3s-default-agent-1              
+INFO[0004] Deleted k3d-k3s-default-agent-0              
+INFO[0011] Deleted k3d-k3s-default-server-0             
+INFO[0011] Deleting image volume 'k3d-k3s-default-images' 
+INFO[0011] Removing cluster details from default kubeconfig... 
+INFO[0011] Removing standalone kubeconfig file (if there is one)... 
+INFO[0011] Successfully deleted cluster k3s-default!
+```
+
+After that, the clusters should be deleted.
+
 #### Debugging
 
 Information on debugging has been placed in a couple different locations:

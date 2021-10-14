@@ -34,6 +34,7 @@
 * [prometheus](/about-prometheus/)
 * [grafana](/about-grafana)
 * [celery](/about-celery)
+* [ohmyzsh](/about-ohmyzsh)
 
 ## Devops Evaluation Rubric
 
