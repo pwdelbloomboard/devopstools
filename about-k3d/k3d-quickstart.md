@@ -77,7 +77,7 @@ Once we have completed the above, we can create a deployment.
 
 ### Designing the Manifests
 
-We will need three manifests:
+We will need three manifests, which we have put [together here in this repo](https://github.com/pwdelbloomboard/dockerreactjs-yarn/tree/main/app/manifests):
 
 * deployment.yaml
 
