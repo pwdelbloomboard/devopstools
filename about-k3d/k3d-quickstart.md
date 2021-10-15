@@ -75,6 +75,23 @@ This is because we have not, "deployed" the application to our cluster.
 
 Once we have completed the above, we can create a deployment.
 
+### Prior to Applying the Deployment
+
+In order for the Deployment to be able to, "Apply" to our cluster, a prerequisite is a running container with a functioning app on which the deployment will draw.
+
+```
+docker run -it --rm \
+-v ${PWD}:/app \
+-v /app/node_modules \
+-p 3001:3000 \
+-e CHOKIDAR_USEPOLLING=true \
+--name buysellguessapp \
+ghcr.io/pwdelbloomboard/ps-container
+```
+If this is up and running successfully, you should be able to see the app running at localhost:3001.
+
+![](/img/buysellguessapp_connectedascontainer3001.png)
+
 ### Designing the Manifests
 
 We will need three manifests, which we have put [together here in this repo](https://github.com/pwdelbloomboard/dockerreactjs-yarn/tree/main/app/manifests):
@@ -104,6 +121,14 @@ kubectl apply -f manifests/deployment.yaml
 
 deployment.apps/buysellguess-dep created
 ```
+The key point here is that within the deployment.yaml file, there must be a container listed with a name and image which corresponds to our application that we are trying to launch. So under the "containers" section of deployment.yaml we should have: 
+
+```
+      containers:
+        - name: buysellguessapp
+          image: ghcr.io/pwdelbloomboard/ps-container
+```
+...which corresponds to the name and image name of our container and image we have been using.
 
 #### Verifying Deployment is Up and Running
 
@@ -111,6 +136,7 @@ We can verify that the deployment is up and running with:
 
 ```
 kubectl get deployments
+
 NAME               READY   UP-TO-DATE   AVAILABLE   AGE
 buysellguess-dep   1/1     1            1           22m
 ```
@@ -170,4 +196,27 @@ NAME                        STATUS   ROLES                  AGE   VERSION
 k3d-buysellguess-server-0   Ready    control-plane,master   15h   v1.21.1+k3s1
 k3d-buysellguess-agent-0    Ready    <none>                 15h   v1.21.1+k3s1
 
+```
+### Pulling Down the Cluster
+
+With k3d, the cluster can be stopped and deleted as a whole.
+
+```
+k3d cluster stop buysellguess
+INFO[0000] Stopping cluster 'buysellguess'  
+```
+
+and to delete it...
+
+```
+k3d cluster delete buysellguess
+INFO[0000] Deleting cluster 'buysellguess'              
+INFO[0000] Deleted k3d-buysellguess-serverlb            
+INFO[0003] Deleted k3d-buysellguess-agent-0             
+INFO[0007] Deleted k3d-buysellguess-server-0            
+INFO[0007] Deleting cluster network 'k3d-buysellguess'  
+INFO[0007] Deleting image volume 'k3d-buysellguess-images' 
+INFO[0007] Removing cluster details from default kubeconfig... 
+INFO[0007] Removing standalone kubeconfig file (if there is one)... 
+INFO[0007] Successfully deleted cluster buysellguess!
 ```
