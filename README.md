@@ -35,6 +35,10 @@
 * [grafana](/about-grafana)
 * [celery](/about-celery)
 * [ohmyzsh](/about-ohmyzsh)
+* [environments](/about-environments)
+* [sqsqueue](/about-sqsqueue)
+* [superset](/about-superset)
+* [helmfile](/about-helmfile)
 
 ## Devops Evaluation Rubric
 

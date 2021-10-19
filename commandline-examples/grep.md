@@ -1,4 +1,4 @@
-# Using Grep
+### Using Grep
 
 If you want to know whether a particular feature is already included in the codebase, you can use grep to search for things.
 
@@ -82,14 +82,3 @@ To add this permanently into the zsh, you use:
 ```
 echo 'export VARIABLE=something' >> ~/.zshenv
 ```
-
-
-# grep
-
-# awk
-
-# sed
-
-# net tools
-
-# shell basics
