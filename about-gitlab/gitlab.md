@@ -1,4 +1,11 @@
+### Viewing a Git Diff
 
+* [Gitlab Git Diffs](https://docs.gitlab.com/ee/development/diffs.html)
+
+#### From a Merge Request
+
+1. Go to the merge request.
+2. Click on "Changes," at the top.
 
 ### How to Do Draft Merge Requests
 
