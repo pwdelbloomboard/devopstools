@@ -39,6 +39,7 @@
 * [sqsqueue](/about-sqsqueue)
 * [superset](/about-superset)
 * [helmfile](/about-helmfile)
+* [kms](/about-kms)
 
 ## Devops Evaluation Rubric
 
