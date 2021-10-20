@@ -39,6 +39,48 @@
 * [sqsqueue](/about-sqsqueue)
 * [superset](/about-superset)
 * [helmfile](/about-helmfile)
+* [kms](/about-kms)
+
+## Not Added Yet
+
+* soc2
+* api
+* gql
+* unit testing
+* integration testing
+* ssl
+* daemons
+* endpoint testing
+* system calls
+* cloudfront
+* network security
+* package management
+* route53
+* pubsub
+* rds
+* cloudwatch
+* auth
+* reading code
+* COPPA
+* FERPA
+
+## Ambiguous
+
+* Runbooks
+* AWS library...which library?
+* Adjacent language syntax
+* Adjacent framework API
+* Core design pattern
+* Kubernetes Lifecycles
+* Debugger
+* Health Check
+* Difference between build chain and pipeline, if any
+* Core Automation Tools
+* Fast Graceful Failures
+* Correct Logic
+* Linux Tools - which ones? Some already listed seperately.
+* Automation - anything specific? It's inherently vast.
+
 
 ## Devops Evaluation Rubric
 
