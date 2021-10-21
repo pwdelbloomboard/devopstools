@@ -18,6 +18,8 @@ There are several ways to flag a merge request as a draft:
 * Commenting in an existing merge request: Add the /draft quick action in a comment. This quick action is a toggle, and can be repeated to change the status again. This quick action discards any other text in the comment.
 * Creating a commit: Add draft:, Draft:, fixup!, or Fixup! to the beginning of a commit message targeting the merge request’s source branch. This is not a toggle, and adding this text again in a later commit doesn’t mark the merge request as ready.
 
+![](/img/gitlabcreatingdraft.png)
+
 #### Commenting In An Existing Merge Request
 
 1. Finish desired changes.
