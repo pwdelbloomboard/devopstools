@@ -13,6 +13,24 @@
 
 > CAUTION: This documentation is for the development version of Helmfile. If you are looking for the documentation for any of releases, please switch to the corresponding release tag like v0.92.1.
 
+### How Helmfile is Used
+
+* Helmfile can be used in production and within testing to verify prior to moving something into production.
+
+The output of a test script will, "write" gotmpl files which can be reviewed to ensure correct ouput.
+
+![](/img/helmfile_test_output.png)
+
+
+### What Helmfile References
+
+* Helmfile references an overall apps.yaml file which lists releases for each application within an overall kubernetes cluster.
+
+* Each release will have a named set which includes an individual application name, along with various added variables such as the, "branchSlug" which helps keep a particular release seperate from any past or future release.
+
+* Templates are also referenced - note in this below image the template logic specifically states, "if environment is prod then FALSE, else TRUE." (kind of the reverse of what you might expect)
+
+* Labels are also applied as release names. Labels within the context of kubernetes 
 
 ### Helmfile in Use
 
