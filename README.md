@@ -40,7 +40,7 @@
 * [superset](/about-superset)
 * [helmfile](/about-helmfile)
 * [kms](/about-kms)
-
+* [shellcheck](/about-shellcheck)
 ## Not Added Yet
 
 * soc2
@@ -63,6 +63,7 @@
 * reading code
 * COPPA
 * FERPA
+
 
 ## Ambiguous
 
