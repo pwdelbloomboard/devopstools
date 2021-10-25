@@ -23,3 +23,8 @@ Metrics don't accurately reflect our work, why using these metrics or what are w
 
 * Focusing on a particular metric has to do with the business goals - perhaps showing whether certain types of engineering efforts are either on time, or meeting customer expectations.
 
+### Ticket Logging Illustration
+
+![](/img/projectmanagementtickets01.png)
+
+![](/img/projectmanagementtickets02.png)

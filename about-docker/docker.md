@@ -23,7 +23,6 @@ Which would pull up an image id, a full image id, basically a long string which 
 
 > Since Docker v1.10, generally, images and layers are no longer synonymous. Instead, an image directly references one or more layers that eventually contribute to a derived container's filesystem.
 
-
 > A Docker image now consists of a configuration object, which (amongst other things) contains an ordered list of layer digests, which enables the Docker Engine to assemble a container's filesystem with reference to layer digests rather than parent images. The image ID is also a digest, and is a computed SHA256 hash of the image configuration object, which contains the digests of the layers that contribute to the image's filesystem definition.
 
 ```
@@ -124,7 +123,6 @@ Which would pull up an image id, a full image id, basically a long string which 
 ]
 
 ```
-
 
 ## Useful Docker Commands
 

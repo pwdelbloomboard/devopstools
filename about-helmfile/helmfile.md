@@ -30,7 +30,9 @@ The output of a test script will, "write" gotmpl files which can be reviewed to 
 
 * Templates are also referenced - note in this below image the template logic specifically states, "if environment is prod then FALSE, else TRUE." (kind of the reverse of what you might expect)
 
-* Labels are also applied as release names. Labels within the context of kubernetes 
+![](/img/applicationwithinhelmfilesappsyaml.png)
+
+* Labels are also applied as release names. [Labels within the context of kubernetes](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/) are more analogous to, "tags" in that they allow users to define a structure and can be applied ad-hoc. Labels contrast to namespaces, which are designed more to partition spaces of an cluster, set resource quotas and globally apply actions to a set of resources.
 
 ### Helmfile in Use
 
