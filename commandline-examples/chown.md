@@ -4,8 +4,8 @@
 
 Usage: chown [OPTION]... [OWNER][:[GROUP]] FILE...
   or:  chown [OPTION]... --reference=RFILE FILE...
-Change the owner and/or group of each FILE to OWNER and/or GROUP.
-With --reference, change the owner and group of each FILE to those of RFILE.
+
+Change the owner and/or group of each FILE to OWNER and/or GROUP With --reference, change the owner and group of each FILE to those of RFILE.
 
   -c, --changes          like verbose but report only when a change is made
 
@@ -14,7 +14,7 @@ With --reference, change the owner and group of each FILE to those of RFILE.
   -v, --verbose          output a diagnostic for every file processed
       --dereference      affect the referent of each symbolic link (this is
                          the default), rather than the symbolic link itself
-                         
+
   -h, --no-dereference   affect symbolic links instead of any referenced file
                          (useful only on systems that can change the
                          ownership of a symlink)

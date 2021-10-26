@@ -41,6 +41,7 @@
 * [helmfile](/about-helmfile)
 * [kms](/about-kms)
 * [shellcheck](/about-shellcheck)
+* [debian](/about-debian)
 ## Not Added Yet
 
 * soc2

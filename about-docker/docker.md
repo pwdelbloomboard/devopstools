@@ -133,7 +133,6 @@ Which would pull up an image id, a full image id, basically a long string which 
 docker volume rm [OPTIONS]
 ```
 
-
 * [Remove all Images](https://docs.docker.com/engine/reference/commandline/image_prune/)
 
 ```
