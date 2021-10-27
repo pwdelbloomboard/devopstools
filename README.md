@@ -1,34 +1,40 @@
-# devopstools
+# devopstools - Alphabetical Order
 
-* [airflow](/about-airflow/)
+* [airflow](/about-airflow)
 * [ansible](/about-ansible)
+* [apis](/about-apis)
 * [asdf](/about-asdf)
+* [auth](/about-auth)
 * [celery](/about-celery)
-* [chalice](/about-chalice/)
+* [chalice](/about-chalice)
+* [cloudfront](/about-cloudfront)
+* [cloudwatch](/about-cloudwatch)
 * [ci](/about-ci)
+* [daemons](/about-daemons)
 * [debian](/about-debian)
 * [deployments](/about-deployments)
 * [direnv](/about-direnv/)
 * [dns](/about-dns/)
 * [docker](/about-docker/)
 * [ec2](/about-ec2)
-* [elasticache](/about-elasticache/)
+* [elasticache](/about-elasticache)
 * [environments](/about-environments)
-* [gitlab](/about-gitlab/)
-* [go](/about-go/)
+* [gitlab](/about-gitlab)
+* [go](/about-go)
+* [gql](/about-gql)
 * [grafana](/about-grafana)
-* [helm](/about-helm/)
+* [helm](/about-helm)
 * [helmfile](/about-helmfile)
 * [javascript](/about-javascript)
-* [k3d/k3s](/about-k3d/)
-* [kinesis](/about-kinesis/)
+* [k3d/k3s](/about-k3d)
+* [kinesis](/about-kinesis)
 * [kms](/about-kms)
-* [kops](/about-kops/)
-* [kubernetes](/about-kubernetes/)
-* [lens](/about-lens/)
+* [kops](/about-kops)
+* [kubernetes](/about-kubernetes)
+* [lens](/about-lens)
 * [mongo](/about-mongo)
 * [mongoose](/about-mongoose)
-* [networking](/about-networking/)
+* [networking](/about-networking)
 * [newrelic](/about-newrelic)
 * [nginx](/about-nginx)
 * [ohmyzsh](/about-ohmyzsh)
@@ -39,6 +45,7 @@
 * [redash](/about-redash)
 * [redis](/about-redis)
 * [registries](/about-registries)
+* [route53](/about-route53)
 * [rundeck](/about-rundeck)
 * [s3](/about-s3)
 * [setupfiles](/about-setupfiles)
@@ -52,32 +59,27 @@
 * [volumes](/about-volumes)
 * [vscode](/about-vscode)
 
+
+
+
 ## Not Added Yet
 
-* soc2
-* api
-* gql
-* unit testing
-* integration testing
-* ssl
-* daemons
-* endpoint testing
-* system calls
-* cloudfront
-* network security
-* package management
-* route53
-* pubsub
-* rds
-* cloudwatch
-* auth
-* reading code
 * COPPA
 * FERPA
-
+* endpoint testing
+* integration testing
+* network security
+* package management
+* soc2
+* system calls
+* unit testing
 
 ## Ambiguous
 
+* api
+* network security
+* reading code
+* package management
 * Runbooks
 * AWS library...which library?
 * Adjacent language syntax
