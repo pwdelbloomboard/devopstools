@@ -1,4 +1,4 @@
-# 
+# Docker Commands
 
 docker run --help
 
@@ -81,7 +81,9 @@ Options:
       --memory-swap bytes              Swap limit equal to memory plus swap: '-1' to enable
                                        unlimited swap
       --memory-swappiness int          Tune container memory swappiness (0 to 100) (default -1)
+
       --mount mount                    Attach a filesystem mount to the container
+
       --name string                    Assign a name to the container
       --network network                Connect a container to a network
       --network-alias list             Add network-scoped alias for the container
