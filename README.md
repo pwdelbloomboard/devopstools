@@ -1,72 +1,162 @@
-# devopstools
+# devopstools - Importance Ranking
+### Needed Soon (alphabetical)
 
+* [command line](/commandline-examples)
+* [rundeck](/about-rundeck)
+* [setup script](/about-setupfiles)
+* SRE School
+* [volumes](/about-volumes)
+### Middle Urgency (alphabetical)
+
+* [cloudwatch](/about-cloudwatch)
+* [kms](/about-kms)
+* [newrelic](/about-newrelic)
+* [pagerduty](/about-pagerduty)
+* [rds](/about-rds)
+* [shellcheck](/about-shellcheck)
+* [ssm](/about-ssm)
+### Not Important Yet But Will Be Later (alphabetica)
+
+* [redash](/about-redash)
+* [superset](/about-superset)
+
+### Not Urgent Yet (alphabetical)
+
+* [airflow](/about-airflow)
+* [ansible](/about-ansible)
+* [apis](/about-apis)
+* [asdf](/about-asdf)
+* [auth](/about-auth)
+* [celery](/about-celery)
+* [chalice](/about-chalice)
+* [ci](/about-ci)
+* [cloudfront](/about-cloudfront)
+* [daemons](/about-daemons)
+* [debian](/about-debian)
+* [deployments](/about-deployments)
 * [direnv](/about-direnv/)
 * [dns](/about-dns/)
 * [docker](/about-docker/)
-* [elasticache](/about-elasticache/)
-* [helm](/about-helm/)
-* [k3d/k3s](/about-k3d/)
-* [kinesis](/about-kinesis/)
-* [kops](/about-kops/)
-* [kubernetes](/about-kubernetes/)
-* [lens](/about-lens/)
-* [mongo](/about-mongo/)
-* [networking](/about-networking/)
-* [postgres](/about-postgres/)
-* [redis](/about-redis/)
-* [rundeck](/about-rundeck/)
-* [s3](/about-s3/)
-* [setupfiles](/about-setupfiles/)
-* [sqsqueue](/about-sqsqueue/)
-* [starship](/about-starship/)
-* [volumes](/about-volumes/)
-* [gitlab](/about-gitlab/)
-* [newrelic](/about-newrelic/)
-* [chalice](/about-chalice/)
-* [airflow](/about-airflow/)
-* [ssm](/about-ssm/)
-* [nginx](/about-nginx)
-* [go](/about-go/)
 * [ec2](/about-ec2)
-* [ansible](/about-ansible)
-* [uppy](/about-uppy)
-* [redash](/about-redash)
-* [prometheus](/about-prometheus/)
-* [grafana](/about-grafana)
-* [celery](/about-celery)
-* [ohmyzsh](/about-ohmyzsh)
+* [elasticache](/about-elasticache)
 * [environments](/about-environments)
-* [sqsqueue](/about-sqsqueue)
-* [superset](/about-superset)
+* [gitlab](/about-gitlab)
+* [go](/about-go)
+* [gql](/about-gql)
+* [grafana](/about-grafana)
+* [helm](/about-helm)
 * [helmfile](/about-helmfile)
+* [javascript](/about-javascript)
+* [k3d/k3s](/about-k3d)
+* [kinesis](/about-kinesis)
+* [kops](/about-kops)
+* [kubernetes](/about-kubernetes)
+* [lens](/about-lens)
+* [mongo](/about-mongo)
+* [mongoose](/about-mongoose)
+* [networking](/about-networking)
+* [nginx](/about-nginx)
+* [ohmyzsh](/about-ohmyzsh)
+* [postgres](/about-postgres)
+* [precommit](/about-precommit)
+* [project management](/about-projectmanagement)
+* [prometheus](/about-prometheus)
+* [redis](/about-redis)
+* [registries](/about-registries)
+* [route53](/about-route53)
+* [s3](/about-s3)
+* [sqsqueue](/about-sqsqueue)
+* [ssl](/about-ssl)
+* [starship](/about-starship)
+* [uppy](/about-uppy)
+* [vscode](/about-vscode)
+
+
+# devopstools Full List - Alphabetical Order
+
+* [airflow](/about-airflow)
+* [ansible](/about-ansible)
+* [apis](/about-apis)
+* [asdf](/about-asdf)
+* [auth](/about-auth)
+* [celery](/about-celery)
+* [chalice](/about-chalice)
+* [ci](/about-ci)
+* [cloudfront](/about-cloudfront)
+* [cloudwatch](/about-cloudwatch)
+* [command line](/commandline-examples)
+* [daemons](/about-daemons)
+* [debian](/about-debian)
+* [deployments](/about-deployments)
+* [direnv](/about-direnv/)
+* [dns](/about-dns/)
+* [docker](/about-docker/)
+* [ec2](/about-ec2)
+* [elasticache](/about-elasticache)
+* [environments](/about-environments)
+* [gitlab](/about-gitlab)
+* [go](/about-go)
+* [gql](/about-gql)
+* [grafana](/about-grafana)
+* [helm](/about-helm)
+* [helmfile](/about-helmfile)
+* [javascript](/about-javascript)
+* [k3d/k3s](/about-k3d)
+* [kinesis](/about-kinesis)
 * [kms](/about-kms)
+* [kops](/about-kops)
+* [kubernetes](/about-kubernetes)
+* [lens](/about-lens)
+* [mongo](/about-mongo)
+* [mongoose](/about-mongoose)
+* [networking](/about-networking)
+* [newrelic](/about-newrelic)
+* [nginx](/about-nginx)
+* [ohmyzsh](/about-ohmyzsh)
+* [pagerduty](/about-pagerduty)
+* [postgres](/about-postgres)
+* [precommit](/about-precommit)
+* [project management](/about-projectmanagement)
+* [prometheus](/about-prometheus)
+* [rds](/about-rds)
+* [redash](/about-redash)
+* [redis](/about-redis)
+* [registries](/about-registries)
+* [route53](/about-route53)
+* [rundeck](/about-rundeck)
+* [s3](/about-s3)
+* [setup script](/about-setupfiles)
 * [shellcheck](/about-shellcheck)
+* [sqsqueue](/about-sqsqueue)
+* [ssl](/about-ssl)
+* [ssm](/about-ssm)
+* [starship](/about-starship)
+* [superset](/about-superset)
+* [uppy](/about-uppy)
+* [volumes](/about-volumes)
+* [vscode](/about-vscode)
+
+
+
+
 ## Not Added Yet
 
-* soc2
-* api
-* gql
-* unit testing
-* integration testing
-* ssl
-* daemons
-* endpoint testing
-* system calls
-* cloudfront
-* network security
-* package management
-* route53
-* pubsub
-* rds
-* cloudwatch
-* auth
-* reading code
 * COPPA
 * FERPA
-
+* endpoint testing
+* integration testing
+* network security
+* package management
+* soc2
+* system calls
+* unit testing
 
 ## Ambiguous
 
+* api
+* network security
+* reading code
+* package management
 * Runbooks
 * AWS library...which library?
 * Adjacent language syntax
