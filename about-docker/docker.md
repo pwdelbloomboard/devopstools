@@ -126,6 +126,12 @@ Which would pull up an image id, a full image id, basically a long string which 
 
 ## Useful Docker Commands
 
+### Docker Command Reference Guide
+
+[docker flags reference](/about-docker/dockercommands.md)
+
+### Discussion on Various Docker Commands
+
 
 * [Remove a volume.](https://docs.docker.com/engine/reference/commandline/volume_rm/)
 
@@ -153,6 +159,8 @@ Why don't all images show up on terminal that show up in Docker dashboard?
 This might be because docker desktop needs a while to process what has been deleted and what has not.
 
 ## Setting Docker Virtual Memory Space
+
+To increase performance on a machine (e.g. docker performance), assuming the machine has enough resources, the Virtual Memory Space allocatd to the Docker Runtime can be increased:
 
 https://docs.docker.com/desktop/mac/space/
 
