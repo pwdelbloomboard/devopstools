@@ -27,6 +27,7 @@
 * [apis](/about-apis)
 * [asdf](/about-asdf)
 * [auth](/about-auth)
+* [dokcer buildkit](/about-buildkit)
 * [celery](/about-celery)
 * [chalice](/about-chalice)
 * [ci](/about-ci)
