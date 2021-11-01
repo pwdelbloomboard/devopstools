@@ -51,6 +51,32 @@ There are several ways to flag a merge request as a draft:
 > Numbers (0-9)
 > Underscore (_), hyphen (-), question mark (?), dot (.), or ampersand (&)
 
+### General Info About How Gitlab Works
+
+* Gitlab organizes things into Groups and Projects
+* A project is made up of several things. 
+-- The git repo
+-- Image registry
+-- MR infrastructure
+
+* While the git repo and the image registry are part of the same project, the way the docker images are tagged are up to the user.
+* The first part of the tag for an image will be the same for every image in the registry for a given project. 
+* For example, for projectA it would be: "registry.gitlab.com/organisationname/projectA
+
+* What we add after that is up to us.
+* Using the app_name and branch_name as part of the registry name is done because it makes it easy to understand/manage/automate. But it could be literally any alpanumeric string that meets the requirements of a docker image tag.
+* So it doesn't matter if a branch exists or not, you can always tag the image and push it to the registry.
+* If you try to pull an image that has not yet been built, tagged and pushed to the registry it will fail.
+
+* There are build scripts which can be set up to help with automation, building images on Gitlab. These scripts can automate the process of pushing things to the registry once they are tagged appropriately with the appopriate branch name and pushed to the registry.
+
+* One automation design choice that can be made is to default to using the master branch for the base image.
+* When building an image for a new application, since there is no, "master branch," that exists at the start, a one-time manual build and push of an image tagged as a master branch can be done, to get the registry ready.
+
+* The act of pushing to the registry, where it is effectively built by Gitlab (through the process of pushing to a registry), is That enables testing before merging to master. Then when merging to master a new image will be built and tagged as master.
+
+* build-secrets, if used within a Dockerfile, should never be created manually. There should be scripts set up within a repo to help build a particular part of a repo.
+
 
 # Resources
 

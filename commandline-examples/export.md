@@ -20,7 +20,7 @@ export: export [-fn] [name[=value] ...] or export -p
 
     Returns success unless an invalid option is given or NAME is invalid.
 
-# Example
+## Example
 
 ```
 export CLIENT_CURRENT_DOMAIN="$DNS"
@@ -32,3 +32,28 @@ In this situation:
 
 * name is CLIENT_CURRENT_DOMAIN
 * =[value] is ="$DNS"
+
+## Using Debian Bullseye Docker Server
+
+We can quickly spin up a debian-11 (bullseye docker image) with the following command and test out export:
+
+```
+docker run -i -t debian:bullseye-slim /bin/bash
+```
+* Note - the command, [source](commandline-examples/source) runs the exportscript.script below.
+* the command "set" shows the environmental variables, we grep it to filter for THIS_VARIABLE.
+
+```
+/# echo 'export THIS_VARIABLE=1234' > exportscript.sh
+
+/# cat exportscript.sh
+export THIS_VARIABLE=1234
+
+/# chmod +x exportscript.sh
+
+/# source exportscript.sh 
+
+/# set | grep THIS_VARIABLE
+THIS_VARIABLE=1234
+
+```

@@ -1,0 +1,1 @@
+The sort command can be used to sort the input provided to it as an argument. By default, it will sort in increasing order.
