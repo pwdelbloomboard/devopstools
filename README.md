@@ -41,6 +41,7 @@
 * [ec2](/about-ec2)
 * [elasticache](/about-elasticache)
 * [environments](/about-environments)
+* [git](/about-git)
 * [gitlab](/about-gitlab)
 * [go](/about-go)
 * [gql](/about-gql)

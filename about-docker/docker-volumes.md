@@ -244,6 +244,13 @@ docker run -ti                  \
 * This is attaching the volume at $PWD/somedir to the (:)mount_location on the container at /somedir 
 * The container is newimagename
 
+### Using Build Secrets
+
+* /moby/buildkit for the Docker frontend contains a feature which allows build secrets.
+
+[documentation for that is here](https://github.com/moby/buildkit/blob/master/frontend/dockerfile/docs/syntax.md)
+
+
 # Resources
 
 * [Persistent Volumes for Notebooks Example](https://stackoverflow.com/questions/53201430/notebooks-not-persistent-for-jupyter-in-docker-container)

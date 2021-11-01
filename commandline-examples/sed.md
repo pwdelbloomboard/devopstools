@@ -1,5 +1,11 @@
 # sed
 
+* SED is a stream editor and can do lots of functions on files such as: searching, find and replace, insertion, deletion.
+* This is commonly a substitute for find or replace.
+* You can edit files without opening them.
+* Much quicker than using VI/VIM/Nano, etc.
+
+
 ### Simplified Form of Sed
 
 The sed command in its simplest form can be used to replace a text in a file.

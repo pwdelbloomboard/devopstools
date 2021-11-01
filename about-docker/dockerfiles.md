@@ -192,6 +192,11 @@ By keeping this CMD variable last, we are basically seperating the setting up of
 * [the gnu set function](https://www.gnu.org/savannah-checkouts/gnu/bash/manual/bash.html#The-Set-Builtin)
 * [gnu bash arguments](https://www.gnu.org/savannah-checkouts/gnu/bash/manual/bash.html#Invoking-Bash)
 
+More specifically stated:
+
+* SHELL is used to define the shell that should execute the commands while building the image from the Dockerfile, from within the Docker runtime environment.  Basically Docker the application is running on top of an OS, this Docker runtime environment can have commands run, and we can pick which shell runs those commands with, "SHELL". It does not have any impact on the image that gets built. https://docs.docker.com/engine/reference/builder/#shell
+
+
 #### ENV
 
 [ENV](https://docs.docker.com/engine/reference/builder/#env)
