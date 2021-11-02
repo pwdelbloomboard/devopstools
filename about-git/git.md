@@ -46,6 +46,18 @@ git rebase main
 
 #### Interactive Rebasing
 
+A better way to do this is to consistenly interactively rebase over time.
+
+```
+git checkout feature
+git rebase -i main
+```
+
+What this does is eliminates the multitude of commits which have been done on your feature branch, and just shows the last few since the time it was branched off.
+
+This reduces, "clutter" and doesn't create the appearance that there was suddently 100+ or however many changes that all of the sudden were done in one hour since the previous commit.
+
+
 
 # Resources
 
