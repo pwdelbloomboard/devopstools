@@ -57,8 +57,61 @@ What this does is eliminates the multitude of commits which have been done on yo
 
 This reduces, "clutter" and doesn't create the appearance that there was suddently 100+ or however many changes that all of the sudden were done in one hour since the previous commit.
 
+#### Merging Master into Feature Branch
 
+To take care of problems, another way to go about things is to merge a master or main branch into a feature branch on local.
+
+```
+# move back over to the main branch
+git checkout master
+
+# pull main branch features
+git pull
+
+# go back over to the feature branch
+git checkout feature
+
+# merge the main into the feature branch
+$ git merge main
+
+```
+
+Note at this point, there may be conflicts, and a message:
+
+* "Automatic merge failed; fix conflicts and then commit the result."
+
+From here, you can open up a merge tool to work through the differences in the branch.
+
+```
+git mergetool
+```
+
+##### Using Git Mergetool
+
+Before using the Git Mergetool, you may need to configure it with the following:
+
+```
+git config merge.tool vimdiff
+git config merge.conflictstyle diff3
+git config mergetool.prompt false
+```
+
+* The top left is the LOCAL version of a file, with the feature.
+* the middle is the BASE version, before any changes were made.
+* the right is the REMOTE version, or main branch, which we are trying to merge into the left.
+
+* The objective is to get the file on the bottom to look like we want it to look like.
+
+![](/img/gitmergetool.png)
+
+The text editor to use while operating gitmerge is VIM.
+
+###### No Conflicts
+
+Sometimes there are no conflicts, 
 
 # Resources
 
 * [Merging vs. Rebasing](https://www.atlassian.com/git/tutorials/merging-vs-rebasing)
+* [Using Git Mergetool](https://stackoverflow.com/questions/161813/how-to-resolve-merge-conflicts-in-a-git-repository)
+* [Git Mergetool Explained](https://www.youtube.com/watch?v=wxh-AOxPX_A)
