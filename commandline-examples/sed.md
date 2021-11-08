@@ -14,6 +14,16 @@ General syntax of using the sed command for replacement:
 
 sed 's/<text_to_replace>/<replacement_text>/' <file_name>
 
+### Common Options
+
+#### sed i
+
+-i[SUFFIX], --in-place[=SUFFIX]
+
+* edit files in place (makes backup if SUFFIX supplied)
+
+
+
 
 ### Sed Options
 
