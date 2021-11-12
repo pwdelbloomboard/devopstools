@@ -6,6 +6,10 @@ For finding a script...
 find ~ -name script.sh 
 ```
 
+### Longer Documentation on Find
+
+https://man7.org/linux/man-pages/man1/find.1.html
+
 ### find on the filesystem
 
 ```
@@ -20,6 +24,77 @@ If you want to avoid errors, do:
 find / -name script.sh 2>/dev/null
 ```
 
+### find by type
+
+```
+find -type f
+```
+
+This comes from, "-type [bcdpflsD]"
+
+  -type c
+
+File is of type c:
+
+* b      block (buffered) special
+* c      character (unbuffered) special
+* d      directory
+* p      named pipe (FIFO)
+* f      regular file
+* l      symbolic link; this is never true if the -L option
+                     or the -follow option is in effect, unless the
+                     symbolic link is broken.  If you want to search for
+                     symbolic links when -L is in effect, use -xtype.
+
+* s      socket
+* D      door (Solaris)
+
+* To search for more than one type at once, you can supply the combined list of type letters separated by a comma `,' (GNU extension).
+
+### printf Option
+
+
+
+```
+ -printf format
+              True; print format on the standard output, interpreting
+              `\' escapes and `%' directives.  Field widths and
+              precisions can be specified as with the printf(3) C
+              function.  Please note that many of the fields are printed
+              as %s rather than %d, and this may mean that flags don't
+              work as you might expect.  This also means that the `-'
+              flag does work (it forces fields to be left-aligned).
+              Unlike -print, -printf does not add a newline at the end
+              of the string.  The escapes and directives are:
+
+              \a     Alarm bell.
+
+              \b     Backspace.
+
+              \c     Stop printing from this format immediately and
+                     flush the output.
+
+              \f     Form feed.
+
+              \n     Newline.
+
+              \r     Carriage return.
+
+              \t     Horizontal tab.
+
+              \v     Vertical tab.
+
+              \0     ASCII NUL.
+
+              \\     A literal backslash (`\').
+
+...
+
+
+
+```
+
+This can format based upon date and many other options.
 ### Find Expanded Help
 
 # find --help

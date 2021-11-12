@@ -1,5 +1,8 @@
 # printf
 
+Print and Format
+
+https://man7.org/linux/man-pages/man1/printf.1.html
 ## Printf Format Specifiers
 
 %c	character

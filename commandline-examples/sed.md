@@ -5,6 +5,9 @@
 * You can edit files without opening them.
 * Much quicker than using VI/VIM/Nano, etc.
 
+### Detailed Documentation
+
+https://man7.org/linux/man-pages/man1/sed.1.html
 
 ### Simplified Form of Sed
 
