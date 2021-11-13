@@ -29,6 +29,25 @@ integration tests is the full suite, is triggered asyncronously, and updates an 
 
 a pipeline is something that can be spun up to create many parallel users hitting the site at once. Unfortunately, it doesn't really work at the moment.
 
+## Types of Rundeck Jobs
+
+
+
+## Running a Job
+
+### Understanding the Context
+
+* First, we have to understand the context 
+
+* Are variables being updated? Why are they being updated? Are we asking certain applications on certain branches being asked to point to one another?
+* Is this an override?  Are you overriding a variable in SSM?
+* Are you using branch slugs rather than branch names?
+* Can you understand the manual implementation of this job?
+### Getting to the Job
+
+
+
+
 # Resources
 
 * [Introduction to Rundeck in Under 10 Minutes](https://www.youtube.com/watch?v=QSY_qw9Buic)
