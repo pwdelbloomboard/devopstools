@@ -6,6 +6,10 @@ For finding a script...
 find ~ -name script.sh 
 ```
 
+### Longer Documentation on Find
+
+https://man7.org/linux/man-pages/man1/find.1.html
+
 ### find on the filesystem
 
 ```
@@ -19,6 +23,103 @@ If you want to avoid errors, do:
 ```
 find / -name script.sh 2>/dev/null
 ```
+
+### find by type
+
+```
+find -type f
+```
+
+This comes from, "-type [bcdpflsD]"
+
+  -type c
+
+File is of type c:
+
+* b      block (buffered) special
+* c      character (unbuffered) special
+* d      directory
+* p      named pipe (FIFO)
+* f      regular file
+* l      symbolic link; this is never true if the -L option
+                     or the -follow option is in effect, unless the
+                     symbolic link is broken.  If you want to search for
+                     symbolic links when -L is in effect, use -xtype.
+
+* s      socket
+* D      door (Solaris)
+
+* To search for more than one type at once, you can supply the combined list of type letters separated by a comma `,' (GNU extension).
+
+### printf Option
+
+
+
+```
+ -printf format
+              True; print format on the standard output, interpreting
+              `\' escapes and `%' directives.  Field widths and
+              precisions can be specified as with the printf(3) C
+              function.  Please note that many of the fields are printed
+              as %s rather than %d, and this may mean that flags don't
+              work as you might expect.  This also means that the `-'
+              flag does work (it forces fields to be left-aligned).
+              Unlike -print, -printf does not add a newline at the end
+              of the string.  The escapes and directives are:
+
+              \a     Alarm bell.
+
+              \b     Backspace.
+
+              \c     Stop printing from this format immediately and
+                     flush the output.
+
+              \f     Form feed.
+
+              \n     Newline.
+
+              \r     Carriage return.
+
+              \t     Horizontal tab.
+
+              \v     Vertical tab.
+
+              \0     ASCII NUL.
+
+              \\     A literal backslash (`\').
+
+...
+
+
+
+```
+
+This can format based upon date and many other options.
+
+### Find exec Option
+
+```
+-exec command ;
+
+       Execute  command;  true  if 0 status is returned.  All following arguments to find are taken to be
+       arguments to the command until an argument consisting of `;' is encountered.  The string  `{}'  is
+       replaced  by  the  current  file name being processed everywhere it occurs in the arguments to the
+       command, not just in arguments where it is alone, as in some versions  of  find.   Both  of  these
+       constructions  might  need  to be escaped (with a `\') or quoted to protect them from expansion by
+       the shell.  See the EXAMPLES section for examples of the use of the -exec option.   The  specified
+       command  is  run  once  for each matched file.  The command is executed in the starting directory.
+       There are unavoidable security problems surrounding use of the -exec action; you  should  use  the
+       -execdir option instead.
+
+
+-exec command {} +
+       This variant of the -exec action runs the specified command on the selected files, but the command
+       line is built by appending each selected file name at the end; the total number of invocations  of
+       the command will be much less than the number of matched files.  The command line is built in much
+       the same way that xargs builds its command lines.  Only one instance of `{}' is allowed within the
+       command.  The command is executed in the starting directory.
+```
+
 
 ### Find Expanded Help
 

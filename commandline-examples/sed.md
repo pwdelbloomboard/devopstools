@@ -5,6 +5,9 @@
 * You can edit files without opening them.
 * Much quicker than using VI/VIM/Nano, etc.
 
+### Detailed Documentation
+
+https://man7.org/linux/man-pages/man1/sed.1.html
 
 ### Simplified Form of Sed
 
@@ -13,6 +16,16 @@ The sed command in its simplest form can be used to replace a text in a file.
 General syntax of using the sed command for replacement:
 
 sed 's/<text_to_replace>/<replacement_text>/' <file_name>
+
+### Common Options
+
+#### sed i
+
+-i[SUFFIX], --in-place[=SUFFIX]
+
+* edit files in place (makes backup if SUFFIX supplied)
+
+
 
 
 ### Sed Options
