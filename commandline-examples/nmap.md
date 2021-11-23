@@ -9,6 +9,24 @@ nmap [scan type] [options] [target specification]
 
 On Debian:
 
+Example:
+
+```
+root@a93522e30f3d:/# nmap google.com
+Starting Nmap 7.80 ( https://nmap.org ) at 2021-11-22 21:30 UTC
+Nmap scan report for google.com (142.251.34.142)
+Host is up (0.010s latency).
+Other addresses for google.com (not scanned): 2607:f8b0:4012:817::200e
+rDNS record for 142.251.34.142: qro02s25-in-f14.1e100.net
+Not shown: 997 filtered ports
+PORT    STATE  SERVICE
+25/tcp  closed smtp
+80/tcp  open   http
+443/tcp open   https
+```
+
+Installation usage suggestions:
+
 ```
 apt-get install nmap
 
