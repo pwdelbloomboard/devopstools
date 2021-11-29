@@ -59,7 +59,7 @@ This interface shows a few different variables that can be used as inputs to the
 
 Going deeper into the job, the actual job code itself can be inspected under, "Definition," which is in the upper right hand corner of the screen, above the variables:
 
-![](/img/)
+![](/img/pointperytonateachother_definition.png)
 
 Rundeck does not have version control, the code for this job is stored directly within Rundeck.
 
