@@ -1,0 +1,1 @@
+We can also manually check for filesystem corruption using the command fsck.

@@ -25,7 +25,10 @@ sed 's/<text_to_replace>/<replacement_text>/' <file_name>
 
 * edit files in place (makes backup if SUFFIX supplied)
 
+#### sed /!d/
 
+* d      Delete pattern space.  Start next cycle.
+* After the address (or address-range), and before the command, a ! may be inserted, which specifies that the command shall only be executed if the address (or address-range) does not match.
 
 
 ### Sed Options

@@ -9,6 +9,24 @@ nmap [scan type] [options] [target specification]
 
 On Debian:
 
+Example:
+
+```
+root@a93522e30f3d:/# nmap google.com
+Starting Nmap 7.80 ( https://nmap.org ) at 2021-11-22 21:30 UTC
+Nmap scan report for google.com (142.251.34.142)
+Host is up (0.010s latency).
+Other addresses for google.com (not scanned): 2607:f8b0:4012:817::200e
+rDNS record for 142.251.34.142: qro02s25-in-f14.1e100.net
+Not shown: 997 filtered ports
+PORT    STATE  SERVICE
+25/tcp  closed smtp
+80/tcp  open   http
+443/tcp open   https
+```
+
+Installation usage suggestions:
+
 ```
 apt-get install nmap
 
@@ -128,3 +146,14 @@ EXAMPLES:
 SEE THE MAN PAGE (https://nmap.org/book/man.html) FOR MORE OPTIONS AND EXAMPLES
 
 ```
+
+## Options
+
+Nmap uses 6 different port states:
+
+* Open — An open port is one that is actively accepting TCP, UDP or SCTP connections. Open ports are what interests us the most because they are the ones that are vulnerable to attacks. Open ports also show the available services on a network.
+* Closed — A port that receives and responds to Nmap probe packets but there is no application listening on that port. Useful for identifying that the host exists and for OS detection.
+* Filtered — Nmap can’t determine whether the port is open because packet filtering prevents its probes from reaching the port. Filtering could come from firewalls or router rules. Often little information is given from filtered ports during scans as the filters can drop the probes without responding or respond with useless error messages e.g. destination unreachable.
+* Unfiltered — Port is accessible but Nmap doesn’t know if it is open or closed. Only used in ACK scan which is used to map firewall rulesets. Other scan types can be used to identify whether the port is open.
+* Open/filtered — Nmap is unable to determine between open and filtered. This happens when an open port gives no response. No response could mean that the probe was dropped by a packet filter or any response is blocked.
+* Closed/filtered — Nmap is unable to determine whether a port is closed or filtered. Only used in the IP ID idle scan.
