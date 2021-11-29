@@ -1,0 +1,1 @@
+tar program is a tool for archiving files and directories into a single file (often called tarball). This tool is usually used to prepare archives of files before it is transferred to a long term backup server. tar doesn’t replace the existing files and folders but creates a new file with extension .tar . It provides lot of flag to choose from for archiving
