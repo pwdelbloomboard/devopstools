@@ -77,6 +77,59 @@ There are several ways to flag a merge request as a draft:
 
 * build-secrets, if used within a Dockerfile, should never be created manually. There should be scripts set up within a repo to help build a particular part of a repo.
 
+#### Gitlab Runners vs. Pipeline
+
+When setting up Continuous Integration (CI), this is done by providing a custom pipeline definition, which is within a yaml file. The Runner does not need to be configured in order to set up a custom pipeline...it is the pipeline which dictates the testing, while the runner is the specific server running the pipeline.
+
+Configuration of a server might be needed if a particular pipeline is for example, undergoing a huge amount of testing, or testing on something that requires a massive amount of data - then you might need a non-standard runner.
+
+https://docs.gitlab.com/runner/
+
+## Gitlab Auto-Devops for Gitlab CI
+
+https://docs.gitlab.com/ee/topics/autodevops/
+
+A good starting place for setting up an automation pipeline is the Gitlab auto-devops job.
+
+There can be a default pipeline definition used across all repos, with additional standard pipelines added as needed. For example, a different pipeline could be created for a front-end repo.
+
+Pipeline jobs are defined in yaml files which can be in a single file or split across multiple files.
+
+#### Autodevops Features
+
+https://docs.gitlab.com/ee/topics/autodevops/#auto-devops-features
+
+* Autobuild - builds from Dockerfile
+* Auto Dependency Scanning - scans for dependencies
+
+Test your app:
+
+* Auto Test
+* Auto Browser Performance Testing
+* Auto Code Intelligence
+* Auto Code Quality
+* Auto Container Scanning
+* Auto License Compliance
+
+Deploy your app:
+
+* Auto Review Apps
+* Auto Deploy
+* Monitor your app:
+
+* Auto Monitoring
+
+Secure your app:
+
+* Auto Dynamic Application Security Testing (DAST)
+* Auto Static Application Security Testing (SAST)
+* Auto Secret Detection
+
+
+#### Example Setup
+
+
+
 
 # Resources
 
