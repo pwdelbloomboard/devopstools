@@ -14,3 +14,11 @@ Basically, it's a form of linting.ß
 
 > We built pre-commit to solve our hook issues. It is a multi-language package manager for pre-commit hooks. You specify a list of hooks you want and pre-commit manages the installation and execution of any hook written in any language before every commit. pre-commit is specifically designed to not require root access. If one of your developers doesn’t have node installed but modifies a JavaScript file, pre-commit automatically handles downloading and building node to run eslint without root.
 
+###  Pre-Commit Hooks
+
+Specifically, we can look at pre-commit/pre-commit-hooks:
+
+https://github.com/pre-commit/pre-commit-hooks
+
+
+

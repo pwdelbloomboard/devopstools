@@ -85,6 +85,30 @@ Configuration of a server might be needed if a particular pipeline is for exampl
 
 https://docs.gitlab.com/runner/
 
+
+### Gitlab Pipelines
+
+* Pipelines are the ordered part of Gitlab CI.
+
+#### Caching in Gitlab CI/CD
+
+Caching is used for dependencies, like packages you download from the internet. Cache is stored where Gitlab Runners are installed and uploaded to S3 if distribued cache is enabled.
+#####  Cache
+
+* Defines per job using the cache keyword.
+* Subsequent pipelines can use the cache
+* Subsequent jobs in the same pipeline can use the cache
+* Different projects 
+
+#### Job Artifacts
+
+* [Job Artifacts](https://docs.gitlab.com/ee/ci/pipelines/job_artifacts.html)
+
+* An archive of files and directories is known as an artifact.
+* 
+
+#### Pipeline Artifacts
+
 ## Gitlab Auto-Devops for Gitlab CI
 
 https://docs.gitlab.com/ee/topics/autodevops/
