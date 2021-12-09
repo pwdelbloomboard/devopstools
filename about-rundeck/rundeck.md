@@ -75,6 +75,17 @@ Rundeck does not have version control, the code for this job is stored directly 
 ### Getting to the Job
 
 
+### Rundeck Plugins
+
+* [Rundeck Plugins](https://docs.rundeck.com/docs/plugins/)
+
+Official Rundeck Plugins listing:
+
+https://docs.rundeck.com/plugins/?$
+
+* Rundeck has a variety of plugins, from integrations with third party services to all sorts of neat tricks.
+
+
 
 
 # Resources

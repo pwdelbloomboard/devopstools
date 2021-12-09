@@ -1,11 +1,11 @@
 # devopstools - Importance Ranking
 ### Needed Soon (alphabetical)
 
-* [command line](/commandline-examples)
-* [rundeck](/about-rundeck)
+* [command line](/commandline-examples) ...[DONE]
+* [rundeck](/about-rundeck) ...[Finished Upgrading]
 * [setup script](/about-setupfiles)
-* SRE School
-* [volumes](/about-volumes)
+* SRE School ...[In Process]
+* [volumes](/about-volumes) ...[80%]
 ### Middle Urgency (alphabetical)
 
 * [cloudwatch](/about-cloudwatch)
@@ -13,7 +13,7 @@
 * [newrelic](/about-newrelic)
 * [pagerduty](/about-pagerduty)
 * [rds](/about-rds)
-* [shellcheck](/about-shellcheck)
+* [shellcheck](/about-shellcheck) ...[DONE]
 * [ssm](/about-ssm)
 ### Not Important Yet But Will Be Later (alphabetica)
 
@@ -73,6 +73,23 @@
 * [starship](/about-starship)
 * [uppy](/about-uppy)
 * [vscode](/about-vscode)
+
+## Need to Add:
+
+* bat
+* coreutils
+* dasel
+* delta
+* diffutils
+* direnv
+* dive
+* dnsmaq
+* aws-iam-authenticator
+* asdf-vm
+* docuum
+* findutils
+* fzf
+
 
 
 # devopstools Full List - Alphabetical Order
