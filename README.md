@@ -2,6 +2,7 @@
 ### Needed Soon (alphabetical)
 
 * [command line](/commandline-examples) ...[DONE]
+* [newrelic](/about-newrelic) ... [STARTED]
 * [rundeck](/about-rundeck) ...[Finished Upgrading]
 * [setup script](/about-setupfiles)
 * SRE School ...[In Process]
@@ -9,17 +10,19 @@
 ### Middle Urgency (alphabetical)
 
 * [cloudwatch](/about-cloudwatch)
+* [daemons](/about-daemons)
 * [kms](/about-kms)
-* [newrelic](/about-newrelic)
 * [pagerduty](/about-pagerduty)
 * [rds](/about-rds)
 * [shellcheck](/about-shellcheck) ...[DONE]
 * [ssm](/about-ssm)
+* [grafana](/about-grafana)
+
 ### Not Important Yet But Will Be Later (alphabetica)
 
 * [redash](/about-redash)
 * [superset](/about-superset)
-
+* [go](/about-go) ... [10%]
 ### Not Urgent Yet (alphabetical)
 
 * [airflow](/about-airflow)
@@ -32,20 +35,17 @@
 * [chalice](/about-chalice)
 * [ci](/about-ci)
 * [cloudfront](/about-cloudfront)
-* [daemons](/about-daemons)
 * [debian](/about-debian)
 * [deployments](/about-deployments)
 * [direnv](/about-direnv/)
 * [dns](/about-dns/)
-* [docker](/about-docker/)
+* [docker](/about-docker/) ... [DONE]
 * [ec2](/about-ec2)
 * [elasticache](/about-elasticache)
 * [environments](/about-environments)
 * [git](/about-git)
-* [gitlab](/about-gitlab)
-* [go](/about-go)
+* [gitlab](/about-gitlab) ... [70%]
 * [gql](/about-gql)
-* [grafana](/about-grafana)
 * [helm](/about-helm)
 * [helmfile](/about-helmfile)
 * [javascript](/about-javascript)
