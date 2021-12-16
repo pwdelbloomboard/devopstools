@@ -46,6 +46,7 @@
 * [git](/about-git)
 * [gitlab](/about-gitlab) ... [70%]
 * [gql](/about-gql)
+* [grok](/about-grok)
 * [helm](/about-helm)
 * [helmfile](/about-helmfile)
 * [javascript](/about-javascript)
