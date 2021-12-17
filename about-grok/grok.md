@@ -197,6 +197,23 @@ This is done in a [Stackoverflow answer on Grok Patterns here](https://stackover
 Ultimately, NewRelic sites a thourough list of all Grok Patterns being listed at this [Grok Debugger Tool](https://grokdebug.herokuapp.com/patterns#).
 
 
+#### Commonly Used Grok Patterns
+
+| Pattern              | Example                                   |
+|----------------------|-------------------------------------------|
+| %{IP}                | “73.241.172.237”                          |
+| %{IPV4}              | “73.241.172.237”                          |
+| %{IPV6}              | “2001:0db8:85a3:0000:0000:8a2e:0370:7334” |
+| %{IPORHOST}          | “cache1.acme.com”                         |
+| %{INT}               | -365                                      |
+| %{POSINT}            | 77                                        |
+| %{NUMBER}            | 44.5                                      |
+| %{WORD}              | SOMEWORD                                  |
+| %{DATA}              | “SOME DATA”                               |
+| %{NOTSPACE}          | “&XYZSOMETEXT&”                           |
+| %{SPACE}             | “ “                                       |
+| %{TIMESTAMP_ISO8601} | “2020-08-19T15:59:49.439513Z”             |
+| %{UNIXPATH}          | “/tmp/mypath”                             |
 ### Using Automatic Grok Discovery Tool
 
 There is an [Automatic Grok discovery tool](https://grokconstructor.appspot.com/do/automatic) online which may or may not be helpful.
