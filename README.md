@@ -2,10 +2,10 @@
 ### Needed Soon (alphabetical)
 
 * [command line](/commandline-examples) ...[DONE]
-* [newrelic](/about-newrelic) ... [STARTED]
-* [rundeck](/about-rundeck) ...[Finished Upgrading]
-* [setup script](/about-setupfiles)
-* SRE School ...[In Process]
+* [newrelic](/about-newrelic) ... [50%]
+* [rundeck](/about-rundeck) ...[50%]
+* [setup script](/about-setupfiles) [20%]
+* SRE School ...[DONE]
 * [volumes](/about-volumes) ...[80%]
 ### Middle Urgency (alphabetical)
 
@@ -15,7 +15,7 @@
 * [pagerduty](/about-pagerduty)
 * [rds](/about-rds)
 * [shellcheck](/about-shellcheck) ...[DONE]
-* [ssm](/about-ssm)
+* [ssm](/about-ssm) ... [DONE]
 * [grafana](/about-grafana)
 
 ### Not Important Yet But Will Be Later (alphabetica)
@@ -46,11 +46,11 @@
 * [git](/about-git)
 * [gitlab](/about-gitlab) ... [70%]
 * [gql](/about-gql)
-* [grok](/about-grok)
-* [helm](/about-helm)
-* [helmfile](/about-helmfile)
+* [grok](/about-grok) ... [100%]
+* [helm](/about-helm) ... [70%]
+* [helmfile](/about-helmfile) ... [50%]
 * [javascript](/about-javascript)
-* [k3d/k3s](/about-k3d)
+* [k3d/k3s](/about-k3d) ... [DONE]
 * [kinesis](/about-kinesis)
 * [kops](/about-kops)
 * [kubernetes](/about-kubernetes)
