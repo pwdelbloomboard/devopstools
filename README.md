@@ -18,7 +18,7 @@
 * [ssm](/about-ssm) ... [DONE]
 * [grafana](/about-grafana)
 
-### Not Important Yet But Will Be Later (alphabetica)
+### Not Important Yet But Will Be Later (alphabetical)
 
 * [redash](/about-redash)
 * [superset](/about-superset)
@@ -38,14 +38,14 @@
 * [debian](/about-debian)
 * [deployments](/about-deployments)
 * [direnv](/about-direnv/)
-* [dns](/about-dns/)
+* [dns](/about-dns/) ... [DONE]
 * [docker](/about-docker/) ... [DONE]
-* [ec2](/about-ec2)
+* [ec2](/about-ec2) ... [10%]
 * [elasticache](/about-elasticache)
 * [environments](/about-environments)
-* [git](/about-git)
+* [git](/about-git) .. [DONE]
 * [gitlab](/about-gitlab) ... [70%]
-* [gql](/about-gql)
+* [gql](/about-gql) ... [80%]
 * [grok](/about-grok) ... [100%]
 * [helm](/about-helm) ... [70%]
 * [helmfile](/about-helmfile) ... [50%]
@@ -53,12 +53,12 @@
 * [k3d/k3s](/about-k3d) ... [DONE]
 * [kinesis](/about-kinesis)
 * [kops](/about-kops)
-* [kubernetes](/about-kubernetes)
+* [kubernetes](/about-kubernetes) ... [20%]
 * [lens](/about-lens)
 * [mongo](/about-mongo)
 * [mongoose](/about-mongoose)
 * [networking](/about-networking)
-* [nginx](/about-nginx)
+* [nginx](/about-nginx) ... [DONE]
 * [ohmyzsh](/about-ohmyzsh)
 * [postgres](/about-postgres)
 * [precommit](/about-precommit)

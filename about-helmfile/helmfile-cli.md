@@ -1,7 +1,9 @@
 # helmfile cli
 
+## helmfile -h
 
-## helmfile apply
+
+## helmfile apply -h
 
 $ helmfile apply -h
 NAME:
