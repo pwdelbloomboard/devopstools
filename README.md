@@ -9,14 +9,14 @@
 * [volumes](/about-volumes) ...[80%]
 ### Middle Urgency (alphabetical)
 
-* [cloudwatch](/about-cloudwatch)
-* [daemons](/about-daemons)
-* [kms](/about-kms)
-* [pagerduty](/about-pagerduty)
-* [rds](/about-rds)
+* [cloudwatch](/about-cloudwatch) ...[0%]
+* [daemons](/about-daemons) ... [0%]
+* [kms](/about-kms) ... [0%]
+* [pagerduty](/about-pagerduty) ... [0%]
+* [rds](/about-rds) ... [0%]
 * [shellcheck](/about-shellcheck) ...[DONE]
 * [ssm](/about-ssm) ... [DONE]
-* [grafana](/about-grafana)
+* [grafana](/about-grafana) ...[0%]
 
 ### Not Important Yet But Will Be Later (alphabetical)
 
