@@ -34,6 +34,7 @@
 * [celery](/about-celery)
 * [chalice](/about-chalice)
 * [ci](/about-ci)
+* [click](/about-click)
 * [cloudfront](/about-cloudfront)
 * [debian](/about-debian)
 * [deployments](/about-deployments)
@@ -74,6 +75,7 @@
 * [starship](/about-starship)
 * [uppy](/about-uppy)
 * [vscode](/about-vscode)
+* [wemake-python-styleguide](/about-wemake-python-styleguide)
 
 ## Need to Add:
 
