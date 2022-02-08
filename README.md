@@ -7,6 +7,8 @@
 * [setup script](/about-setupfiles) [20%]
 * SRE School ...[DONE]
 * [volumes](/about-volumes) ...[80%]
+* [webhooks](/about-webhooks) ... [0%]
+* [fluentbit](/about-fluentbit) ... [10%]
 ### Middle Urgency (alphabetical)
 
 * [cloudwatch](/about-cloudwatch) ...[0%]
