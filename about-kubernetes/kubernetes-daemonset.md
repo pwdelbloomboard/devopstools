@@ -1,0 +1,1 @@
+* A Daemonset is a pod that runs on every Node in a cluster.

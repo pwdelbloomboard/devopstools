@@ -7,18 +7,20 @@
 * [setup script](/about-setupfiles) [20%]
 * SRE School ...[DONE]
 * [volumes](/about-volumes) ...[80%]
+* [webhooks](/about-webhooks) ... [0%]
+* [fluentbit](/about-fluentbit) ... [10%]
 ### Middle Urgency (alphabetical)
 
-* [cloudwatch](/about-cloudwatch)
-* [daemons](/about-daemons)
-* [kms](/about-kms)
-* [pagerduty](/about-pagerduty)
-* [rds](/about-rds)
+* [cloudwatch](/about-cloudwatch) ...[0%]
+* [daemons](/about-daemons) ... [0%]
+* [kms](/about-kms) ... [0%]
+* [pagerduty](/about-pagerduty) ... [0%]
+* [rds](/about-rds) ... [0%]
 * [shellcheck](/about-shellcheck) ...[DONE]
 * [ssm](/about-ssm) ... [DONE]
-* [grafana](/about-grafana)
+* [grafana](/about-grafana) ...[0%]
 
-### Not Important Yet But Will Be Later (alphabetica)
+### Not Important Yet But Will Be Later (alphabetical)
 
 * [redash](/about-redash)
 * [superset](/about-superset)
@@ -34,18 +36,19 @@
 * [celery](/about-celery)
 * [chalice](/about-chalice)
 * [ci](/about-ci)
+* [click](/about-click)
 * [cloudfront](/about-cloudfront)
 * [debian](/about-debian)
 * [deployments](/about-deployments)
 * [direnv](/about-direnv/)
-* [dns](/about-dns/)
+* [dns](/about-dns/) ... [DONE]
 * [docker](/about-docker/) ... [DONE]
-* [ec2](/about-ec2)
+* [ec2](/about-ec2) ... [10%]
 * [elasticache](/about-elasticache)
 * [environments](/about-environments)
-* [git](/about-git)
+* [git](/about-git) .. [DONE]
 * [gitlab](/about-gitlab) ... [70%]
-* [gql](/about-gql)
+* [gql](/about-gql) ... [80%]
 * [grok](/about-grok) ... [100%]
 * [helm](/about-helm) ... [70%]
 * [helmfile](/about-helmfile) ... [50%]
@@ -53,12 +56,12 @@
 * [k3d/k3s](/about-k3d) ... [DONE]
 * [kinesis](/about-kinesis)
 * [kops](/about-kops)
-* [kubernetes](/about-kubernetes)
+* [kubernetes](/about-kubernetes) ... [20%]
 * [lens](/about-lens)
 * [mongo](/about-mongo)
 * [mongoose](/about-mongoose)
 * [networking](/about-networking)
-* [nginx](/about-nginx)
+* [nginx](/about-nginx) ... [DONE]
 * [ohmyzsh](/about-ohmyzsh)
 * [postgres](/about-postgres)
 * [precommit](/about-precommit)
@@ -74,6 +77,7 @@
 * [starship](/about-starship)
 * [uppy](/about-uppy)
 * [vscode](/about-vscode)
+* [wemake-python-styleguide](/about-wemake-python-styleguide)
 
 ## Need to Add:
 
