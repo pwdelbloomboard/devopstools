@@ -173,10 +173,55 @@ Fluent Bit v1.8.12
 
 ### Attempting to Exec Into Container
 
+Once running a container, one can attempt to exec in with:
+
 ```
 $ docker exec -it 67af36cc6a3e4d9d5229f32f5004bc9ec834da383d3db467fc494675ba62d705 /bin/sh
 OCI runtime exec failed: exec failed: container_linux.go:380: starting container process caused: exec: "/bin/sh": stat /bin/sh: no such file or directory: unknown
 ```
+
+This runs into a failure because the default fluentbit docker image which means the layers only contain the container and the application, automatically running, no linux container layer involved.
+
+```
+docker run --name myfluentbittest -p 127.0.0.1:24224:24224 fluent/fluent-bit:1.8-debug /fluent-bit/bin/fluent-bit -i forward -o stdout -p format=json_lines -f 1
+```
+
+From there, we can -it/bash into the container with:
+
+```
+docker exec -it myfluentbittest /bin/bash
+```
+
+This actually works and we are presented with a root @ containerid.
+
+```
+root@d3e8c8c11c9c:/# ls
+bin  boot  dev	etc  fluent-bit  home  lib  lib64  media  mnt  opt  proc  root	run  sbin  srv	sys  tmp  usr  var
+```
+
+From here we can attempt to find the config file.
+
+```
+root@d3e8c8c11c9c:/# find . conf | grep conf
+./fluent-bit/etc/parsers_java.conf
+./fluent-bit/etc/parsers_ambassador.conf
+./fluent-bit/etc/plugins.conf
+./fluent-bit/etc/parsers_cinder.conf
+./fluent-bit/etc/fluent-bit.conf
+./fluent-bit/etc/parsers_openstack.conf
+./fluent-bit/etc/parsers.conf
+./fluent-bit/etc/parsers_extra.conf
+```
+
+Within the fluentbit file we have several .conf files:
+
+```
+root@d3e8c8c11c9c:/fluent-bit/etc# ls
+fluent-bit.conf  parsers.conf  parsers_ambassador.conf	parsers_cinder.conf  parsers_extra.conf  parsers_java.conf  parsers_openstack.conf  plugins.conf
+```
+
+
+
 
 ### Following the FluentBit Docker Documentation
 
@@ -239,6 +284,16 @@ docker run --log-driver=fluentd -it ubuntu
 ```
 
 ### Configuring FluentBit on Docker Container
+
+In order to Configure FluentBit, meaning configuring the parser, a debug Container Image must be used, which contains a linux-like environment, allowing one to exec/bash into the container while running.
+
+The default fluentbit images are, "Distroless," while the "Debug" images use alpine linux. [Here](https://hub.docker.com/layers/fluent/fluent-bit/1.8-debug/images/sha256-00249780660f7eeb0e1c12d5dadaed9a511fdc7314b210f45ca3c74529104dcd?context=explore) is an example.
+
+```
+fluent/fluent-bit:1.8-debug
+```
+
+This follows the above 
 
 
 ### Fluentbit on Kubernetes
