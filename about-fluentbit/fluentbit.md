@@ -104,9 +104,11 @@ So basically, every input plugin uses a different set of parser commands.
     Types pid:integer
 ```
 
+Parsers are independently and optionally handled by each input plugin.  The [parsers.conf](/about-fluentbit/parsers.conf) file shows some of the defaults.
 
+All of the services handled by parsers can be viewed under [the parsers configuration documentation](https://docs.fluentbit.io/manual/pipeline/parsers)
 
-
+* All parsers must be defined in a parsers.conf file, not in the Fluent Bit global configuration file.
 #### Filter
 
 #### Buffer
@@ -282,7 +284,6 @@ Then in parallel, run the log-driver as an -it:
 ```
 docker run --log-driver=fluentd -it ubuntu
 ```
-
 ### Configuring FluentBit on Docker Container
 
 In order to Configure FluentBit, meaning configuring the parser, a debug Container Image must be used, which contains a linux-like environment, allowing one to exec/bash into the container while running.
@@ -293,10 +294,55 @@ The default fluentbit images are, "Distroless," while the "Debug" images use alp
 fluent/fluent-bit:1.8-debug
 ```
 
-This follows the above 
+This follows the above section on, [attempting to exec into a container](https://github.com/pwdelbloomboard/devopstools/blob/main/about-fluentbit/fluentbit.md#attempting-to-exec-into-container).
+
+#### fluent-bit.conf
+
+[fluent-bit.conf](/about-fluentbit/fluent-bit.conf)
+
+* This appears to be the, "root" configuration file which sets both the input and output of the stream as mentioned within the fluentbit documentation on input and output.
+* 
+
+#### parsers.conf
+
+[parsers.conf](/about-fluentbit/parsers.conf)
+
+* this appears to be a long default list of common types of logs to parse, including:
+
+* apache
+* apache2
+* apache_error
+* nginx
+* json
+* docker
+* docker-daemon
+* syslog-rfc5424
+* syslog-rfc3164-local
+* syslog-rfc3164
+* mongodb
+* envoy
+* cri
+* kube-custom
+
+#### plugins.conf
 
 
-### Fluentbit on Kubernetes
+#### Installing Tools to Edit Conf Files
+
+This docker image is based upon debian, so we can do the following commands to install editor files and other possibly needed tools:
+
+```
+apt-get update
+apt-get install curl
+apt-get install wget
+apt-get install vim
+apt-get install nano
+```
+#### Editing parsers.conf to Filter Pre-Set Phrases
+
+
+
+## Fluentbit on Kubernetes
 
 The documentation for processing container logs from Systemd/Journald, enriching logs with Kubernetes Metadata is found, and centralizing logs in third party storage is found [here](https://docs.fluentbit.io/manual/installation/kubernetes).
 
