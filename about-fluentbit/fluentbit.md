@@ -164,20 +164,30 @@ This is what would allow parsing on our cluster.
 
 ###### Multiline Modifier in Detail
 
+https://docs.fluentbit.io/manual/pipeline/filters/multiline-stacktrace
 
+* Allows combining multiline outputs into single line outputs or just working with multiline outputs in general.
 
 ###### Nest Modifier in Detail
 
+https://docs.fluentbit.io/manual/pipeline/filters/nest
 
+* Basically you can operate with or on nested data.
 ###### Rewrite Tag Modifier in Detail
 
+https://docs.fluentbit.io/manual/pipeline/filters/rewrite-tag
 
+* Tags are what makes routing possible. You can re-write tags in certain scenarios with conditions.
 ###### Standard Output in Detail
 
+You can have the standard output data folow through the filter plugin, which can be useful for debugging.
 
-###### Checlist in Detail
+https://docs.fluentbit.io/manual/pipeline/filters/standard-output
+###### Checkist in Detail
 
 https://docs.fluentbit.io/manual/pipeline/filters/checklist
+
+The following plugin looks up if a value in a specified list exists and then allows the addition of a record to indicate if found. 
 
 ###### Tensorflow Light Detail
 
@@ -187,6 +197,19 @@ https://docs.fluentbit.io/manual/pipeline/filters/tensorflow
 
 #### Routing
 
+
+#### Outputs
+
+https://docs.fluentbit.io/manual/pipeline/outputs
+
+There are many different output options, a few:
+
+* NewRelic - https://docs.fluentbit.io/manual/pipeline/outputs/new-relic
+* HTTP 
+* Forward
+* Standard Output
+* Syslog
+* Amazon Kinesis
 
 ## Docker Image - Trying it Out
 
