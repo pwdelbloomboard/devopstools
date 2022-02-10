@@ -139,8 +139,7 @@ The different types of filters includes:
 * GeoIP2Filter - Filter allows you to enrich the incoming data stream using location data from GeoIP2 database.
 * Kubernetes - enrich your log files with Kubernetes metadata.
 * Parser - The Parser Filter plugin allows for parsing fields in event records.  Basically, Parsers do not happen automatically, they have to go through a Filter in order to be applied. Parsers are built "shapes," which filters can then apply.
-* Modify - 
-
+* Modify - The Modify Filter plugin allows you to change records using rules and conditions.
 * Standard Output - Allows printing to the standard output the data flowed through the filter plugin, which can be useful for debugging.
 * Tensorflow - Allows running machine learning interface tasks on the records of data coming from input plugsin or a stream processor. Uses Tensorflow Lite as the interface engine (used for mobile and IoT applications).
 
@@ -148,12 +147,20 @@ The different types of filters includes:
 
 https://docs.fluentbit.io/manual/pipeline/filters/record-modifier
 
+Allows appending certain fields or to exclude specific fields.
+
+###### Modify in Detail
+
+https://docs.fluentbit.io/manual/pipeline/filters/modify
+
+* So for example you could take a json input, and rename a key to another name, and add an additional entry key/value pair.
+* Contains operations Set, Add, Remove, (also Remove Wildcard, Remove Regex), Rename, Copy, etc. 
+* You can also use conditionals such as, "Key_exists" or "keymatches" and others.
 ###### Parser in Detail
 
 https://docs.fluentbit.io/manual/pipeline/filters/parser
 
 This is what would allow parsing on our cluster.
-
 
 ###### Multiline Modifier in Detail
 
