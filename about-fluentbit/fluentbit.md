@@ -111,6 +111,71 @@ All of the services handled by parsers can be viewed under [the parsers configur
 * All parsers must be defined in a parsers.conf file, not in the Fluent Bit global configuration file.
 #### Filter
 
+> In production environments we want to have full control of the data we are collecting, filtering is an important feature that allows us to alter the data before delivering it to some destination.
+
+* Filtering is implemented through plugins.
+* Each filter can be used to match, exclude or enrich your logs.
+* Many filters are supported - a common use case us K8s deployments. Every pod log needs the proper metadata associated.
+* Filters, similar to input plugins, run in an instance context, which has its own independent configuration.
+
+More information on filters described in the [filters](https://docs.fluentbit.io/manual/pipeline/filters) section.
+
+The default plugins.conf configuration is shown under [plugins.conf](/about-fluentbit/plugins.conf).
+
+There are scripted, command-line based instantiations and declarative based instantiations of each of these below.
+
+The different types of filters includes:
+
+* AWS Metadata - enriches logs with AWS Metadata. Adds EC2 instance ID and availability zone to log records.
+* Expect - validate that records match certain criteria in their structure, like validating that a key exists or it has a specific value.  Expect can actually validate data and structure, basically integrating it into our CI systems to ensure that the expected structure is being used. More information on this found [here](https://docs.fluentbit.io/manual/local-testing/validating-your-data-and-structure).
+* Grep - allows you to match or eclude specific records based upon a regular expression pattern.
+* Lua - allows you to modify incoming records with custom Lua scripts.
+* Record Modifier - Alows to append fields or to exclude specific fields.
+* Multiline - Helps to concatenate messages that were orignally one context but later were split across multiple records or log lines. There are built-in parsers that allow multi-line functionality for Go, Python, Ruby, or Java.
+* Nest - Works with nested data, allows you to take records and put them in a nest.
+* Rewrite Tag - There may be scenarios where the tag needs to be modified on the fly, this allows us to re-emit a record under a new tag in order to route it the proper direction.
+* Throttle - Sets the average rate of messages per interval based upon a leaky bucket and sliding window algorithm.
+* Checklist - Looks up if a value in a specified list exists and then allows the addition of a record to indicate if found.
+* GeoIP2Filter - Filter allows you to enrich the incoming data stream using location data from GeoIP2 database.
+* Kubernetes - enrich your log files with Kubernetes metadata.
+* Parser - The Parser Filter plugin allows for parsing fields in event records.  Basically, Parsers do not happen automatically, they have to go through a Filter in order to be applied. Parsers are built "shapes," which filters can then apply.
+* Modify - 
+
+* Standard Output - Allows printing to the standard output the data flowed through the filter plugin, which can be useful for debugging.
+* Tensorflow - Allows running machine learning interface tasks on the records of data coming from input plugsin or a stream processor. Uses Tensorflow Lite as the interface engine (used for mobile and IoT applications).
+
+###### Record Modifier in Detail
+
+https://docs.fluentbit.io/manual/pipeline/filters/record-modifier
+
+###### Parser in Detail
+
+https://docs.fluentbit.io/manual/pipeline/filters/parser
+
+This is what would allow parsing on our cluster.
+
+
+###### Multiline Modifier in Detail
+
+
+
+###### Nest Modifier in Detail
+
+
+###### Rewrite Tag Modifier in Detail
+
+
+###### Standard Output in Detail
+
+
+###### Checlist in Detail
+
+https://docs.fluentbit.io/manual/pipeline/filters/checklist
+
+###### Tensorflow Light Detail
+
+https://docs.fluentbit.io/manual/pipeline/filters/tensorflow
+
 #### Buffer
 
 #### Routing
@@ -222,9 +287,6 @@ root@d3e8c8c11c9c:/fluent-bit/etc# ls
 fluent-bit.conf  parsers.conf  parsers_ambassador.conf	parsers_cinder.conf  parsers_extra.conf  parsers_java.conf  parsers_openstack.conf  plugins.conf
 ```
 
-
-
-
 ### Following the FluentBit Docker Documentation
 
 Run the following to get a container going that uses fluent-bit.
@@ -282,8 +344,58 @@ docker run -p 127.0.0.1:24224:24224 fluent/fluent-bit:1.8 /fluent-bit/bin/fluent
 Then in parallel, run the log-driver as an -it:
 
 ```
-docker run --log-driver=fluentd -it ubuntu
+docker run --name testlogger --log-driver=fluentd -it ubuntu
 ```
+#### About FluentD Log Driver
+
+* What is this FluentD log driver doing?
+
+More info about it can be found [here](https://docs.docker.com/config/containers/logging/fluentd/).
+
+> The fluentd logging driver sends container logs to the Fluentd collector as structured log data. Then, users can use any of the various output plugins of Fluentd to write these logs to various destinations. In addition to the log message itself, the fluentd log driver sends the following metadata in the structured log message:
+
+* container_name
+* container_id
+* source
+* log
+
+Different options, shown in the documentation can be specified upon running the container. So for example:
+
+```
+docker run --log-driver=fluentd --log-opt fluentd-address=fluentdhost:24224
+```
+
+The options include:
+
+* fluentd-address - specified as a fluentdhost:port, tcp://port, or path
+* tag - by default, the first 12 characters of the docker id
+* labels, labels-regex, env, env-regex ... are used to tag logs, which is talked about in docker documentation under [customizing log driver output](https://docs.docker.com/config/containers/logging/log_tags/)
+* fluentd-async - connects to fluentd in the background. Messages are buffered until the connection is established. Defaults to false.
+* fluentd-buffer-limit - set the numebr of events buffered on the memory.
+* fluentd-retry-wait - how long to wait before retries.
+* fluentd-max-retries
+* fluentd-sub-second-precision
+
+##### Adding FluentD Log Driver to Running Nginx Container
+
+We have coverd [nginx](/about-nginx/nginx.md).
+
+We can use the Dockerfile, build an image called, "nginxtest" with content and then run an nginx container on a vistable port, while forwarding the logs via the log-driver using fluentd, also allowing us to bash in to the image:
+
+
+```
+docker build -t nginxtest .
+
+docker run --name some-nginx -d -p 8080:80 --log-driver=fluentd -it nginxtest
+```
+If need be we can exec into this container with:
+
+```
+docker exec -it some-nginx /bin/bash
+```
+
+However in this scenario, sending, echo "hello world" to stdout will not be picked up on the fluentbit listener side, only the web visits.
+
 ### Configuring FluentBit on Docker Container
 
 In order to Configure FluentBit, meaning configuring the parser, a debug Container Image must be used, which contains a linux-like environment, allowing one to exec/bash into the container while running.
@@ -301,7 +413,6 @@ This follows the above section on, [attempting to exec into a container](https:/
 [fluent-bit.conf](/about-fluentbit/fluent-bit.conf)
 
 * This appears to be the, "root" configuration file which sets both the input and output of the stream as mentioned within the fluentbit documentation on input and output.
-* 
 
 #### parsers.conf
 
