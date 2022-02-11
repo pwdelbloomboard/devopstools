@@ -38,6 +38,7 @@
 * [ci](/about-ci)
 * [click](/about-click)
 * [cloudfront](/about-cloudfront)
+* [cobra](/about-cobra)
 * [debian](/about-debian)
 * [deployments](/about-deployments)
 * [direnv](/about-direnv/)
