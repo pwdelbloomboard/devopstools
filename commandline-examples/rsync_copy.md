@@ -22,5 +22,3 @@ rsync provides a number of options that control how the command behaves. The mos
 That command above directly copies rsync.md, to a new file called rsync_copy.md.
 
 Running this command again simply overwrites the rsync_copy.md file with a newly updated file.
-
-Note that this is designed to be used over ssh, so you can compress or change the remote shell as mentioned in the option flags.
