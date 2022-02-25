@@ -2,13 +2,13 @@
 ### Needed Soon (alphabetical)
 
 * [command line](/commandline-examples) ...[DONE]
-* [newrelic](/about-newrelic) ... [50%]
+* [newrelic](/about-newrelic) ... [70%]
 * [rundeck](/about-rundeck) ...[50%]
 * [setup script](/about-setupfiles) [20%]
 * SRE School ...[DONE]
-* [volumes](/about-volumes) ...[80%]
+* [volumes](/about-volumes) ...[DONE]
 * [webhooks](/about-webhooks) ... [0%]
-* [fluentbit](/about-fluentbit) ... [10%]
+* [fluentbit](/about-fluentbit) ... [80%] (lacking variables)
 ### Middle Urgency (alphabetical)
 
 * [cloudwatch](/about-cloudwatch) ...[0%]
@@ -18,7 +18,6 @@
 * [rds](/about-rds) ... [0%]
 * [shellcheck](/about-shellcheck) ...[DONE]
 * [ssm](/about-ssm) ... [DONE]
-* [grafana](/about-grafana) ...[0%]
 
 ### Not Important Yet But Will Be Later (alphabetical)
 
@@ -50,6 +49,7 @@
 * [git](/about-git) .. [DONE]
 * [gitlab](/about-gitlab) ... [70%]
 * [gql](/about-gql) ... [80%]
+* [grafana](/about-grafana) ...[0%]
 * [grok](/about-grok) ... [100%]
 * [helm](/about-helm) ... [70%]
 * [helmfile](/about-helmfile) ... [50%]
