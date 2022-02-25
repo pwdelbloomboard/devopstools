@@ -68,6 +68,35 @@ Inputs include:
 * TCP - Obvious
 * Windows Event Log - Obvious
 
+##### Tail Input in Detail
+
+https://docs.fluentbit.io/manual/pipeline/inputs/tail
+
+> The plugin reads every matched file in the Path pattern and for every new line found (separated by a ), it generates a new record. Optionally a database file can be used so the plugin can have a history of tracked files and a state of offsets, this is very useful to resume a state if the service is restarted.
+
+* Buffer_Chunk_Size - sets to read fiels data, used to increase buffer size.
+* Buffer_Max_Size - set the limit of the buffer size per monitored file.
+* Path - Specifies a specific log file or multiple ones through use of common wildcards.
+* Path_Key - appends the name of the monitored file as part of the record. Value assigned becomes a key in the map.
+* Eclude_Path - Set one or multiple shell patterns seperated by commas to exclude files matching certain criteria, e.g. *.zip
+* Offset_Key - appends the offset of the current monitored file as part of the record. Value assigned becomes a key in the map.
+* Read_from_Head - for newly discovered files, read from the head, not tail.
+* Refresh_Interval - default 60 seconds
+* Rotate_wait - specify the extra time in seconds to monitor a file once rotated in case pending data is flushed.
+* Ignore_Older - ignores files where modification date is older than time in seconds
+* Skip_Long_Lines - when monitored file reaches buffer capacity, default behavior is to stop montioring that file.
+* Skip_Empty_Lines - obvious.
+* DB - specify the database file to keep track of montiroed files and offsets.
+* Parser - Specify the name of a parser to interpret the entry as a structured message.
+* Key - When a message is unstructured (no parser applied), it's appended as a string under the key name log. This option allows to define an alternative name for that key.
+* Inotify_Watcher - Set to false to use file stat watcher instead of inotify.
+* Tag - Set a tag (with regex-extract fields) that will be placed on lines read. E.g. kube.<namespace_name>.<pod_name>.<container_name>. Note that "tag expansion" is supported: if the tag includes an asterisk (*), that asterisk will be replaced with the absolute path of the monitored file (also see Workflow of Tail + Kubernetes Filter).
+* Tag_Regex - Set a regex to extract fields from the file name. E.g. (?<pod_name>[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*)_(?<namespace_name>[^_]+)_(?<container_name>.+)-
+* Static_Batch_size - Set the maximum number of bytes to process per iteration for the monitored static files (files that already exists upon Fluent Bit start).
+
+Multiline Support
+
+
 #### Parser
 
 > Dealing with raw strings or unstructured messages is a constant pain; having a structure is highly desired. Ideally we want to set a structure to the incoming data by the Input Plugins as soon as they are collected:

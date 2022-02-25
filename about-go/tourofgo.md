@@ -102,12 +102,47 @@ The above program will return, "world hello" - because we literally swaped the s
 
 Go's return values may be named.
 
+```
+func split(sum int) (x, y int) {
+	x = sum * 4 / 9
+	y = sum - x
+	return
+}
+```
 
-#### Left Off At:
+Note the values calculated, the x and y are returned as values with a space in between, without having named any value after, "return."  This is known as a naked return.
+
+#### Variables
+
+The var statement declares a list of variables, as with a function argument list.
+
+```
+var c, python, java bool
+
+func main() {
+	var i int
+	fmt.Println(i, c, python, java)
+}
+```
+
+The above will return an int i as 0, then c, python, java as booleans showing that they are false.
+
+#### Variables with initializers
+
+
+```
+var i, j int = 1, 2
+
+func main() {
+	var c, python, java = true, false, "no!"
+	fmt.Println(i, j, c, python, java)
+}
+
+```
+#### Short Variable Declarations
 
 
 
-
-https://go.dev/tour/basics/5
+https://go.dev/tour/basics/9
 
 
