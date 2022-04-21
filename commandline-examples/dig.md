@@ -39,3 +39,10 @@ ns4.google.com.		187813	IN	A	216.239.38.10
 ;; MSG SIZE  rcvd: 191
 
 ```
+
+
+Basically, it gives a bit more detail than nslookup.
+
+host and nslookup both give highly structured, line by line answers which are useful in scripting. Contrast this to, "dig" which gives much more probing and comprehensive answers, but then it has more of a human readable, manual output.
+
+Host is designed to be a simplified version of nslookup.  Dig is designed to be a more complicated, human version of nslookup.

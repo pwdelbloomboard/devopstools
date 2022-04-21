@@ -1,0 +1,1 @@
+> The perf command is used as a primary interface to the Linux kernel performance monitoring capabilities and can record CPU performance counters and trace points. The perf command can report combinations of performance counters as performance metrics and can inject small scripts (BPF scripts) into the kernel to process this data in real time.

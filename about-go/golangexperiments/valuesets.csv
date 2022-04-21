@@ -1,0 +1,12 @@
+host.cpuIdlePercent,0
+host.cpuIoWaitPercent,0
+host.cpuPercent,0
+host.cpuStealPercent,0
+host.cpuSystemPercent,0
+host.cpuUserPercent,0
+host.disk.freeBytes,1
+host.disk.freePercent,0
+host.disk.inodesFree,0
+host.disk.inodesTotal,1
+host.disk.inodesUsed,1
+host.disk.inodesUsedPercent,0
