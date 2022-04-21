@@ -12,9 +12,10 @@
 ### Middle Urgency (alphabetical)
 
 * [cloudwatch](/about-cloudwatch) ...[0%]
-* [daemons](/about-daemons) ... [0%]
+* [daemons](/about-daemons) ... [DONE]
+* [cronjobs](/about-cronjobs) ... [DONE]
 * [kms](/about-kms) ... [0%]
-* [pagerduty](/about-pagerduty) ... [0%]
+* [pagerduty](/about-pagerduty) ... [60%]
 * [rds](/about-rds) ... [0%]
 * [shellcheck](/about-shellcheck) ...[DONE]
 * [ssm](/about-ssm) ... [DONE]
@@ -23,7 +24,7 @@
 
 * [redash](/about-redash)
 * [superset](/about-superset)
-* [go](/about-go) ... [10%]
+* [go](/about-go) ... [80%]
 ### Not Urgent Yet (alphabetical)
 
 * [airflow](/about-airflow)
