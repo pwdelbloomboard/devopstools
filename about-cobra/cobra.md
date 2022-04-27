@@ -494,5 +494,65 @@ func Execute() error {
 
 Basically, one of the keys was initializing the go mod prior to anything else once the folder was created, and then installing go cobra with, "go get ~" after the modfile was created. This allowed the modfile to capture cobra as a dependency.  The mod file is similar in concept to a requirements.txt or a package-lock.json file in node, or a gemfile in ruby on rails. The modfile appears to update automatically as you install dependencies on the fly while building the code, rather than declaratively specifying them within requirements.txt or under some other paradigm. So just because you may have installed a particular dependency on your machine, does not mean it will work in a particular Golang project.
 
+After getting the cobra overall structure up and running, you can then use, "cobra-cli" as a command line tool to add individual functions to the overall command line that was set up.
+
+So within the root file, "home/commandapp" you can run:
+
+```
+cobra-cli add sayhello
+sayhello created at /home/commandapp
+```
+Looking at the command folder we see:
+
+```
+:/home/commandapp/cmd# ls
+root.go  sayhello.go
+```
+
+What this command line tool does would be similar to adding the same structure that you see within the [Cobra documentation here for a function add](https://github.com/spf13/cobra/blob/master/user_guide.md#create-rootcmd).
 
 
+Within sayhello.go we can modify the actual function itself:
+
+```
+// sayhelloCmd represents the sayhello command
+var sayhelloCmd = &cobra.Command{
+        Use:   "sayhello",
+        Short: "Just go ahead and say hello.",
+        Long: `Long description - just go ahead and say hello`,
+        Run: func(cmd *cobra.Command, args []string) {
+                fmt.Println("sayhello called --- hello!")
+        },
+}
+```
+
+Then we can install it:
+
+```
+go install
+```
+
+Then we can run the command commandapp, which now has a new, "sayhello" Available Command listed:
+
+```
+# commandapp
+Thanks for testing out our Go Cobra application
+
+Usage:
+  cobra [command]
+
+Available Commands:
+  completion  Generate the autocompletion script for the specified shell
+  help        Help about any command
+  sayhello    Just go ahead and say hello.
+
+Flags:
+  -h, --help   help for cobra
+```
+So from here if we want to call this actual, "subcommand" so to speak, we run:
+
+```
+commandapp sayhello
+sayhello called --- hello!
+```
+Just remember that after adding the new command, you have to run, "go install" to install the actual command prior to running it.
