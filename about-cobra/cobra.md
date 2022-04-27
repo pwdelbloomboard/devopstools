@@ -556,3 +556,34 @@ commandapp sayhello
 sayhello called --- hello!
 ```
 Just remember that after adding the new command, you have to run, "go install" to install the actual command prior to running it.
+
+Beyond creating a simple function, we can input arguments.
+
+```
+// sayhelloCmd represents the sayhello command
+var sayhelloCmd = &cobra.Command{
+	Use:   "sayhello",
+	Short: "Just go ahead and say hello.",
+	Long: `Long description - just go ahead and say hello`,
+	Run: func(cmd *cobra.Command, args []string) {
+        if len(args) > 0 {
+            for _, inputs := range args{
+                fmt.Println(inputs)
+            }
+        } else {
+            fmt.Println("Please provide an argument!")
+        }
+	},
+}
+```
+Remember that after making the above changes you have to run, "go install".
+
+So basically this function will now spit back out whatever argument we put in.
+
+```
+# commandapp sayhello
+Please provide an argument!
+# commandapp sayhello whatevs
+whatevs
+```
+We can of course within the Go File, create functions within those functions to call from the main cmd type functions that we create. Various extensions / packages can be added into each cmd file as well.
