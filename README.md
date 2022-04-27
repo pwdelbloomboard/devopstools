@@ -1,29 +1,22 @@
 # devopstools - Importance Ranking
 ### Needed Soon (alphabetical)
 
-* [airflow](/about-airflow) ... [0%]
 * [auth](/about-auth) ... [0%]
 * [aws-loadbalancers](/about-awsloadbalancers) ... [0%]
 * [cobra](about-cobra) ... [20%] (integrating with devops ci)
 * [command line](/commandline-examples) ...[80] (setup scripts, ci scripts)
 * [feast](/about-feast)
-* [gitlab](/about-gitlab) ... [50%] (pipelines)
 * [go](/about-go) ... [80%] (cobra, setup scripts)
 * [helm](/about-helm) ... [70%]
 * [helmfile](/about-helmfile) ... [50%]
-* [kinesis](/about-kinesis) ... [0%]
 * [kubernetes](/about-kubernetes) ... [20%] (replacing clusters)
 * [kubeflow](/about-kubeflow) ... [0%]
 * [kustomize](/about-kustomize) ... [0%]
-* [mongo](/about-mongo) ... [0%]
-* [mongoose](/about-mongoose) ... [0%]
 * [minnio](/about-minio) ... [0%]
 * [nginx](/about-nginx) ... [80%] (using nginx as a load balancer) 
 * [network connectors](/about-networkconnectors) ... [0%]
 * [pubsub](/about-pubsub) ... [0%]
 * [rds](/about-rds) ... [0%] (replacing manifests)
-* [redash](/about-redash) ... [0%]
-* [superset](/about-superset) ... [0%]
 * [spark](/about-spark) ... [0%]
 * [sqsqueue](/about-sqsqueue) ... [0%]
 * [s3](/about-s3) ... [20%] ... (working with minio)
@@ -32,19 +25,25 @@
 
 ### Middle Urgency (alphabetical)
 
+* [airflow](/about-airflow) ... [0%]
 * [cloudwatch](/about-cloudwatch) ...[0%]
 * [kms](/about-kms) ... [0%]
+* [gitlab](/about-gitlab) ... [50%] (pipelines)
 * [ha-ft](/about-haft) ... [5%]
+* [istio](/about-istio) ... [0%]
+* [kinesis](/about-kinesis) ... [0%]
+* [mongo](/about-mongo) ... [0%]
+* [mongoose](/about-mongoose) ... [0%]
 * [newrelic](/about-newrelic) ... [90%]
+* [redash](/about-redash) ... [0%]
 * [rundeck](/about-rundeck) ...[50%]
 * [setup script](/about-setupfiles) [20%]
+* [superset](/about-superset) ... [0%]
 * [webhooks](/about-webhooks) ... [0%]
-
 ### Not Important Yet But Might Be Later (alphabetical)
 
 * [fluentbit](/about-fluentbit) ... [80%] (lacking variables)
 * [pagerduty](/about-pagerduty) ... [60%]
-
 ### Not Urgent Yet (alphabetical)
 
 * [ansible](/about-ansible)
@@ -344,3 +343,8 @@ Auth
 ## Python Production Tools
 
 * [python tools](/python-examples/pythonexamples.md)
+
+
+## Change List
+
+* 20220427 - Re-prioritized, moved farther out tools down the list.
