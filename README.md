@@ -1,37 +1,55 @@
 # devopstools - Importance Ranking
 ### Needed Soon (alphabetical)
 
-* [command line](/commandline-examples) ...[DONE]
-* [newrelic](/about-newrelic) ... [70%]
-* [rundeck](/about-rundeck) ...[50%]
-* [setup script](/about-setupfiles) [20%]
-* SRE School ...[DONE]
-* [volumes](/about-volumes) ...[DONE]
-* [webhooks](/about-webhooks) ... [0%]
-* [fluentbit](/about-fluentbit) ... [80%] (lacking variables)
+* [airflow](/about-airflow) ... [0%]
+* [auth](/about-auth) ... [0%]
+* [aws-loadbalancers](/about-awsloadbalancers) ... [0%]
+* [cobra](about-cobra) ... [20%] (integrating with devops ci)
+* [command line](/commandline-examples) ...[80] (setup scripts, ci scripts)
+* [feast](/about-feast)
+* [gitlab](/about-gitlab) ... [50%] (pipelines)
+* [go](/about-go) ... [80%] (cobra, setup scripts)
+* [helm](/about-helm) ... [70%]
+* [helmfile](/about-helmfile) ... [50%]
+* [kinesis](/about-kinesis) ... [0%]
+* [kubernetes](/about-kubernetes) ... [20%] (replacing clusters)
+* [kubeflow](/about-kubeflow) ... [0%]
+* [kustomize](/about-kustomize) ... [0%]
+* [mongo](/about-mongo) ... [0%]
+* [mongoose](/about-mongoose) ... [0%]
+* [minnio](/about-minio) ... [0%]
+* [nginx](/about-nginx) ... [80%] (using nginx as a load balancer) 
+* [network connectors](/about-networkconnectors) ... [0%]
+* [pubsub](/about-pubsub) ... [0%]
+* [rds](/about-rds) ... [0%] (replacing manifests)
+* [redash](/about-redash) ... [0%]
+* [superset](/about-superset) ... [0%]
+* [spark](/about-spark) ... [0%]
+* [sqsqueue](/about-sqsqueue) ... [0%]
+* [s3](/about-s3) ... [20%] ... (working with minio)
+* [ssl](/about-ssl) ... [50%] ... (redirecting unsecure traffic)
+* [understanding scripts](/understanding-scripts) ... [10%]
+
 ### Middle Urgency (alphabetical)
 
 * [cloudwatch](/about-cloudwatch) ...[0%]
-* [daemons](/about-daemons) ... [DONE]
-* [cronjobs](/about-cronjobs) ... [DONE]
 * [kms](/about-kms) ... [0%]
+* [ha-ft](/about-haft) ... [5%]
+* [newrelic](/about-newrelic) ... [90%]
+* [rundeck](/about-rundeck) ...[50%]
+* [setup script](/about-setupfiles) [20%]
+* [webhooks](/about-webhooks) ... [0%]
+
+### Not Important Yet But Might Be Later (alphabetical)
+
+* [fluentbit](/about-fluentbit) ... [80%] (lacking variables)
 * [pagerduty](/about-pagerduty) ... [60%]
-* [rds](/about-rds) ... [0%]
-* [shellcheck](/about-shellcheck) ...[DONE]
-* [ssm](/about-ssm) ... [DONE]
 
-### Not Important Yet But Will Be Later (alphabetical)
-
-* [redash](/about-redash)
-* [superset](/about-superset)
-* [go](/about-go) ... [80%]
 ### Not Urgent Yet (alphabetical)
 
-* [airflow](/about-airflow)
 * [ansible](/about-ansible)
 * [apis](/about-apis)
 * [asdf](/about-asdf)
-* [auth](/about-auth)
 * [dokcer buildkit](/about-buildkit)
 * [celery](/about-celery)
 * [chalice](/about-chalice)
@@ -42,28 +60,14 @@
 * [debian](/about-debian)
 * [deployments](/about-deployments)
 * [direnv](/about-direnv/)
-* [dns](/about-dns/) ... [DONE]
-* [docker](/about-docker/) ... [DONE]
 * [ec2](/about-ec2) ... [10%]
 * [elasticache](/about-elasticache)
 * [environments](/about-environments)
-* [git](/about-git) .. [DONE]
-* [gitlab](/about-gitlab) ... [70%]
 * [gql](/about-gql) ... [80%]
-* [grafana](/about-grafana) ...[0%]
-* [grok](/about-grok) ... [100%]
-* [helm](/about-helm) ... [70%]
-* [helmfile](/about-helmfile) ... [50%]
 * [javascript](/about-javascript)
-* [k3d/k3s](/about-k3d) ... [DONE]
-* [kinesis](/about-kinesis)
 * [kops](/about-kops)
-* [kubernetes](/about-kubernetes) ... [20%]
 * [lens](/about-lens)
-* [mongo](/about-mongo)
-* [mongoose](/about-mongoose)
 * [networking](/about-networking)
-* [nginx](/about-nginx) ... [DONE]
 * [ohmyzsh](/about-ohmyzsh)
 * [postgres](/about-postgres)
 * [precommit](/about-precommit)
@@ -72,14 +76,26 @@
 * [redis](/about-redis)
 * [registries](/about-registries)
 * [route53](/about-route53)
-* [s3](/about-s3)
 * [selenium](/about-selenium)
-* [sqsqueue](/about-sqsqueue)
-* [ssl](/about-ssl)
 * [starship](/about-starship)
 * [uppy](/about-uppy)
 * [vscode](/about-vscode)
 * [wemake-python-styleguide](/about-wemake-python-styleguide)
+
+
+## Completed (Alphabetical)
+
+* [cronjobs](/about-cronjobs) ... [DONE]
+* [daemons](/about-daemons) ... [DONE]
+* [dns](/about-dns/) ... [DONE]
+* [docker](/about-docker/) ... [DONE]
+* [git](/about-git) .. [DONE]
+* [grok](/about-grok) ... [DONE%]
+* [k3d/k3s](/about-k3d) ... [DONE]
+* SRE School ...[DONE]
+* [shellcheck](/about-shellcheck) ...[DONE]
+* [ssm](/about-ssm) ... [DONE]
+* [volumes](/about-volumes) ...[DONE]
 
 ## Need to Add:
 
@@ -155,7 +171,6 @@
 * [s3](/about-s3)
 * [setup script](/about-setupfiles)
 * [shellcheck](/about-shellcheck)
-* [sqsqueue](/about-sqsqueue)
 * [ssl](/about-ssl)
 * [ssm](/about-ssm)
 * [starship](/about-starship)
@@ -165,6 +180,9 @@
 * [vscode](/about-vscode)
 
 
+## No Longer Really Needed
+
+* [grafana](/about-grafana) ...[0%]
 
 
 ## Not Added Yet
