@@ -1,4 +1,10 @@
 # devopstools - Importance Ranking
+
+### Next (order of priority)
+
+* [kustomize](/about-kustomize) ... [0%]
+* [go](/about-go) ... [80%] (cobra, setup scripts)
+* [kubeflow](/about-kubeflow) ... [0%]
 ### Needed Soon (alphabetical)
 
 * [auth](/about-auth) ... [0%]
@@ -6,12 +12,9 @@
 * [cobra](about-cobra) ... [20%] (integrating with devops ci)
 * [command line](/commandline-examples) ...[80] (setup scripts, ci scripts)
 * [feast](/about-feast)
-* [go](/about-go) ... [80%] (cobra, setup scripts)
 * [helm](/about-helm) ... [70%]
 * [helmfile](/about-helmfile) ... [50%]
 * [kubernetes](/about-kubernetes) ... [20%] (replacing clusters)
-* [kubeflow](/about-kubeflow) ... [0%]
-* [kustomize](/about-kustomize) ... [0%]
 * [minnio](/about-minio) ... [0%]
 * [nginx](/about-nginx) ... [80%] (using nginx as a load balancer) 
 * [network connectors](/about-networkconnectors) ... [0%]
