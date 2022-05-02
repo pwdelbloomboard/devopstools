@@ -1,0 +1,18 @@
+version: '3.1'
+
+services:
+  playwithgolang_service:
+    image: golang-bullseye:latest
+    build: .
+    container_name: playwithgolang_container
+    working_dir: /home/startcontent/quickstart/
+    command: hugo server --bind 0.0.0.0 -D
+    ports: 
+      - 1313:1313
+    volumes:
+      - type: bind
+        source: ./volumebindmount
+        target: /home/startcontent
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    tty: true

@@ -63,6 +63,19 @@ My favorite number is 1
 ### Setting Up Volume for Bind Mount
 
 Let's say we want to keep some of the files we create within the GoLang shell on our local machine for safe keeping, to have for the next time we sign into practice Go.
+
+To do this, we can set up a bind mount within a docker-compose.yml file (see the example attached).
+
+We can then spin up the image and the service with:
+
+```
+docker-compose up -d
+docker exec -t -i playwithgolang_container /bin/bash
+```
+Sure enough, after testing, we have a fully formed Go container and 
+
+### Running Go with Port to View Externally
+
 ## Go Playground
 
 * "Go Playground" is a web service that runs on GoLang.org's servers.
@@ -71,6 +84,30 @@ https://go.dev/tour/welcome/4
 ## About Go
 
 [Tour Of Go](/about-go/tourofgo.md)
+
+## Defining Variables
+
+For example:
+```
+var (
+appConfig   map[string]deploy.App
+apps        []string
+)
+```
+is the same as:
+
+```
+var appConfig map[string]deploy.App
+var apps []string
+```
+And similar to:
+
+```
+errorMessage := range
+```
+Which doesn't care about the variable type
+
+
 
 # Resources
 
