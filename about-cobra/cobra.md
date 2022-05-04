@@ -587,3 +587,7 @@ Please provide an argument!
 whatevs
 ```
 We can of course within the Go File, create functions within those functions to call from the main cmd type functions that we create. Various extensions / packages can be added into each cmd file as well.
+
+### Resources
+
+* [Building an IP Tracker in GoLang and Cobra](https://www.youtube.com/watch?v=Ll-s38JKWi8)
