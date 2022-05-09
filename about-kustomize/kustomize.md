@@ -361,7 +361,7 @@ kustomize edit set image argoproj/argocli=argoproj/argocli:v2.12.4
 
 ### Is it better/worse/same as helm?
 
-
+* Depends upon use case.
 
 ## Resources
 
