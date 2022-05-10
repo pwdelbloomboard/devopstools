@@ -1,0 +1,21 @@
+version: '3.1'
+
+services:
+  playwithkustomize_service:
+    image: kustomize_purposed_debian:bullseye-slim
+    build: .
+    container_name: playwithkustomize_container
+    # mount docker.sock to be able to run a docker container in a docker container
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    # working_dir:
+    # command: /bin/bash
+    ports: 
+      - 80:80
+    # volumes:
+    #  - type: bind
+    #    source: ./volumebindmount
+    #    target: /home/startcontent
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    tty: true
