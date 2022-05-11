@@ -30,7 +30,7 @@ RUN chmod +x kubectl                                           && \
 # move to home directory
 WORKDIR /home
 # clone k3d-demo
-RUN git clone https://github.com/pwdelbloomboard/k3d-demo.git --branch v0.0.1
+RUN git clone https://github.com/pwdelbloomboard/k3d-demo.git --branch v0.0.2
 
 # can't run the following commands until container is up and running!
 # RUN k3d cluster create whatevscluster                          && \
