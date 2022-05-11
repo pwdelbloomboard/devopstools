@@ -2,19 +2,18 @@
 
 ### Next (order of priority)
 
-* [kustomize](/about-kustomize) ... [0%]
+* [registries](/about-registries) ... [50%]
+* [kustomize](/about-kustomize) ... [30%]
 * [go](/about-go) ... [80%] (cobra, setup scripts)
 * [kubeflow](/about-kubeflow) ... [0%]
 ### Needed Soon (alphabetical)
 
 * [auth](/about-auth) ... [0%]
 * [aws-loadbalancers](/about-awsloadbalancers) ... [0%]
-* [cobra](about-cobra) ... [20%] (integrating with devops ci)
-* [command line](/commandline-examples) ...[80] (setup scripts, ci scripts)
-* [feast](/about-feast)
-* [helm](/about-helm) ... [70%]
-* [helmfile](/about-helmfile) ... [50%]
-* [kubernetes](/about-kubernetes) ... [20%] (replacing clusters)
+* [cobra](about-cobra) ... [40%] (integrating with devops ci)
+* [command line](/commandline-examples) ...[81] (setup scripts, ci scripts)
+* [feast](/about-feast) ... [0%]
+* [kubernetes](/about-kubernetes) ... [30%] (replacing clusters)
 * [minnio](/about-minio) ... [0%]
 * [nginx](/about-nginx) ... [80%] (using nginx as a load balancer) 
 * [network connectors](/about-networkconnectors) ... [0%]
@@ -46,6 +45,8 @@
 ### Not Important Yet But Might Be Later (alphabetical)
 
 * [fluentbit](/about-fluentbit) ... [80%] (lacking variables)
+* [helm](/about-helm) ... [70%]
+* [helmfile](/about-helmfile) ... [50%]
 * [pagerduty](/about-pagerduty) ... [60%]
 ### Not Urgent Yet (alphabetical)
 
@@ -76,7 +77,6 @@
 * [project management](/about-projectmanagement)
 * [prometheus](/about-prometheus)
 * [redis](/about-redis)
-* [registries](/about-registries)
 * [route53](/about-route53)
 * [selenium](/about-selenium)
 * [starship](/about-starship)
