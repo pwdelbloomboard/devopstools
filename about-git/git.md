@@ -121,6 +121,19 @@ fatal: adding files failed
 ```
 * Basically there is a leftover git in a directory.
 
+Within the topmost relevant directory, do:
+
+```
+find ./ -name '.git'
+./about-go/go-docker/volumebindmount/quickstart/.git
+./about-go/go-docker/volumebindmount/quickstart/themes/ananke/.git
+./about-hugo/volumebindmount/quickstart/themes/ananke/.git
+./.git
+```
+In the above example, we have a couple different git's within the files shown, because these are dev-mode containers, and we had set up github repos within the docker containers in order to load a particular theme (rather than doing a curl), and this git repo is causing the above issue now.
+
+The solution is essentially to eliminate the extra git repos withinside the main git repo, and use curl rather than git to clone (or rather clone) those repositories.
+
 
 # Resources
 
