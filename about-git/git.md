@@ -108,7 +108,19 @@ The text editor to use while operating gitmerge is VIM.
 
 ###### No Conflicts
 
-Sometimes there are no conflicts, 
+Sometimes there are no conflicts, you're good to go!
+
+
+## Selected Git Errors
+
+### directory does not have a commit checked out
+
+```
+error: 'about-go/go-docker/volumebindmount/quickstart/' does not have a commit checked out
+fatal: adding files failed
+```
+* Basically there is a leftover git in a directory.
+
 
 # Resources
 

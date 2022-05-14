@@ -30,8 +30,3 @@ WORKDIR /home
 RUN git clone https://github.com/vfarcic/k3d-demo.git
 
 WORKDIR /home/k3d-demo/
-
-# can't run the following commands until container is up and running!
-# RUN k3d cluster create whatevscluster                          && \
-#        kubectl apply --filename k8s/
-
