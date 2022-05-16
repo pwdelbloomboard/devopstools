@@ -1,0 +1,6 @@
+Ungoverned costs
+Unanticipated usage
+Dev/Test waste
+Too much production headroom
+Wrongsizing production
+Suboptimal design and implementation
