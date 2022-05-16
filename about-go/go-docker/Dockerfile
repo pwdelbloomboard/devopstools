@@ -5,7 +5,7 @@
 FROM buildpack-deps:bullseye-scm
 
 # copy desired content from goapps file
-COPY volumebindmount /home/startcontent
+COPY volumebindmount /home/volumebindmount
 
 # install cgo-related dependencies
 RUN set -eux; \

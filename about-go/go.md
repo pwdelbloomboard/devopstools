@@ -195,9 +195,6 @@ p=&x
 
 Basically, you use pointers when you have structs which contain such large amounts of data, that you never want this data going on the heap because the slowness of working with that struct on the heap would make things slower overall because Golang is constantly doing garbage collection, which happens on the heap, and every time it has to do garbage collection on this big struct it takes a while. Instead, it's just faster to keep it on the nice stack where it doesn't need to be garbage collected.
 
-
-
-
 ## Data Types and Working with Data
 
 ### Slices
