@@ -10,6 +10,8 @@
 
 > The Twelve-Factor App methodology is a methodology for building software-as-a-service applications. These best practices are designed to enable applications to be built with portability and resilience when deployed to the web.
 
+They are basically, "things that apps should have to make them strong enough to be on the web."  Much of these factors are the types of things that one sees commonly 
+
 ### What Are The 12 Factors?
 
 | I    | Codebase            | There should be exactly one codebase for a deployed service with the codebase being used for many deployments.      |
@@ -27,3 +29,14 @@
 | XII  | Admin Processes     | Any needed admin tasks should be kept in source control and packaged with the application.                          |
 
 
+## Built Viper Demonstration
+
+[Within Docker Go - Go Viper](https://github.com/pwdelbloomboard/devopstools/tree/main/about-go/go-docker/volumebindmount/goviper)
+
+### Why Use Viper
+
+* So viper is all about config files. Any time that you run a program, go viper will look for a config file. Perhaps for the purposes of oauth, using an auth token, you can use config files to store them into a temporary struct in your environment.
+
+#### Settings in Viper
+
+* A common other usage is, "SetEnvPrefix" - which basically, MySQL uses when an image starts up on Docker...viper will check for an environment variable matching the SetEnvPrefix variable.
