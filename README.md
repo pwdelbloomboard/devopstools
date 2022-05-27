@@ -2,9 +2,9 @@
 
 ### Next (order of priority)
 
-* [registries](/about-registries) ... [50%]
+* [kubernetes](/about-kubernetes) ... [30%] (replacing clusters)
 * [kustomize](/about-kustomize) ... [30%]
-* [go](/about-go) ... [80%] (cobra, setup scripts)
+* [go](/about-go) ... [85%] (cobra, setup scripts)
 * [kubeflow](/about-kubeflow) ... [0%]
 ### Needed Soon (alphabetical)
 
@@ -13,7 +13,6 @@
 * [cobra](about-cobra) ... [40%] (integrating with devops ci)
 * [command line](/commandline-examples) ...[81] (setup scripts, ci scripts)
 * [feast](/about-feast) ... [0%]
-* [kubernetes](/about-kubernetes) ... [30%] (replacing clusters)
 * [minnio](/about-minio) ... [0%]
 * [nginx](/about-nginx) ... [80%] (using nginx as a load balancer) 
 * [network connectors](/about-networkconnectors) ... [0%]
@@ -48,6 +47,11 @@
 * [helm](/about-helm) ... [70%]
 * [helmfile](/about-helmfile) ... [50%]
 * [pagerduty](/about-pagerduty) ... [60%]
+
+### Heavily Updated Since Last Cycle, More Or Less Done for Now
+
+* [registries](/about-registries) ... [80%]
+
 ### Not Urgent Yet (alphabetical)
 
 * [ansible](/about-ansible)
