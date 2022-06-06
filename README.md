@@ -2,16 +2,15 @@
 
 ### Next (order of priority)
 
-* [kubernetes](/about-kubernetes) ... [30%] (replacing clusters)
-* [kustomize](/about-kustomize) ... [30%]
+* [kubernetes](/about-kubernetes) ... [40%] (replacing clusters)
+* [kustomize](/about-kustomize) ... [80%]
 * [go](/about-go) ... [85%] (cobra, setup scripts)
 * [kubeflow](/about-kubeflow) ... [0%]
 ### Needed Soon (alphabetical)
 
 * [auth](/about-auth) ... [0%]
 * [aws-loadbalancers](/about-awsloadbalancers) ... [0%]
-* [cobra](about-cobra) ... [40%] (integrating with devops ci)
-* [command line](/commandline-examples) ...[81] (setup scripts, ci scripts)
+* [command line](/commandline-examples) ...[85%] (setup scripts, ci scripts)
 * [feast](/about-feast) ... [0%]
 * [minnio](/about-minio) ... [0%]
 * [nginx](/about-nginx) ... [80%] (using nginx as a load balancer) 
@@ -89,8 +88,9 @@
 * [wemake-python-styleguide](/about-wemake-python-styleguide)
 
 
-## Completed (Alphabetical)
+## Reached Sufficient Level of Completion (Alphabetical)
 
+* [cobra](about-cobra) ... [DONE]
 * [cronjobs](/about-cronjobs) ... [DONE]
 * [daemons](/about-daemons) ... [DONE]
 * [dns](/about-dns/) ... [DONE]
