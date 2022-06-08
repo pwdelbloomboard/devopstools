@@ -2,16 +2,18 @@
 
 ### Next (order of priority)
 
+* [understanding scripts](/understanding-scripts) ... [20%]
 * [kubernetes](/about-kubernetes) ... [40%] (replacing clusters)
 * [kustomize](/about-kustomize) ... [80%]
 * [go](/about-go) ... [85%] (cobra, setup scripts)
-* [kubeflow](/about-kubeflow) ... [0%]
+* [kubeflow](/about-kubeflow) ... [5%]
 ### Needed Soon (alphabetical)
 
-* [auth](/about-auth) ... [0%]
+* [auth](/about-auth) ... [10%]
 * [aws-loadbalancers](/about-awsloadbalancers) ... [0%]
 * [command line](/commandline-examples) ...[85%] (setup scripts, ci scripts)
 * [feast](/about-feast) ... [0%]
+* [istio](/about-istio) ... [0%]
 * [minnio](/about-minio) ... [0%]
 * [nginx](/about-nginx) ... [80%] (using nginx as a load balancer) 
 * [network connectors](/about-networkconnectors) ... [0%]
@@ -21,16 +23,13 @@
 * [sqsqueue](/about-sqsqueue) ... [0%]
 * [s3](/about-s3) ... [20%] ... (working with minio)
 * [ssl](/about-ssl) ... [50%] ... (redirecting unsecure traffic)
-* [understanding scripts](/understanding-scripts) ... [10%]
-
 ### Middle Urgency (alphabetical)
 
-* [airflow](/about-airflow) ... [0%]
+* [airflow](/about-airflow) ... [10%]
 * [cloudwatch](/about-cloudwatch) ...[0%]
 * [kms](/about-kms) ... [0%]
-* [gitlab](/about-gitlab) ... [50%] (pipelines)
+* [gitlab](/about-gitlab) ... [50%] (pipelines, oauth applications)
 * [ha-ft](/about-haft) ... [5%]
-* [istio](/about-istio) ... [0%]
 * [kinesis](/about-kinesis) ... [0%]
 * [mongo](/about-mongo) ... [0%]
 * [mongoose](/about-mongoose) ... [0%]
@@ -39,14 +38,13 @@
 * [rundeck](/about-rundeck) ...[50%]
 * [setup script](/about-setupfiles) [20%]
 * [superset](/about-superset) ... [0%]
-* [webhooks](/about-webhooks) ... [0%]
 ### Not Important Yet But Might Be Later (alphabetical)
 
 * [fluentbit](/about-fluentbit) ... [80%] (lacking variables)
 * [helm](/about-helm) ... [70%]
 * [helmfile](/about-helmfile) ... [50%]
 * [pagerduty](/about-pagerduty) ... [60%]
-
+* [webhooks](/about-webhooks) ... [20%]
 ### Heavily Updated Since Last Cycle, More Or Less Done for Now
 
 * [registries](/about-registries) ... [80%]
