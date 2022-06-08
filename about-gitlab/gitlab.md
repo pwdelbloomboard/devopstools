@@ -150,8 +150,24 @@ Secure your app:
 * Auto Secret Detection
 
 
-#### Example Setup
+## Gitlab Applications - Configuring GitLab as an Oauth 2.0 Authentication Identity Provider
 
+https://docs.gitlab.com/ee/integration/oauth_provider.html 
+
+### What is an Oauth 2.0 Authentication Identity Provider?
+
+> Authentication in the context of a user accessing an application tells an application who the current user is and whether or not they're present. A full authentication protocol will probably also tell you a number of attributes about this user, such as a unique identifier, an email address, and what to call them when the application says "Good Morning". Authentication is all about the user and their presence with the application, and an internet-scale authentication protocol needs to be able to do this across network and security boundaries.
+
+> However, OAuth tells the application none of that. OAuth says absolutely nothing about the user, nor does it say how the user proved their presence or even if they're still there. As far as an OAuth client is concerned, it asked for a token, got a token, and eventually used that token to access some API. It doesn't know anything about who authorized the application or if there was even a user there at all. In fact, much of the point of OAuth is about giving this delegated access for use in situations where the user is not present on the connection between the client and the resource being accessed. This is great for client authorization, but it's really bad for authentication where the whole point is figuring out if the user is there or not (and who they are).
+
+* This is why Gitlab refers to Oauth providing client applications, "Secure Delegated Access" to server resources on behalf of a resource owner.
+
+* Once an application is created, external services can manage tokens using hte OAuth 2 API.
+
+* Oauth can be used to allow users to sign in to your application with a Gitlab Account (single sign-on)
+* ... to set up Gitlab.com for authentication to your Gitlab instance.
+* The above can be achieved either through User-Owned or Group-Owned Applications.
+* These applications are given TOKEN's and ID's, which can be stored on a key-value store such as AWS-SSM, where they can be accessed by applications within different environments as a way to gain access.
 
 
 
