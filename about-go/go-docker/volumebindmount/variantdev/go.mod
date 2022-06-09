@@ -2,7 +2,7 @@ module example.com/m
 
 go 1.17
 
-require github.com/variantdev/vals v0.17.0
+require github.com/variantdev/vals v0.16.2
 
 require (
 	cloud.google.com/go v0.81.0 // indirect
