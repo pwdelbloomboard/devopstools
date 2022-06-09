@@ -21,9 +21,9 @@ func main() {
 
 	valsRendered, err := runtime.Eval(map[string]interface{}{
 		"inline": map[string]interface{}{
-			"foo": "ref+awsssm:///V1/kubeflow/local/GITLAB_APPLICATION_ID[?region=us-west-1]",
+			"foo": "ref+awsssm:///V1/kubeflow/local/GITLAB_APPLICATION_ID?region=us-west-1",
 			"bar": map[string]interface{}{
-				"baz": "ref+awsssm:///V1/kubeflow/local/GITLAB_APPLICATION_ID[?region=us-west-1]",
+				"baz": "ref+awsssm:///V1/kubeflow/local/GITLAB_APPLICATION_ID?region=us-west-1",
 			},
 		},
 	})
