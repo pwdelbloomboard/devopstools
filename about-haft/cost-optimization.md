@@ -8,3 +8,5 @@
 
 * There are three major cloud service providers which dominate the majority of the marketplace, with AWS representing about 1/3rd of the marketplace, followed by Azure and Google Cloud (and Alicloud thereafter).
 * All three cloud service providers offer cost management visibility tools.
+
+# Cloud Cost Optimization Articles
