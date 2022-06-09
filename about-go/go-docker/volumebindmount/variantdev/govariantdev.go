@@ -1,24 +1,22 @@
 package main
 
 import (
+	"encoding/json"
+	"fmt"
+
 	"github.com/variantdev/vals"
 )
-
-type Options struct {
-	CacheSize     int
-	ExcludeSecret bool
-}
 
 func main() {
 
 	// secretsToCache := 256 // how many secrets to keep in LRU cache
-	opts := Options{}
+	opts := vals.Options{}
 	opts.CacheSize = 256
 	opts.ExcludeSecret = false
 
 	runtime, err := vals.New(opts)
 	if err != nil {
-		return nil, err
+		fmt.Println("Error: opts not working.")
 	}
 
 	valsRendered, err := runtime.Eval(map[string]interface{}{
@@ -29,4 +27,13 @@ func main() {
 			},
 		},
 	})
+
+	// Convert map to json string
+	jsonStr, err := json.Marshal(valsRendered)
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	fmt.Println(string(jsonStr))
+
 }
