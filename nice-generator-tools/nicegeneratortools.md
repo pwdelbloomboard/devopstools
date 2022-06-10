@@ -16,3 +16,5 @@
 
 * [Kubernetes YAML Generator](https://k8syaml.com/)
 * [Kubernetes Ingress Builder](https://ingressbuilder.jetstack.io/)
+
+* [Regex Generator](https://regex-generator.olafneumann.org/)
