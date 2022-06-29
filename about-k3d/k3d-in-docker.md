@@ -380,6 +380,15 @@ spec:
 
 Basically the image, "vfarcic/devops-toolkit-series" which defaults to the [image on Dockerhub](https://hub.docker.com/r/vfarcic/devops-toolkit-series/tags), which is the web's main Docker image registry. 
 
+## Registries
+
+* I didn't test this out, but presumably one could set up a registry within Docker as well, using:
+
+```
+k3d registry create registry.localhost --port 5000
+```
+* This is discussed more at length within [k3d Quickstart Guide](about-k3d/k3d-quickstart.md).
+
 
 ## Resources
 
