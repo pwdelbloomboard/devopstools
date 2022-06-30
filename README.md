@@ -7,22 +7,23 @@
 * [kustomize](/about-kustomize) ... [80%]
 * [go](/about-go) ... [85%] (cobra, setup scripts)
 * [kubeflow](/about-kubeflow) ... [5%]
+* [istio](/about-istio) ... [0%]
 ### Needed Soon (alphabetical)
 
 * [auth](/about-auth) ... [10%]
 * [aws-loadbalancers](/about-awsloadbalancers) ... [0%]
 * [command line](/commandline-examples) ...[85%] (setup scripts, ci scripts)
 * [feast](/about-feast) ... [0%]
-* [istio](/about-istio) ... [0%]
-* [minnio](/about-minio) ... [0%]
+* [minnio](/about-minio) ... [0%] ... (more of a question now since minnio doesn't work)
 * [nginx](/about-nginx) ... [80%] (using nginx as a load balancer) 
 * [network connectors](/about-networkconnectors) ... [0%]
 * [pubsub](/about-pubsub) ... [0%]
 * [rds](/about-rds) ... [0%] (replacing manifests)
 * [spark](/about-spark) ... [0%]
 * [sqsqueue](/about-sqsqueue) ... [0%]
-* [s3](/about-s3) ... [20%] ... (working with minio)
+* [s3](/about-s3) ... [20%] ... (working with minio, see above)
 * [ssl](/about-ssl) ... [50%] ... (redirecting unsecure traffic)
+
 ### Middle Urgency (alphabetical)
 
 * [airflow](/about-airflow) ... [10%]
@@ -38,6 +39,7 @@
 * [rundeck](/about-rundeck) ...[50%]
 * [setup script](/about-setupfiles) [20%]
 * [superset](/about-superset) ... [0%]
+
 ### Not Important Yet But Might Be Later (alphabetical)
 
 * [fluentbit](/about-fluentbit) ... [80%] (lacking variables)
@@ -45,6 +47,7 @@
 * [helmfile](/about-helmfile) ... [50%]
 * [pagerduty](/about-pagerduty) ... [60%]
 * [webhooks](/about-webhooks) ... [20%]
+
 ### Heavily Updated Since Last Cycle, More Or Less Done for Now
 
 * [registries](/about-registries) ... [80%]
@@ -116,8 +119,6 @@
 * docuum
 * findutils
 * fzf
-
-
 
 # devopstools Full List - Alphabetical Order
 

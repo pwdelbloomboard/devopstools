@@ -4,7 +4,7 @@
 
 ### k3d create registry
 
-* [k3d registries guide](https://k3d.io/usage/guides/registries/)
+* [k3d registries guide for v5.2.0](https://k3d.io/v5.2.0/usage/registries/)
 
 ```
 k3d registry create registry.localhost --port 5000
