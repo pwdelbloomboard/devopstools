@@ -139,3 +139,22 @@ KMS
 ref+awsssm://PATH/TO/PARAM[?region=REGION]
 ```
 
+## Expansion on the Vals Package
+
+* We have already been using the vals package, as shown above and within govariantdev.go within this directory.
+* Documentation for any package can be found by appending the package's github after pkg.go.dev:
+
+https://pkg.go.dev/github.com/variantdev/vals
+
+## Sources
+
+https://pkg.go.dev/github.com/variantdev/vals#readme-go
+
+https://pkg.go.dev/github.com/variantdev/vals#section-readme
+
+https://pkg.go.dev/github.com/variantdev/vals#Eval
+
+https://github.com/variantdev/vals/blob/v0.18.0/vals.go#L412
+
+https://github.com/variantdev/vals/blob/v0.18.0/vals.go#L113
+
