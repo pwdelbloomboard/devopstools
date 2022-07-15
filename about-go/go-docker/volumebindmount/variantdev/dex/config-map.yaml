@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: dex
+data:
+  config.yaml: |
+    #issuer: https://dex.auth.svc.cluster.local:5556/dex
+    issuer: https://kf.ds.bloomboard.com/dex
+    storage:
+      type: kubernetes
+      config:
+        inCluster: true
+    web:
+      http: 0.0.0.0:5556
+    logger:
+      level: "debug"
+      format: text
+    oauth2:
+      skipApprovalScreen: true
+    enablePasswordDB: false
+    connectors:
+    - type: gitlab
+      id: gitlab
+      name: Gitlab
+      config:
+        clientID: "ref+awsssm:///V1/kubeflow/local/GITLAB_APPLICATION_ID?region=us-west-1"
+        clientSecret: $GITLAB_CLIENT_SECRET
+        redirectURI: "https://kf.ds.bloomboard.com/dex/callback"
+        groups:
+        - bloomboard
+    staticClients: # from manifests/common/oidc-authservice/base/secret_params.env
+    - idEnv: OIDC_CLIENT_ID
+      redirectURIs: ["/login/oidc"]
+      name: 'Dex Login Application'
+      secretEnv: OIDC_CLIENT_SECRET
+
