@@ -2,7 +2,10 @@ module example.com/m
 
 go 1.17
 
-require github.com/variantdev/vals v0.16.2
+require (
+	github.com/variantdev/vals v0.16.2
+	gopkg.in/yaml.v2 v2.4.0
+)
 
 require (
 	cloud.google.com/go v0.81.0 // indirect
@@ -21,7 +24,6 @@ require (
 	github.com/Azure/go-autorest/autorest/validation v0.3.1 // indirect
 	github.com/Azure/go-autorest/logger v0.2.1 // indirect
 	github.com/Azure/go-autorest/tracing v0.6.0 // indirect
-	github.com/a8m/envsubst v1.3.0 // indirect
 	github.com/alecthomas/participle v0.4.2-0.20191220090139-9fbceec1d131 // indirect
 	github.com/aws/aws-sdk-go v1.40.28 // indirect
 	github.com/blang/semver v3.5.1+incompatible // indirect
