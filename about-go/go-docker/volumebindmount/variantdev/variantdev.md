@@ -242,40 +242,15 @@ valsRendered, err := runtime.Eval(map[string]interface{}{
 * Then we would need to Unmarshal the JSON string, turn it into a YAML, then Marshal it back into a string.
 * Or, we might Unmarshal json to a struct, and then yaml marshal it, as with:
 
-```
-package main
+[This repo's jsontoyaml.go we prooved out here](https://github.com/pwdelbloomboard/devopstools/blob/main/about-go/go-docker/volumebindmount/variantdev/jsontoyaml.go).
 
-import (
-	"encoding/json"
-	"fmt"
-	"log"
+* In Summary:
 
-	"gopkg.in/yaml.v2"
-)
-
-type vars struct {
-	Data1 string  `json:"data1" yaml:"data1"`
-	Data2 float64 `json:"data2" yaml:"data2"`
-}
-
-func main() {
-	inp := []byte(`{"data1":"meow","data2":0.1234}`)
-
-	data := &vars{}
-	if err := json.Unmarshal(inp, data); err != nil {
-		log.Fatal(err)
-	}
-
-	// Do some validation on data?
-
-	out, err := yaml.Marshal(data)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	fmt.Printf("output:\n%s\n", out)
-}
-```
+* Replace references to desired ENV values with ref's in the desired input.yaml files.
+* Turn this input.yaml into a map[string]interface{} input to runtime.Eval()
+* Run runtime.Eval() to get valsRendered
+* Do yaml.Marshal to on this a valsRendered.
+* Turn that into a string output, then feed into kustomize and apply.
 
 ### Upshot of Above - Using Refs and Secrets
 
@@ -430,19 +405,45 @@ VAULT_TOKEN=yourtoken  VAULT_ADDR=http://127.0.0.1:8200/ cat <<EOF
 foo: $(vault kv get -format json secret/foo | jq -r .data.data.mykey)
 EOF
 ```
-
-
-
 #### New Function - https://pkg.go.dev/github.com/variantdev/vals#New
 
 * Returns an instance of the Runtime struct.
 
-
-
-
-
 #### Input Function - https://pkg.go.dev/github.com/variantdev/vals#Input
 
+* [Source Code](https://github.com/variantdev/vals/blob/v0.18.0/io.go#L65)
+
+* Takes in a string, outputs a map[string]interface{}
+* Does an unmarshal function on a yaml.
+* This might potentially be a way to input a string from a yaml and output to the proper internal format used by variantdev.
+
+There is a section in this function which makes it look like it's meant to deal with yaml, to unmarshal the yaml:
+
+```
+	if err := yaml.Unmarshal(input, &m); err != nil {
+		return nil, err
+	}
+
+```
+
+#### Output Function - 
+
+* [Source Code](https://github.com/variantdev/vals/blob/ead3b58e118841ec33c33a29483ba3539b632aa4/io.go#L65)
+
+* Appears to take a *string and an interface as an input and output a string.
+* Likely this is taking the input either JSON or YAML and is marshalling it (to be able to display or print).
+* Again, outputs a string, likely a string version of JSON or YAML.
+
+## Pulling It All Together
+
+So the pathway to pull everything together in the way we need it to be done is as follows:
+
+1. Pull a yaml file as a string from an arbitrary URL/location.
+2. Convert said yaml file string into a map[string]interface{}
+3. 
+
+
+* In order to convert a yaml to a map[string]interface{}, there is a pathway to do that using json as described in this tutorial here by [Bitfield Consulting](https://bitfieldconsulting.com/golang/map-string-interface).
 
 
 
