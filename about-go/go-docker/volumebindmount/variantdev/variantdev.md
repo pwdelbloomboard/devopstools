@@ -242,40 +242,15 @@ valsRendered, err := runtime.Eval(map[string]interface{}{
 * Then we would need to Unmarshal the JSON string, turn it into a YAML, then Marshal it back into a string.
 * Or, we might Unmarshal json to a struct, and then yaml marshal it, as with:
 
-```
-package main
+[This repo's jsontoyaml.go we prooved out here](https://github.com/pwdelbloomboard/devopstools/blob/main/about-go/go-docker/volumebindmount/variantdev/jsontoyaml.go).
 
-import (
-	"encoding/json"
-	"fmt"
-	"log"
+* In Summary:
 
-	"gopkg.in/yaml.v2"
-)
-
-type vars struct {
-	Data1 string  `json:"data1" yaml:"data1"`
-	Data2 float64 `json:"data2" yaml:"data2"`
-}
-
-func main() {
-	inp := []byte(`{"data1":"meow","data2":0.1234}`)
-
-	data := &vars{}
-	if err := json.Unmarshal(inp, data); err != nil {
-		log.Fatal(err)
-	}
-
-	// Do some validation on data?
-
-	out, err := yaml.Marshal(data)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	fmt.Printf("output:\n%s\n", out)
-}
-```
+* Replace references to desired ENV values with ref's in the desired input.yaml files.
+* Turn this input.yaml into a map[string]interface{} input to runtime.Eval()
+* Run runtime.Eval() to get valsRendered
+* Do yaml.Marshal to on this a valsRendered.
+* Turn that into a string output, then feed into kustomize and apply.
 
 ### Upshot of Above - Using Refs and Secrets
 
