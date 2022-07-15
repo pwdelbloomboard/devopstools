@@ -438,12 +438,41 @@ There is a section in this function which makes it look like it's meant to deal 
 
 So the pathway to pull everything together in the way we need it to be done is as follows:
 
-1. Pull a yaml file as a string from an arbitrary URL/location.
+0. Create a yaml file with the desired ref's pointing to where secrets are kept.
+1. Pull a yaml file as a string from an arbitrary URL/location.  This can be done with kustomize and:
+
+```
+installString = sourceurl[index]
+				logrus.Info("instalString for: ", apps[index], "set to: ", installString)
+				// build the yaml file as a command
+				builtyamlbyte, err := exec.Command("kustomize", "build", installString).Output()
+				if err != nil {
+					logrus.Fatalf("exec.Command failed with %s\n", err)
+				}
+
+				// convert installation yaml to a string
+				builtyamlstring := string(builtyamlbyte)
+
+```
+
+
+
 2. Convert said yaml file string into a map[string]interface{}
-3. 
+3. Use the [example here](https://github.com/pwdelbloomboard/devopstools/blob/main/about-go/go-docker/volumebindmount/variantdev/govariantdevjsontoyaml.go) to pull said rendered values, and to then convert that to JSON, and then into YAML, and a YAML string.
+4. Said YAML string can be used to apply to create a configmap on a deployment.
 
 
 * In order to convert a yaml to a map[string]interface{}, there is a pathway to do that using json as described in this tutorial here by [Bitfield Consulting](https://bitfieldconsulting.com/golang/map-string-interface).
+
+* So in order to achieve step 3 above, we do the following:
+
+1. Convert YAML to JSON using the "github.com/ghodss/yaml" library and the YAMLtoJSON function.
+2. Use json.Unmarshal to unmarshal the data from json to map[string]interface{} -- in the below example, p should have the data given in the variable, "data" which was originally in JSON.
+
+```
+var p map[string]interface{}
+err = json.Unmarshal(data, &p)
+```
 
 
 
