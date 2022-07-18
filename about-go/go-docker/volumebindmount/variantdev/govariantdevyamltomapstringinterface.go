@@ -5,6 +5,8 @@ import (
 	"os/exec"
 
 	"github.com/sirupsen/logrus"
+	// using 	"github.com/ghodss/yaml" for
+	"github.com/ghodss/yaml"
 )
 
 // using 	"github.com/ghodss/yaml" for
@@ -33,8 +35,19 @@ func main() {
 		logrus.Fatalf("yamlcmd failed with  %s\n", fmt.Sprint(err))
 	}
 
-	// build the yaml as a string
-	yamlstring = string(yamlcmd)
-	logrus.Info(yamlstring)
+	// convert the yaml object into a yaml string and print
+	// yamlStr := string(yamlcmd)
+	// logrus.Info(yamlStr)
+
+	// convert yamlstring, yaml object to json object
+	jsonObj, err := yaml.YAMLToJSON(yamlcmd)
+	if err != nil {
+		fmt.Printf("err: %v\n", err)
+		return
+	}
+
+	// creating a convertable string
+	jsonStr := string(jsonObj)
+	fmt.Println(jsonStr)
 
 }
