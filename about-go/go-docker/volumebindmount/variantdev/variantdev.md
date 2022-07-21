@@ -451,6 +451,10 @@ So the pathway to pull everything together in the way we need it to be done is a
 * E) Range over the temp.yaml to ensure every line is copied.
 * F) Very important, remove the temporary file for security purposes.
 
+* 2A. Since yaml files unmarshalling only marshals one section seperated by "---" at one time, we have to decode the yaml file, as we have done [here in this example](https://github.com/pwdelbloomboard/devopstools/blob/main/about-go/go-docker/volumebindmount/yaml/yamlunmarshall.go).
+
+* This way of unmarshalling yaml files does so in such a way that an arbitray number of files can be unmarshalled out.
+
 
 3. Use the [example here](https://github.com/pwdelbloomboard/devopstools/blob/main/about-go/go-docker/volumebindmount/variantdev/govariantdevjsontoyaml.go) to pull said rendered values, and to then convert that to JSON, and then into YAML, and a YAML string.
 
