@@ -438,17 +438,34 @@ There is a section in this function which makes it look like it's meant to deal 
 
 So the pathway to pull everything together in the way we need it to be done is as follows:
 
-0. Create a yaml file with the desired ref's pointing to where secrets are kept.
+0. Create a yaml file with the desired ref's pointing to where secrets are kept.  We did this with [the "dex" folder here](https://github.com/pwdelbloomboard/devopstools/tree/main/about-go/go-docker/volumebindmount/variantdev/dex).
+
 1. Pull a yaml file as a string from an arbitrary URL/location.  This can be done with kustomize and [this example code on these lines](https://github.com/pwdelbloomboard/devopstools/blob/main/about-go/go-docker/volumebindmount/variantdev/govariantdevyamltomapstringinterface.go#L31).
 
-2. Convert said yaml file string into a map[string]interface{}
+2. Convert said yaml file string into a map[string]interface{}.  This means: 
+
+* A) First building the yaml file using Kustomize with ```yamlcmd, err := exec.Command("kustomize", "build", installString).Output()```
+* B) Next converting that command to a string, ```yamlStr := string(yamlcmd)```
+* C) The tricky part, create a temp.yaml file into which you write the yamlStr with tempFile.WriteString(yamlStr).
+* D) Using vals.Input("tmp/temp.yaml"), write to a yamlMapStrIntf to finally have the finalized map string interface.
+* E) Range over the temp.yaml to ensure every line is copied.
+* F) Very important, remove the temporary file for security purposes.
+
+
 3. Use the [example here](https://github.com/pwdelbloomboard/devopstools/blob/main/about-go/go-docker/volumebindmount/variantdev/govariantdevjsontoyaml.go) to pull said rendered values, and to then convert that to JSON, and then into YAML, and a YAML string.
+
 4. Said YAML string can be used to apply to create a configmap on a deployment.
 
 
-* In order to convert a yaml to a map[string]interface{}, there is a pathway to do that using json as described in this tutorial here by [Bitfield Consulting](https://bitfieldconsulting.com/golang/map-string-interface).
+## Appendix
 
-* So in order to achieve step 2) above, we do the following:
+### Alternative Methods of "Pulling It All Together" Which Don't Work
+
+#### Directly Converting a Map String Interface from Yaml - Tutorial Methods
+
+* Allegedly, in order to convert a yaml to a map[string]interface{}, there is a pathway to do that using json as described in this tutorial here by [Bitfield Consulting](https://bitfieldconsulting.com/golang/map-string-interface).
+
+* So in order to achieve step 2) above, we could have attempted to do the following:
 
 1. Convert YAML to JSON using the "github.com/ghodss/yaml" library and the YAMLtoJSON function.
 2. Use json.Unmarshal to unmarshal the data from json to map[string]interface{} -- in the below example, p should have the data given in the variable, "data" which was originally in JSON.
@@ -457,7 +474,220 @@ So the pathway to pull everything together in the way we need it to be done is a
 var p map[string]interface{}
 err = json.Unmarshal(data, &p)
 ```
+* However, doing this does not accomplish what we want, because it simply creates a map[string]interface{} without having a structure for which to put the yaml fields in. A struct must be built which is custom to this yaml in order to inject values into the map[string]interface{}.
 
+#### Turning []byte into a JSON Object
+
+* Note ... An alternative method for step 2C) of, "Pulling it All Together" above, which sounds reasonable, but does not work would be to do the following:
+
+* C) Turning that []byte into a JSON Object, which is ultimately a map[string]interface{}.
+
+
+2A. We can attempt to do this by using the ```jsonObj, err := yaml.YAMLToJSON(yamlcmd)``` which should take the input yaml command.  This comes from the library [ghodss/yaml](https://pkg.go.dev/github.com/ghodss/yaml).  Specifically, this [YAMLToJSON command documented here](https://pkg.go.dev/github.com/ghodss/yaml#YAMLToJSON) takes an input of a []byte (byte array), and outputs a []byte (byte array), so we have to convert from string to []byte.
+
+```
+func YAMLToJSON(y []byte) ([]byte, error)
+```
+
+2B. When we attempt to convert the yaml file as a JSON object back into a string, we only see one line as an output: 
+
+```
+{"apiVersion":"v1","kind":"Namespace","metadata":{"name":"auth"}}
+```
+
+Also of note, that above function, YAMLToJSON outputs a []byte, when really we need a map[string]interface{}.
+
+
+#### Turning the Output of Kustomize into a String, Then Byte Array
+
+According to [this blog post](https://www.ribice.ba/golang-yaml-string-map/), the default yaml library marshals maps into map[string]interface{}.  Looking at the Marshal/Unmarshal function from the Yaml Library:
+
+```
+func Unmarshal(in []byte, out interface{}) (err error)     
+func Marshal(in interface{}) (out []byte, err error)
+```
+* Note, there is also an, "Unmarshalstrict" option.
+* So when we attempt to Unmarshal the yaml byte, we get:
+
+```
+	err = yaml.Unmarshal(yamlByte, &t)
+	if err != nil {
+		logrus.Fatalf("error: %v", err)
+	}
+	fmt.Printf("--- t:\n%v\n\n", t)
+```
+
+* Which results in essentially an empty unmarsahlled :
+
+```
+--- t:
+{ {0 []}}
+```
+* This is likely because our struct is not formatted correctly, e.g. that the struct is pre-defined toward fields that do not match up with the fields coming from the YAML, e.g.:
+
+```
+type T struct {
+	A string
+	B struct {
+		RenamedC int   `yaml:"c"`
+		D        []int `yaml:",flow"`
+	}
+}
+```
+* So at this point, it's good to ask the question ... is there anything in variantdev/vals that might already do what we're trying to do?
+
+#### Attempting to Feed a yaml as a String Directly Into vals.Input()
+
+* There's the Input Function:
+
+```
+func Input(f string) (map[string]interface{}, error)
+```
+
+* This evidently inputs a string and outputs a map[string]interface{}. Does it work with our yamlStr?
+* Evidently, we hit an input error upon attempting the conversion, telling us that the, "file name is too long."  Does this really mean that the file name is too long?
+
+```
+	yamlMapStrIntf, err := vals.Input(yamlStr)
+
+	logrus.Info("Banana!  vals.Input command complete.")
+	if err != nil {
+		logrus.Info("Double Banana! We hit an error!")
+		logrus.Info(err)
+	}
+
+```
+* Looking at the actual function for Input, we see:
+
+```
+func Input(f string) (map[string]interface{}, error) {
+	m := map[string]interface{}{}
+	var input []byte
+	var err error
+	if f == "-" {
+		input, err = ioutil.ReadAll(os.Stdin)
+	} else if f != "" {
+		input, err = ioutil.ReadFile(f)
+	} else {
+		return nil, fmt.Errorf("Nothing to eval: No file specified")
+	}
+	if err != nil {
+		return nil, err
+	}
+	if err := yaml.Unmarshal(input, &m); err != nil {
+		return nil, err
+	}
+
+	return m, nil
+}
+```
+* It appears that Input uses the utility, ioutil.ReadAll() on the os.Stdin with the input string as "-" or if no input string, uses ioutil.ReadFile(f).
+* What seems to be happening is that ioutil.Readfile() is being activated on yamlStr, which is leading to an error.
+* Looking at the documentation for ioutil.ReadFile() it appears that as of Go version 1.16, ReadFile() simply calls a filename from os.ReadFile, e.g.:
+
+```
+func main() {
+	content, err := ioutil.ReadFile("testdata/hello")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Printf("File contents: %s", content)
+
+}
+```
+* So, we have to figure out how to feed in the string as a Stdin.
+* We know that using ```vals.Input("-")``` will basically make the vals.Input listen for the Stdin. However if we run this, and then never run the command itself, we never get an output.
+* Looking at the actual [ioutil source code](https://pkg.go.dev/io/ioutil#ReadAll):
+
+```
+	r := strings.NewReader("Go is a general-purpose language designed with systems programming in mind.")
+
+	b, err := ioutil.ReadAll(r)
+	if err != nil {
+		log.Fatal(err)
+	}
+```
+* Basically, it appears that we just have to feed the results of strings.NewReader() into ioutil.ReadAll() in order to get it to read and create a result.
+* However, even this method results in an empty map[string]interface{}
+
+#### Creating a Temp File Using os.CreateTemp
+
+* Basically, if we attempt to use os.CreateTemp to create an actual file which gets fed into the vals.Input function, "othertemp.yaml", it seems that it would work, but the result is an empty map[string]interface{}
+
+```
+	// create temp file using os.CreateTemp
+	// map[string]interface{} result is empty if using this method
+	/*
+		otherTempFile, err := os.CreateTemp("", "othertemp.yaml")
+		if err != nil {
+			logrus.Fatal("Cannot create temporary file", err)
+		}
+
+		defer otherTempFile.Close()
+		defer os.Remove(otherTempFile.Name())
+
+		yamlStrByteArray := []byte(yamlStr)
+		if _, err = otherTempFile.Write(yamlStrByteArray); err != nil {
+			log.Fatal("Failed to write to temporary file", err)
+		}
+	*/
+```
+
+#### Similar to Above, Creating a Temp File using ioutil.TempFile
+
+* This also results in an empty map[string]interface{} output from the vals.Input() function.
+
+```
+	/*
+		// Create our Temp File:  This will create a filename like /tmp/prefix-123456
+		// We can use a pattern of "pre-*.txt" to get an extension like: /tmp/pre-123456.txt
+		tmpFile, err := ioutil.TempFile(os.TempDir(), "prefix-")
+		if err != nil {
+			log.Fatal("Cannot create temporary file", err)
+		}
+
+		// Remember to clean up the file afterwards
+		defer os.Remove(tmpFile.Name())
+
+		logrus.Info("Created File: " + tmpFile.Name())
+
+		// Example writing to the file
+		yamlStrByteArray := []byte(yamlStr)
+		if _, err = tmpFile.Write(yamlStrByteArray); err != nil {
+			log.Fatal("Failed to write to temporary file", err)
+		}
+	*/
+```
+
+#### Attempting to Pass a String as an Input to exec.Command
+
+* Basically, we can try to use some fancy methodology to pass stdin to a command, and then run vals.Input("-") given the vals.Input() source code looking for a "-" input to signify that a stdin input is coming in:
+
+```
+	// pass a string as input to exec.Command
+	// yamlStdin := strings.NewReader(yamlStr)
+
+	/*
+		// use a pipe
+		pipeInput, pipeOutput, err := os.Pipe()
+		if err != nil {
+			logrus.Info(err)
+		}
+
+		logrus.Info("pipeOutput", pipeOutput)
+
+		cmd := exec.Command("echo", yamlStr)
+		cmd.Stdin = os.Stdin
+		cmd.Stdout = os.Stdout
+		cmd.Stderr = os.Stderr
+		// run the command, put into output as cmd.Run()
+		cmderr := cmd.Run()
+		if cmderr != nil {
+			logrus.Info(cmderr)
+		}
+	*/
+```
 
 
 
