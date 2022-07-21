@@ -16,27 +16,7 @@ import (
 	"github.com/variantdev/vals"
 )
 
-// struct to recieve unmarshalled fields from yaml
-type Data struct {
-	Entry []Entry `yaml:"entries"`
-}
-
-// interface to hold yaml
-type Entry interface{}
-
 func main() {
-
-	// creating a simple map[string]interface{}
-	foods := map[string]interface{}{
-		"bacon": "delicious",
-		"eggs": struct {
-			source string
-			price  float64
-		}{"chicken", 1.75},
-		"steak": true,
-	}
-
-	fmt.Println(foods)
 
 	// build a yaml file using kustomize from the dex folder.
 	installString := "./dex"
@@ -71,7 +51,7 @@ func main() {
 	yamlMapStrIntf, err := vals.Input("tmp/temp.yaml")
 
 	// delete the temp.yaml file after done
-	os.Remove("tmp/temp.yaml")
+	// os.Remove("tmp/temp.yaml")
 
 	// now the yamlMapStrIntf should have been created
 	logrus.Info("yamlMapStrIntf: ", yamlMapStrIntf)
