@@ -23,8 +23,8 @@ data:
       id: gitlab
       name: Gitlab
       config:
-        clientID: $GITLAB_APPLICATION_ID
-        clientSecret: $GITLAB_CLIENT_SECRET
+        clientID: ref+awsssm:///V1/kubeflow/local/GITLAB_APPLICATION_ID?region=us-west-1
+        clientSecret: ref+awsssm:///V1/kubeflow/local/GITLAB_CLIENT_SECRET?region=us-west-1
         redirectURI: "https://kf.ds.bloomboard.com/dex/callback"
         groups:
         - bloomboard
