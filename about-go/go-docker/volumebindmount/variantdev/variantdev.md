@@ -438,11 +438,16 @@ There is a section in this function which makes it look like it's meant to deal 
 
 So the pathway to pull everything together in the way we need it to be done is as follows:
 
-0. Create a yaml file with the desired ref's pointing to where secrets are kept.  We did this with [the "dex" folder here](https://github.com/pwdelbloomboard/devopstools/tree/main/about-go/go-docker/volumebindmount/variantdev/dex).
+0. Create a yaml file with the desired ref's pointing to where secrets are kept, call this, "config-map-template.yaml".  We did this with [the "dex" folder here](https://github.com/pwdelbloomboard/devopstools/tree/main/about-go/go-docker/volumebindmount/variantdev/dex).
 
-1. Pull a yaml file as a string from an arbitrary URL/location.  This can be done with kustomize and [this example code on these lines](https://github.com/pwdelbloomboard/devopstools/blob/main/about-go/go-docker/volumebindmount/variantdev/govariantdevyamltomapstringinterface.go#L31).
+1. Pull a yaml file as a string from an arbitrary URL/location.  This can be done with ioutil.ReadFile() and [this example code on these lines](https://github.com/pwdelbloomboard/devopstools/blob/main/about-go/go-docker/volumebindmount/configmaptemplate.go#L25).
 
-2. Convert said yaml file string into a map[string]interface{}.  This means: 
+2. 
+
+
+
+
+Convert said yaml file string into a map[string]interface{}.  This means: 
 
 * A) First building the yaml file using Kustomize with ```yamlcmd, err := exec.Command("kustomize", "build", installString).Output()```
 * B) Next converting that command to a string, ```yamlStr := string(yamlcmd)```
@@ -451,9 +456,11 @@ So the pathway to pull everything together in the way we need it to be done is a
 * E) Range over the temp.yaml to ensure every line is copied.
 * F) Very important, remove the temporary file for security purposes.
 
-* 2A. Since yaml files unmarshalling only marshals one section seperated by "---" at one time, we have to decode the yaml file, as we have done [here in this example](https://github.com/pwdelbloomboard/devopstools/blob/main/about-go/go-docker/volumebindmount/yaml/yamlunmarshall.go).
+* 2A. Since yaml files unmarshalling only marshals one section seperated by "---" at one time, we have to decode the yaml file, as we have done [here in this example](https://github.com/pwdelbloomboard/devopstools/blob/main/about-go/go-docker/volumebindmount/yaml/yamltodoc.go).  This iterative method is necessary because if we attempt to unmarshal a yaml into a struct, straight up without any iteration, only the first section of the yaml file gets unmarshalled, as with [this example converting a yaml to a map](https://github.com/pwdelbloomboard/devopstools/blob/main/about-go/go-docker/volumebindmount/yaml/yamltomap.go).
 
-* This way of unmarshalling yaml files does so in such a way that an arbitray number of files can be unmarshalled out.
+* 
+
+* A) Better yet, build the config-map-template.yaml first, replacing the appropriate values, then writing the results of that to config-map.yaml with the replaced values.
 
 
 3. Use the [example here](https://github.com/pwdelbloomboard/devopstools/blob/main/about-go/go-docker/volumebindmount/variantdev/govariantdevjsontoyaml.go) to pull said rendered values, and to then convert that to JSON, and then into YAML, and a YAML string.
