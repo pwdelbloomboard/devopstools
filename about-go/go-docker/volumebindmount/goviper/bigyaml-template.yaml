@@ -1,4 +1,6 @@
-config.yaml: |
+apiVersion: v1
+data:
+  config.yaml: |
     issuer: https://dex.auth.svc.cluster.local:5556/dex
     storage:
       type: kubernetes
@@ -17,8 +19,8 @@ config.yaml: |
       id: gitlab
       name: Gitlab
       config:
-        clientID: whatever
-        clientSecret: whatever
+        clientID: whatever_clientid
+        clientSecret: whatever_clientsecret
         redirectURI: "https://kf.ds.bloomboard.com/dex/callback"
         groups:
         - bloomboard
@@ -27,3 +29,7 @@ config.yaml: |
       redirectURIs: ["/login/oidc"]
       name: 'Dex Login Application'
       secretEnv: OIDC_CLIENT_SECRET
+kind: ConfigMap
+metadata:
+  name: dex
+  namespace: auth

@@ -1,0 +1,28 @@
+issuer: https://dex.auth.svc.cluster.local:5556/dex
+storage:
+  type: kubernetes
+  config:
+    inCluster: true
+web:
+  http: 0.0.0.0:5556
+logger:
+  level: "debug"
+  format: text
+oauth2:
+  skipApprovalScreen: true
+enablePasswordDB: false
+connectors:
+- type: gitlab
+  id: gitlab
+  name: Gitlab
+  config:
+    clientID: whatever
+    clientSecret: whatever
+    redirectURI: "https://kf.ds.bloomboard.com/dex/callback"
+    groups:
+    - bloomboard
+staticClients: # from manifests/common/oidc-authservice/base/secret_params.env
+- idEnv: OIDC_CLIENT_ID
+  redirectURIs: ["/login/oidc"]
+  name: 'Dex Login Application'
+  secretEnv: OIDC_CLIENT_SECRET

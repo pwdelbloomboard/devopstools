@@ -1,0 +1,13 @@
+issuer: ""
+storage: ""
+web: ""
+oauth2: ""
+enablePasswordDB: false
+staticClients: ""
+connectors:
+  type: ""
+  id: ""
+  name: ""
+  config:
+    clientID: replacement_client_id
+    clientSecret: replacement_client_secret

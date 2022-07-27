@@ -26,7 +26,6 @@ func main() {
 	// unmarshal yfile test.yaml into the map interface location
 	err2 := yaml.Unmarshal(yfile, &data)
 	if err2 != nil {
-
 		log.Fatal(err2)
 	}
 
