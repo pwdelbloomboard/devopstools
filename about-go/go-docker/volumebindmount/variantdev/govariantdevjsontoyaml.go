@@ -53,7 +53,7 @@ func main() {
 	fmt.Println("yaml version of json []byte{}, converted by JSONToYAML: ")
 
 	// creating a convertable string
-	yamlStr = string(y)
+	yamlStr := string(y)
 
 	fmt.Println(yamlStr)
 
