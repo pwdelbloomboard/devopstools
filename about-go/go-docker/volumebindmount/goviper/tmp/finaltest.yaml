@@ -1,0 +1,31 @@
+connectors:
+    "0":
+        config:
+            clientid: whatever_clientid_new
+            clientsecret: whatever_secret_new
+            groups:
+                "0":
+                    bloomboard: bloomboard
+            redirecturi: https://kf.ds.bloomboard.com/dex/callback
+        id: gitlab
+        name: Gitlab
+        type: gitlab
+enablepassworddb: false
+issuer: https://dex.auth.svc.cluster.local:5556/dex
+logger:
+    format: text
+    level: debug
+oauth2:
+    skipapprovalscreen: true
+staticclients:
+    - idEnv: OIDC_CLIENT_ID
+      name: Dex Login Application
+      redirectURIs:
+        - /login/oidc
+      secretEnv: OIDC_CLIENT_SECRET
+storage:
+    config:
+        incluster: true
+    type: kubernetes
+web:
+    http: 0.0.0.0:5556

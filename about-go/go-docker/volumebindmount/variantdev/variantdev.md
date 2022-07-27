@@ -442,30 +442,15 @@ So the pathway to pull everything together in the way we need it to be done is a
 
 1. Pull a yaml file as a string from an arbitrary URL/location.  This can be done with ioutil.ReadFile() and [this example code on these lines](https://github.com/pwdelbloomboard/devopstools/blob/main/about-go/go-docker/volumebindmount/configmaptemplate.go#L25).
 
-2. 
+2. Since yaml files unmarshalling only marshals one section seperated by "---" at one time, we have to decode the yaml file, as we have done [here in this example](https://github.com/pwdelbloomboard/devopstools/blob/main/about-go/go-docker/volumebindmount/yaml/yamltodoc.go).  This iterative method is necessary because if we attempt to unmarshal a yaml into a struct, straight up without any iteration, only the first section of the yaml file gets unmarshalled, as with [this example converting a yaml to a map](https://github.com/pwdelbloomboard/devopstools/blob/main/about-go/go-docker/volumebindmount/yaml/yamltomap.go)
+
+* After reading a test1.yaml file from the system, we can make a map[interface{}]interface{}, unmarshal the yaml file info into that map, and then we can re-marshal that info, and re-write the info into another test2.yaml file, as shown in [this example here](https://github.com/pwdelbloomboard/devopstools/blob/main/about-go/go-docker/volumebindmount/yaml/maptoyaml.go).
+
+* The trick then is to replace the fields in the yaml with only the information we want to be replaced.  This is where variantdev comes in, as demonstrated by [this example here](https://github.com/pwdelbloomboard/devopstools/blob/main/about-go/go-docker/volumebindmount/variantdev/configmaptemplate.go), where we actually use, exec.Command() to execute the shell command, "vals eval -f -" on the stdin input representing the ref+stringstuff for the comamand in question.
 
 
 
-
-Convert said yaml file string into a map[string]interface{}.  This means: 
-
-* A) First building the yaml file using Kustomize with ```yamlcmd, err := exec.Command("kustomize", "build", installString).Output()```
-* B) Next converting that command to a string, ```yamlStr := string(yamlcmd)```
-* C) The tricky part, create a temp.yaml file into which you write the yamlStr with tempFile.WriteString(yamlStr).
-* D) Using vals.Input("tmp/temp.yaml"), write to a yamlMapStrIntf to finally have the finalized map string interface.
-* E) Range over the temp.yaml to ensure every line is copied.
-* F) Very important, remove the temporary file for security purposes.
-
-* 2A. Since yaml files unmarshalling only marshals one section seperated by "---" at one time, we have to decode the yaml file, as we have done [here in this example](https://github.com/pwdelbloomboard/devopstools/blob/main/about-go/go-docker/volumebindmount/yaml/yamltodoc.go).  This iterative method is necessary because if we attempt to unmarshal a yaml into a struct, straight up without any iteration, only the first section of the yaml file gets unmarshalled, as with [this example converting a yaml to a map](https://github.com/pwdelbloomboard/devopstools/blob/main/about-go/go-docker/volumebindmount/yaml/yamltomap.go).
-
-* 
-
-* A) Better yet, build the config-map-template.yaml first, replacing the appropriate values, then writing the results of that to config-map.yaml with the replaced values.
-
-
-3. Use the [example here](https://github.com/pwdelbloomboard/devopstools/blob/main/about-go/go-docker/volumebindmount/variantdev/govariantdevjsontoyaml.go) to pull said rendered values, and to then convert that to JSON, and then into YAML, and a YAML string.
-
-4. Said YAML string can be used to apply to create a configmap on a deployment.
+* So given the above being possible, we can of course download the config-map-template.yaml first, replacing the appropriate values, then writing the results of that to config-map.yaml with the replaced values. After this is completed, then kustomize will use the kustomization.yaml file to use values from config-map.yaml to apply the finalized config-map into the cluster.
 
 
 ## Appendix
