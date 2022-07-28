@@ -444,13 +444,9 @@ So the pathway to pull everything together in the way we need it to be done is a
 
 2. Since yaml files unmarshalling only marshals one section seperated by "---" at one time, we have to decode the yaml file, as we have done [here in this example](https://github.com/pwdelbloomboard/devopstools/blob/main/about-go/go-docker/volumebindmount/yaml/yamltodoc.go).  This iterative method is necessary because if we attempt to unmarshal a yaml into a struct, straight up without any iteration, only the first section of the yaml file gets unmarshalled, as with [this example converting a yaml to a map](https://github.com/pwdelbloomboard/devopstools/blob/main/about-go/go-docker/volumebindmount/yaml/yamltomap.go)
 
-* After reading a test1.yaml file from the system, we can make a map[interface{}]interface{}, unmarshal the yaml file info into that map, and then we can re-marshal that info, and re-write the info into another test2.yaml file, as shown in [this example here](https://github.com/pwdelbloomboard/devopstools/blob/main/about-go/go-docker/volumebindmount/yaml/maptoyaml.go).
-
-* The trick then is to replace the fields in the yaml with only the information we want to be replaced.  This is where variantdev comes in, as demonstrated by [this example here](https://github.com/pwdelbloomboard/devopstools/blob/main/about-go/go-docker/volumebindmount/variantdev/configmaptemplate.go), where we actually use, exec.Command() to execute the shell command, "vals eval -f -" on the stdin input representing the ref+stringstuff for the comamand in question.
-
-
-
 * So given the above being possible, we can of course download the config-map-template.yaml first, replacing the appropriate values, then writing the results of that to config-map.yaml with the replaced values. After this is completed, then kustomize will use the kustomization.yaml file to use values from config-map.yaml to apply the finalized config-map into the cluster.
+
+This was accomplished successfully [here in this example](https://github.com/pwdelbloomboard/devopstools/blob/main/about-go/go-docker/volumebindmount/variantdev/sedvariantdev.go).
 
 
 ## Appendix
