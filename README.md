@@ -2,19 +2,18 @@
 
 ### Next (order of priority)
 
-* [understanding scripts](/understanding-scripts) ... [20%]
-* [kubernetes](/about-kubernetes) ... [40%] (replacing clusters)
-* [kustomize](/about-kustomize) ... [80%]
-* [go](/about-go) ... [85%] (cobra, setup scripts)
-* [kubeflow](/about-kubeflow) ... [5%]
+* [understanding scripts](/understanding-scripts) ... [95%]
+* [kubernetes](/about-kubernetes) ... [40%]
+* [kustomize](/about-kustomize) ... [90%]
+* [go](/about-go) ... [85%]
+* [kubeflow](/about-kubeflow) ... [33%]
 * [istio](/about-istio) ... [0%]
+* [aws-loadbalancers](/about-awsloadbalancers) ... [0%]
 ### Needed Soon (alphabetical)
 
 * [auth](/about-auth) ... [10%]
-* [aws-loadbalancers](/about-awsloadbalancers) ... [0%]
 * [command line](/commandline-examples) ...[85%] (setup scripts, ci scripts)
 * [feast](/about-feast) ... [0%]
-* [minnio](/about-minio) ... [0%] ... (more of a question now since minnio doesn't work)
 * [nginx](/about-nginx) ... [80%] (using nginx as a load balancer) 
 * [network connectors](/about-networkconnectors) ... [0%]
 * [pubsub](/about-pubsub) ... [0%]
@@ -34,6 +33,7 @@
 * [kinesis](/about-kinesis) ... [0%]
 * [mongo](/about-mongo) ... [0%]
 * [mongoose](/about-mongoose) ... [0%]
+* [minnio](/about-minio) ... [0%] ... (more of a question now since minnio doesn't work)
 * [newrelic](/about-newrelic) ... [90%]
 * [redash](/about-redash) ... [0%]
 * [rundeck](/about-rundeck) ...[50%]
