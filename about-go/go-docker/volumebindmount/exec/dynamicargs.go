@@ -15,6 +15,7 @@ func main() {
 	// setting up the arguments
 	var args []string
 	args = []string{"-e", "s/unix/linux/g", "-e", "s/free/superfree/g", "sedfile.txt"}
+	logrus.Info("args: ",args)
 	logrus.Info(reflect.TypeOf(args))
 	// creating the command
 	cmd, cmdStdout := exec.Command("sed", args...), new(strings.Builder)

@@ -1,0 +1,5 @@
+volumes:
+    - name: USB1
+      space: 1GB
+      name: USB2
+      space: 2GB

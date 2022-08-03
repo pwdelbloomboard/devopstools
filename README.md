@@ -2,22 +2,19 @@
 
 ### Next (order of priority)
 
-* [understanding scripts](/understanding-scripts) ... [95%]
-* [kubernetes](/about-kubernetes) ... [40%]
-* [kustomize](/about-kustomize) ... [90%]
-* [go](/about-go) ... [85%]
-* [kubeflow](/about-kubeflow) ... [33%]
+* [kubernetes](/about-kubernetes) ... [40%] (custom reasources)
+* [feast](/about-feast) ... [0%]
+* [rds](/about-rds) ... [0%] (replacing manifests)
+* [kubeflow](/about-kubeflow) ... [33%] (as a user)
 * [istio](/about-istio) ... [0%]
 * [aws-loadbalancers](/about-awsloadbalancers) ... [0%]
 ### Needed Soon (alphabetical)
 
 * [auth](/about-auth) ... [10%]
 * [command line](/commandline-examples) ...[85%] (setup scripts, ci scripts)
-* [feast](/about-feast) ... [0%]
 * [nginx](/about-nginx) ... [80%] (using nginx as a load balancer) 
 * [network connectors](/about-networkconnectors) ... [0%]
 * [pubsub](/about-pubsub) ... [0%]
-* [rds](/about-rds) ... [0%] (replacing manifests)
 * [spark](/about-spark) ... [0%]
 * [sqsqueue](/about-sqsqueue) ... [0%]
 * [s3](/about-s3) ... [20%] ... (working with minio, see above)
@@ -97,11 +94,14 @@
 * [dns](/about-dns/) ... [DONE]
 * [docker](/about-docker/) ... [DONE]
 * [git](/about-git) .. [DONE]
+* [go](/about-go) ... [85%]
 * [grok](/about-grok) ... [DONE%]
 * [k3d/k3s](/about-k3d) ... [DONE]
+* [kustomize](/about-kustomize) ... [90%]
 * SRE School ...[DONE]
 * [shellcheck](/about-shellcheck) ...[DONE]
 * [ssm](/about-ssm) ... [DONE]
+* [understanding scripts](/understanding-scripts) ... [95%]
 * [volumes](/about-volumes) ...[DONE]
 
 ## Need to Add:
