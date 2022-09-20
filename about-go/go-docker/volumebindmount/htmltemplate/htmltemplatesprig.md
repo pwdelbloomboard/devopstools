@@ -1,5 +1,9 @@
 # Common Functions from html/template
 
+## Important
+
+* When switching between html/template and text/template you must switch the library imported at the top import() function within Golang, otherwise Golang will get confused at which library you are calling.
+
 ### Must
 
 ```
