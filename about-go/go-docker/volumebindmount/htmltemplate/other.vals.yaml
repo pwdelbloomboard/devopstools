@@ -1,0 +1,5 @@
+issuer: https://kf.ds.bloomboard.com/dex
+storage:
+  type: kubernetes
+  config:
+    inCluster: true
