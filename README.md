@@ -11,13 +11,13 @@
 ### Needed Soon (alphabetical)
 
 * [auth](/about-auth) ... [10%]
-* [command line](/commandline-examples) ...[85%] (setup scripts, ci scripts)
+* [ha-ft](/about-haft) ... [5%]
+* [kinesis](/about-kinesis) ... [0%]
 * [nginx](/about-nginx) ... [80%] (using nginx as a load balancer) 
 * [network connectors](/about-networkconnectors) ... [0%]
 * [pubsub](/about-pubsub) ... [0%]
 * [spark](/about-spark) ... [0%]
 * [sqsqueue](/about-sqsqueue) ... [0%]
-* [s3](/about-s3) ... [20%] ... (working with minio, see above)
 * [ssl](/about-ssl) ... [50%] ... (redirecting unsecure traffic)
 
 ### Middle Urgency (alphabetical)
@@ -26,12 +26,10 @@
 * [cloudwatch](/about-cloudwatch) ...[0%]
 * [kms](/about-kms) ... [0%]
 * [gitlab](/about-gitlab) ... [50%] (pipelines, oauth applications)
-* [ha-ft](/about-haft) ... [5%]
-* [kinesis](/about-kinesis) ... [0%]
 * [mongo](/about-mongo) ... [0%]
 * [mongoose](/about-mongoose) ... [0%]
 * [minnio](/about-minio) ... [0%] ... (more of a question now since minnio doesn't work)
-* [newrelic](/about-newrelic) ... [90%]
+* [newrelic](/about-newrelic) ... [90%] (APM)
 * [redash](/about-redash) ... [0%]
 * [rundeck](/about-rundeck) ...[50%]
 * [setup script](/about-setupfiles) [20%]
@@ -44,7 +42,7 @@
 * [helmfile](/about-helmfile) ... [50%]
 * [pagerduty](/about-pagerduty) ... [60%]
 * [webhooks](/about-webhooks) ... [20%]
-
+* [s3](/about-s3) ... [20%] ... (working with minio, see above)
 ### Heavily Updated Since Last Cycle, More Or Less Done for Now
 
 * [registries](/about-registries) ... [80%]
@@ -54,7 +52,7 @@
 * [ansible](/about-ansible)
 * [apis](/about-apis)
 * [asdf](/about-asdf)
-* [dokcer buildkit](/about-buildkit)
+* [docker buildkit](/about-buildkit)
 * [celery](/about-celery)
 * [chalice](/about-chalice)
 * [ci](/about-ci)
@@ -89,6 +87,7 @@
 ## Reached Sufficient Level of Completion (Alphabetical)
 
 * [cobra](about-cobra) ... [DONE]
+* [command line](/commandline-examples) ...[85%] (setup scripts, ci scripts)
 * [cronjobs](/about-cronjobs) ... [DONE]
 * [daemons](/about-daemons) ... [DONE]
 * [dns](/about-dns/) ... [DONE]

@@ -54,7 +54,35 @@ kops completion bash
 
 #### kops export
 
+* Export a configuration
+
+For example:
+
+```
+kops export kubecfg thing.domain.com --state s3://secret-state-store-bucket --admin
+```
+* The above exports a kubeconfig file with the cluster admin user (make sure you keep this user safe!)
+
+* A kubeconfig file is a file used to configure access to Kubernetes when used in conjunction with the kubectl commandline tool (or other clients).  So this command would essentially give access to a cluster.
+
 #### kops get
+
+Get a cluster and its instance groups
+
+```
+kops get k8s-cluster.example.com
+```
+Example:
+
+```
+  assets         Display assets for cluster.
+  clusters       Get one or many clusters.
+  instancegroups Get one or many instance groups.
+  instances      Display cluster instances.
+  keypairs       Get one or many keypairs.
+  secrets        Get one or many secrets.
+  sshpublickeys  Get one or many secrets.
+```
 
 #### kops promote
 
