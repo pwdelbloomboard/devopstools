@@ -3,8 +3,8 @@
 ### Next (order of priority)
 
 * [kubernetes](/about-kubernetes) ... [40%] (custom reasources)
-* [feast](/about-feast) ... [0%]
 * [rds](/about-rds) ... [0%] (replacing manifests)
+* [redis](/about-redis) ... [10%]
 * [kubeflow](/about-kubeflow) ... [33%] (as a user)
 * [istio](/about-istio) ... [0%]
 * [aws-loadbalancers](/about-awsloadbalancers) ... [0%]
@@ -42,7 +42,7 @@
 * [helmfile](/about-helmfile) ... [50%]
 * [pagerduty](/about-pagerduty) ... [60%]
 * [webhooks](/about-webhooks) ... [20%]
-* [s3](/about-s3) ... [20%] ... (working with minio, see above)
+* [s3](/about-s3) ... [30%] ... (working with minio, see above)
 ### Heavily Updated Since Last Cycle, More Or Less Done for Now
 
 * [registries](/about-registries) ... [80%]
@@ -75,7 +75,6 @@
 * [precommit](/about-precommit)
 * [project management](/about-projectmanagement)
 * [prometheus](/about-prometheus)
-* [redis](/about-redis)
 * [route53](/about-route53)
 * [selenium](/about-selenium)
 * [starship](/about-starship)
@@ -92,6 +91,7 @@
 * [daemons](/about-daemons) ... [DONE]
 * [dns](/about-dns/) ... [DONE]
 * [docker](/about-docker/) ... [DONE]
+* [feast](/about-feast) ... [80%]
 * [git](/about-git) .. [DONE]
 * [go](/about-go) ... [85%]
 * [grok](/about-grok) ... [DONE%]

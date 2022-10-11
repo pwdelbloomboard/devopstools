@@ -32,3 +32,37 @@ Summary:
 
 * Predictions for cascading failures, bottlenecks and dependency on a warm cache seem obvious in retrospect, but it is easier to make broad brush statements about the sorts of incidents that may occur to pinpoint every specific sequence of events or problem that leads to a cascading failure.
 * Complex systems contain changing mixutres of failures latent within them. The complexity of these systems make it impossible for them to run without multiple flaws present. Eradication of all failures is limited by economic costs because it is difficult before the fact to see how such failures might contribute to an incident.
+
+
+## Uber Michealangelo
+
+* [Meet Michelangelo: Uber’s Machine Learning Platform](https://www.uber.com/en-CA/blog/michelangelo-machine-learning-platform/)
+
+## Blog Post from Jayendra Patil on AWS HAFT
+
+* [Blog Post](https://jayendrapatil.com/aws-high-availability-fault-tolerance-architecture-certification/)
+
+* Further, [AWS Certified Solutions Architect Exam Guide](https://d1.awsstatic.com/training-and-certification/docs-sa-assoc/AWS-Certified-Solutions-Architect-Associate_Exam-Guide.pdf)
+
+* https://aws.amazon.com/certification/certified-solutions-architect-associate/
+
+# Job Requirements
+
+* Types of job requirements listed for Machine Learning Engineers:
+
+* Recommendation systems and deep learning
+* Applying machine learning methods in settings like recommender systems, search, user modeling, image recognition, graph
+* Representation learning, natural language processing.
+* Experience building pipelines for large scale data processing
+* Comprehensive knowledge of ML concepts, including classification, regression, and unsupervised learning.
+* Hands-on experience with traditional machine learning as well as deep learning algorithms.
+* Proficiency with Python programming, including numeric, data analysis, and ML libraries such as NumPy, pandas, Scikit-learn, and/or PyTorch.
+* Solid understanding of statistical and mathematical methods used in ML, evaluation, and hypothesis testing.
+* Proficiency with deploying models via a platform like MLFLow or AWS SageMaker.
+* Proficiency with SQL for data analysis.
+* Direct experience with feature engineering using structured or unstructured data.
+* Large scale data processing technologies (e.g. TensorFlow, SciKit learn, Dataflow, Hadoop, Scalding, Spark, Storm)
+* Experience in using ML techniques to optimize customer facing product features
+* Strong mathematical background in statistics and machine learning
+* Agile software processes, data-driven development, reliability, and responsible experimentation
+* Machine learning publications or work on open source
