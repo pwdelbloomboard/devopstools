@@ -1,0 +1,84 @@
+
+digraph Feast {
+    compound=true;
+    splines="polyline"
+
+        {
+            node [margin=1 fontcolor=black fontsize=12 width=2 shape=cylinder style=filled]
+            aws [fillcolor=lightsalmon fixedsize=true label="AWS Infrastructure"] 
+        }
+
+        {
+            node [margin=1 fontcolor=white fontsize=12 width=2 shape=cylinder style=filled]
+            local [fillcolor=darkblue fixedsize=true label="Local"] 
+        }        
+
+    subgraph cluster_jupyterlab {
+        label = "JupyterLab";
+        color=lightgrey;
+        style=filled;
+        fontcolor=chocolate;
+        
+  
+
+        { 
+            node [margin=1 fontcolor=black fontsize=12 width=2 shape=box style=filled]
+            pythonsdk [fillcolor=lightblue fixedsize=true label="Python SDK"]
+        }
+        { 
+            node [margin=1 fontcolor=white fontsize=12 width=2 shape=box style=filled]
+            cli [fillcolor=black fixedsize=true label="CLI"]
+        }
+
+        
+        subgraph cluster_dir {
+            label = "Feature Repo";
+            color=white;
+            style=filled;
+            fontcolor=navy;
+            
+            
+            { 
+                node [margin=1 fontcolor=navy fontsize=12 width=2 shape=box style=filled]
+                dir [fillcolor=lightgrey fixedsize=true label="Directory Name"]
+            }
+
+            { 
+                node [margin=1 fontcolor=navy fontsize=12 width=2 shape=box style=filled]
+                data [fillcolor=lightgrey fixedsize=true label="Data"]
+            }
+            
+            { 
+                node [margin=1 fontcolor=navy fontsize=12 width=2 shape=box style=filled]
+                feature_store [fillcolor=lightgrey fixedsize=true label="Feature Store"]
+            }
+
+            { 
+                node [margin=1 fontcolor=navy fontsize=12 width=2 shape=box style=filled]
+                examplepy [fillcolor=lightgrey fixedsize=true label="Example.py - Definitions"]
+            }
+            
+            { 
+                node [margin=1 fontcolor=navy fontsize=12 width=2 shape=box style=filled]
+                driverstats [fillcolor=lightgrey fixedsize=true label="Driver Stats"]
+            }
+            
+        }
+  
+    }
+
+  # aws -> {cli}
+  feature_store -> {pythonsdk} [ label="fs = FeatureStore(repo_path).get_historical_features(~)" color="red" fontcolor="red" ]
+  pythonsdk -> {aws} [xlabel="feast materialize DATERANGE       " color="orange" fontcolor="orange" ]
+  aws -> {pythonsdk} [xlabel="fs = FeatureStore(repo_path).get_online_features(~)" color="green" fontcolor="green" ]
+  
+  cli -> {dir} [ label="feast init" style="dotted" ];
+  cli -> {aws local} [ label="feast apply" style="dotted" color="blue"];
+  cli -> {aws} [ label="feast init -t aws" style="dotted" ];
+  
+  dir -> {data feature_store examplepy} [ style="dashed" splines=true ];
+  # dir -> { dir } [ label="feast apply" style="dotted" ];
+  
+  data -> {driverstats} [ style="dashed" ];
+
+}
