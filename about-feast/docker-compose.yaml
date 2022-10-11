@@ -1,0 +1,22 @@
+version: '3.1'
+
+services:
+  feast_jupyternotebook:
+    image: jupyter/minimal-notebook/feastjupyter:ubuntu-22.04
+    build: .
+    container_name: feast_jupyternotebook_container
+    working_dir: /home/jovyan/work
+    environment:
+    - GRANT_SUDO=yes
+    - PASSWORD=password
+    - JUPYTER_TOKEN=easy
+    command: "start-notebook.sh --NotebookApp.token='' --NotebookApp.password=''"
+    ports: 
+      - 8889:8888
+    volumes:
+      - type: bind
+        source: ./volumebindmount
+        target: /home/jovyan/work
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    tty: true
