@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "banana-app-NZCkyBK1zTm4z96s"
+version = "0.0.2"
+authors = [
+    { name="Patrick Delaney", email="patrick@fakeemail.com" },
+]
+description = "Sample package application."
+readme = "README.md"
+requires-python = ">=3.7"
+classifiers = [
+   "Programming Language :: Python :: 3",
+   "License :: OSI Approved :: MIT License",
+   "Operating System :: OS Independent",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/pwdelbloomboard/devopstools"
+"Bug Tracker" = "https://github.com/pwdelbloomboard/devopstools/issues"
+
+[tool.setuptools.packages]
+find = {}

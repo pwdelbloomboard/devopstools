@@ -88,6 +88,13 @@ https://kubernetes.io/docs/concepts/storage/volumes/
 
 In short, similar to a Docker volume.
 
+### Re: Shared Volumes
+
+* "Storage backend with support for shared volumes"
+
+* What a shared volume is does not seem to be explicitly spelled out in the K8s documentation, but it seems to be implied that it is simply a volume that is shared between pods.  E.g. no special resource type is needed, it’s just that more than one pod shares a volume.
+https://kubernetes.io/docs/concepts/storage/volumes/#using-subpath 
+
 ## Persistent Volumes
 
 https://kubernetes.io/docs/concepts/storage/persistent-volumes/
