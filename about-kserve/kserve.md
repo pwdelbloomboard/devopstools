@@ -72,7 +72,7 @@ curl -v http://sklearn-iris.kserve-test/v1/models/sklearn-iris:predict -d @./iri
 * In my case, I created a model which is on my namespace, "patrick," with the endpoint shown and fed in empty data:
 
 ```
-curl http://patrick-function-test-via-potato.patrick.svc.cluster.local/v1/models/patrick-function-test-via-potato:predict  -d @./empty-input.json
+curl -v http://patrick-function-test-via-potato.patrick.svc.cluster.local/v1/models/patrick-function-test-via-potato:predict  -d @./empty-input.json
 ```
 * The result was:
 
@@ -81,7 +81,7 @@ curl http://patrick-function-test-via-potato.patrick.svc.cluster.local/v1/models
 * Closing connection 0
 curl: (6) Could not resolve host: patrick-function-test-via-potato.patrick.svc.cluster.local
 ```
-
+* This was 
 
 
 
