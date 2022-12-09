@@ -573,6 +573,20 @@ Adding:  2  +1:
 * In order to duplicate this in a private location, you must read the documentation for the chosen service.
 
 
+### Further Notes -- Dependencies
+
+
+* If there are dependencies within a project, those must be covered in the pyproject.toml as specified under [PEP0631](https://peps.python.org/pep-0631/)
+
+```
+dependencies = [
+  'PyYAML ~= 5.0',
+  'requests[security] < 3',
+  'subprocess32; python_version < "3.2"',
+]
+```
+
+
 # Tutorials
 
 * https://dev.to/christo22694524/installing-private-python-packages-in-docker-images-1hgm

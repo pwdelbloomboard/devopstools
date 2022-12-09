@@ -1,0 +1,122 @@
+[09/Dec/2022:03:19:54] ENGINE Listening for SIGTERM.
+[09/Dec/2022:03:19:54] ENGINE Listening for SIGHUP.
+[09/Dec/2022:03:19:54] ENGINE Listening for SIGUSR1.
+[09/Dec/2022:03:19:54] ENGINE Bus STARTING
+CherryPy Checker:
+The Application mounted at '' has an empty config.
+
+[09/Dec/2022:03:19:54] ENGINE Started monitor thread 'Autoreloader'.
+[09/Dec/2022:03:19:54] ENGINE Serving on http://127.0.0.1:8080
+[09/Dec/2022:03:19:54] ENGINE Bus STARTED
+127.0.0.1 - - [09/Dec/2022:03:22:23] "GET / HTTP/1.1" 404 1342 "" "curl/7.74.0"
+127.0.0.1 - - [09/Dec/2022:03:22:31] "GET / HTTP/1.1" 404 1342 "" "curl/7.74.0"
+127.0.0.1 - - [09/Dec/2022:03:22:54] "GET / HTTP/1.1" 404 1342 "" "curl/7.74.0"
+[09/Dec/2022:03:25:41] ENGINE Restarting because /home/volumebindmount/app.py changed.
+[09/Dec/2022:03:25:41] ENGINE Stopped thread 'Autoreloader'.
+[09/Dec/2022:03:25:41] ENGINE Bus STOPPING
+[09/Dec/2022:03:25:42] ENGINE HTTP Server cherrypy._cpwsgi_server.CPWSGIServer(('127.0.0.1', 8080)) shut down
+[09/Dec/2022:03:25:42] ENGINE Bus STOPPED
+[09/Dec/2022:03:25:42] ENGINE Bus EXITING
+[09/Dec/2022:03:25:42] ENGINE Bus EXITED
+[09/Dec/2022:03:25:42] ENGINE Waiting for child threads to terminate...
+[09/Dec/2022:03:25:42] ENGINE Re-spawning python /home/volumebindmount/app.py
+Traceback (most recent call last):
+  File "/home/volumebindmount/app.py", line 9, in <module>
+    cherrypy.quickstart(Root(), '/')
+NameError: name 'Root' is not defined
+Traceback (most recent call last):
+  File "/home/volumebindmount/app.py", line 9, in <module>
+    cherrypy.quickstart(Root(), '/')
+NameError: name 'Root' is not defined
+[09/Dec/2022:03:27:50] ENGINE Listening for SIGTERM.
+[09/Dec/2022:03:27:50] ENGINE Listening for SIGHUP.
+[09/Dec/2022:03:27:50] ENGINE Listening for SIGUSR1.
+[09/Dec/2022:03:27:50] ENGINE Bus STARTING
+CherryPy Checker:
+The Application mounted at '' has an empty config.
+
+[09/Dec/2022:03:27:50] ENGINE Started monitor thread 'Autoreloader'.
+[09/Dec/2022:03:27:50] ENGINE Serving on http://127.0.0.1:8089
+[09/Dec/2022:03:27:50] ENGINE Bus STARTED
+127.0.0.1 - - [09/Dec/2022:03:28:27] "GET / HTTP/1.1" 200 12 "" "curl/7.74.0"
+127.0.0.1 - - [09/Dec/2022:03:28:34] "GET / HTTP/1.1" 200 12 "" "curl/7.74.0"
+[09/Dec/2022:03:32:25] ENGINE Restarting because /home/volumebindmount/intro.py changed.
+[09/Dec/2022:03:32:25] ENGINE Stopped thread 'Autoreloader'.
+[09/Dec/2022:03:32:25] ENGINE Bus STOPPING
+[09/Dec/2022:03:32:25] ENGINE HTTP Server cherrypy._cpwsgi_server.CPWSGIServer(('127.0.0.1', 8089)) shut down
+[09/Dec/2022:03:32:25] ENGINE Bus STOPPED
+[09/Dec/2022:03:32:25] ENGINE Bus EXITING
+[09/Dec/2022:03:32:25] ENGINE Bus EXITED
+[09/Dec/2022:03:32:25] ENGINE Waiting for child threads to terminate...
+[09/Dec/2022:03:32:25] ENGINE Re-spawning python /home/volumebindmount/intro.py
+[09/Dec/2022:03:32:27] ENGINE Listening for SIGTERM.
+[09/Dec/2022:03:32:27] ENGINE Listening for SIGHUP.
+[09/Dec/2022:03:32:27] ENGINE Listening for SIGUSR1.
+[09/Dec/2022:03:32:27] ENGINE Bus STARTING
+CherryPy Checker:
+The Application mounted at '' has an empty config.
+
+[09/Dec/2022:03:32:27] ENGINE Started monitor thread 'Autoreloader'.
+[09/Dec/2022:03:32:27] ENGINE Serving on http://127.0.0.1:8089
+[09/Dec/2022:03:32:27] ENGINE Bus STARTED
+127.0.0.1 - - [09/Dec/2022:03:32:30] "GET / HTTP/1.1" 200 32 "" "curl/7.74.0"
+[09/Dec/2022:03:32:40] ENGINE Restarting because /home/volumebindmount/intro.py changed.
+[09/Dec/2022:03:32:40] ENGINE Stopped thread 'Autoreloader'.
+[09/Dec/2022:03:32:40] ENGINE Bus STOPPING
+[09/Dec/2022:03:32:40] ENGINE HTTP Server cherrypy._cpwsgi_server.CPWSGIServer(('127.0.0.1', 8089)) shut down
+[09/Dec/2022:03:32:40] ENGINE Bus STOPPED
+[09/Dec/2022:03:32:40] ENGINE Bus EXITING
+[09/Dec/2022:03:32:40] ENGINE Bus EXITED
+[09/Dec/2022:03:32:41] ENGINE Waiting for child threads to terminate...
+[09/Dec/2022:03:32:41] ENGINE Re-spawning python /home/volumebindmount/intro.py
+[09/Dec/2022:03:32:43] ENGINE Listening for SIGTERM.
+[09/Dec/2022:03:32:43] ENGINE Listening for SIGHUP.
+[09/Dec/2022:03:32:43] ENGINE Listening for SIGUSR1.
+[09/Dec/2022:03:32:43] ENGINE Bus STARTING
+CherryPy Checker:
+The Application mounted at '' has an empty config.
+
+[09/Dec/2022:03:32:43] ENGINE Started monitor thread 'Autoreloader'.
+[09/Dec/2022:03:32:43] ENGINE Serving on http://127.0.0.1:8089
+[09/Dec/2022:03:32:43] ENGINE Bus STARTED
+127.0.0.1 - - [09/Dec/2022:03:32:53] "GET / HTTP/1.1" 200 42 "" "curl/7.74.0"
+[09/Dec/2022:03:33:01] ENGINE Restarting because /home/volumebindmount/intro.py changed.
+[09/Dec/2022:03:33:01] ENGINE Stopped thread 'Autoreloader'.
+[09/Dec/2022:03:33:01] ENGINE Bus STOPPING
+[09/Dec/2022:03:33:01] ENGINE HTTP Server cherrypy._cpwsgi_server.CPWSGIServer(('127.0.0.1', 8089)) shut down
+[09/Dec/2022:03:33:01] ENGINE Bus STOPPED
+[09/Dec/2022:03:33:01] ENGINE Bus EXITING
+[09/Dec/2022:03:33:01] ENGINE Bus EXITED
+[09/Dec/2022:03:33:01] ENGINE Waiting for child threads to terminate...
+[09/Dec/2022:03:33:01] ENGINE Re-spawning python /home/volumebindmount/intro.py
+[09/Dec/2022:03:33:03] ENGINE Listening for SIGTERM.
+[09/Dec/2022:03:33:03] ENGINE Listening for SIGHUP.
+[09/Dec/2022:03:33:03] ENGINE Listening for SIGUSR1.
+[09/Dec/2022:03:33:03] ENGINE Bus STARTING
+CherryPy Checker:
+The Application mounted at '' has an empty config.
+
+[09/Dec/2022:03:33:03] ENGINE Started monitor thread 'Autoreloader'.
+[09/Dec/2022:03:33:03] ENGINE Serving on http://127.0.0.1:8089
+[09/Dec/2022:03:33:03] ENGINE Bus STARTED
+127.0.0.1 - - [09/Dec/2022:03:33:04] "GET / HTTP/1.1" 200 26 "" "curl/7.74.0"
+[09/Dec/2022:03:33:09] ENGINE Restarting because /home/volumebindmount/intro.py changed.
+[09/Dec/2022:03:33:09] ENGINE Stopped thread 'Autoreloader'.
+[09/Dec/2022:03:33:09] ENGINE Bus STOPPING
+[09/Dec/2022:03:33:10] ENGINE HTTP Server cherrypy._cpwsgi_server.CPWSGIServer(('127.0.0.1', 8089)) shut down
+[09/Dec/2022:03:33:10] ENGINE Bus STOPPED
+[09/Dec/2022:03:33:10] ENGINE Bus EXITING
+[09/Dec/2022:03:33:10] ENGINE Bus EXITED
+[09/Dec/2022:03:33:10] ENGINE Waiting for child threads to terminate...
+[09/Dec/2022:03:33:10] ENGINE Re-spawning python /home/volumebindmount/intro.py
+[09/Dec/2022:03:33:12] ENGINE Listening for SIGTERM.
+[09/Dec/2022:03:33:12] ENGINE Listening for SIGHUP.
+[09/Dec/2022:03:33:12] ENGINE Listening for SIGUSR1.
+[09/Dec/2022:03:33:12] ENGINE Bus STARTING
+CherryPy Checker:
+The Application mounted at '' has an empty config.
+
+[09/Dec/2022:03:33:12] ENGINE Started monitor thread 'Autoreloader'.
+[09/Dec/2022:03:33:12] ENGINE Serving on http://127.0.0.1:8089
+[09/Dec/2022:03:33:12] ENGINE Bus STARTED
+127.0.0.1 - - [09/Dec/2022:03:33:15] "GET / HTTP/1.1" 200 27 "" "curl/7.74.0"
