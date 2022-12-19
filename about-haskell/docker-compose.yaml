@@ -1,0 +1,20 @@
+version: '3.1'
+
+services:
+  haskell_service:
+    image: haskell/slim-buster
+    build: .
+    container_name: haskellslimbustercontainer
+    working_dir: /home/volumebindmount
+    # environment:
+    # - PASSWORD=password
+    # command:
+    ports: 
+      - 8888:8888
+    volumes:
+      - type: bind
+        source: ./volumebindmount
+        target: /home/volumebindmount
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    tty: true

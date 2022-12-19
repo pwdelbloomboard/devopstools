@@ -1,0 +1,1 @@
+docker exec -ti haskellslimbustercontainer /bin/bash
