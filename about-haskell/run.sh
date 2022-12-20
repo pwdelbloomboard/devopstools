@@ -1,1 +1,1 @@
-docker-compose up --rm haskell_service
+docker-compose run -ti --rm haskell_service /bin/bash
