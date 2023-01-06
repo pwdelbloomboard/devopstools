@@ -1,0 +1,1 @@
+docker-compose run -ti --publish 8888:8888 --rm haskell_service /bin/bash
