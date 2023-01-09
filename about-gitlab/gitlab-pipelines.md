@@ -101,13 +101,83 @@ test-code-job2:
 
 * Looking at some various examples of steps we may need:
 
-```
-include:
-  - project: $PROJECT_NAME
-    file: $FILE_NAME
-    ref: master
-```
+* "include" is the selector for the project name, file name, branch name.  This is a global keyword along with, "default" which signifies default values, "stages" which names the order of the pipeline stages, "variables" which defines the variables for the job in the pipeline and "workflow," which controls what kind of pipeline to run.
+* [include](https://docs.gitlab.com/ee/ci/yaml/#include) has specific possible subjey inputs:
 
 ```
+include:local
+include:project
+include:remote
+include:template
+```
+
+* So for example [include:project](https://docs.gitlab.com/ee/ci/yaml/#includeproject) is documented in its own right.
+
+```
+include:
+  - project: 'my-group/my-project'
+    file: '/templates/.gitlab-ci-template.yml'
+    ref: master
+```
+* We can define our own instruction set, such as, "Run precommit checks" which utilizes keyword, ["extends"](https://docs.gitlab.com/ee/ci/yaml/#extends) which creates Configuration entries that a job inherits from.
+* extends an alternative to YAML anchors and is a little more flexible and readable.
+* About anchors: YAML has a feature called ‘anchors’ that you can use to duplicate content across your document.  So if you have an anchor such as &thisthing:
+
+```
+.hello: &thisthing
+    image: ruby
+    services:
+    - postgres
+```
+and then you extend that anchor, like so:
+
+```
+test1:
+    <<: *thisthing
+    script: test1 project
+```
+
+* Then all of the items under &thisthing above will be included and copied down below.  Therefore if we go:
+
+```
+Run precommit tests:
+  extends: .tests
+  rules:
+  - if:
+    when:
+```
+* The, ".tests" would be equivalent to doing <<: .tests, but not only that, it would be grabbing ".tests" from the above:
+
+```
+include:
+  - project: 'my-group/my-project'
+    file: '/templates/.gitlab-ci-template.yml'
+```
+* Which can basically serve as a library of a ton of different references to other yml setups, which allows us to store a huge variety of yml options across many different fields and consolidate them into one file, also using the, "include" field, and then re-populate them back into the yaml we are working on now.
+* This avoids having to copy and paste tons and tons of yaml all over every single file, but rather to just create pointers to pointers.
+* So for example if we anted to set up something to publish a python package we could do:
+
+```
+Build and publish python package:
+  extends: .pythonPublish
+
+variables:
+  VAR:
+```
+* So what would our .pythonPublish look like?
+
+```
+.pythonPublish:
+  image: $IMAGE
+  stage: build
+  script: /scripts/python_publish.sh
+  rules:
+    - if: (some rules where we wouldn't want this to happen)
+      when: never
+    - changes:
+      - anything/under/these/files/**/*
+      when: on_success
+    - if: $PYTHON_PUBLISH_FORCE
+      when: on_success
 
 ```
