@@ -167,10 +167,10 @@ variables:
 * So what would our .pythonPublish look like?
 
 ```
-.pythonPublish:
+.pipPublish:
   image: $IMAGE
   stage: build
-  script: /scripts/python_publish.sh
+  script: /scripts/pip_publish.sh
   rules:
     - if: (some rules where we wouldn't want this to happen)
       when: never
@@ -179,5 +179,15 @@ variables:
       when: on_success
     - if: $PYTHON_PUBLISH_FORCE
       when: on_success
-
 ```
+
+
+##### Building a pip_publish Script
+
+* The pip_publish script included within the extended .pipPublish: yaml is the meat of how pip's get published.
+* For more on how to build a pip_publish Script:
+
+* [pip-publish-script.md](/about-pythonpackage/pip-publish-script.md)
+
+##### Looking a Bit Closer At .pipPublish to Make Sure Working Correctly
+
