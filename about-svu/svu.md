@@ -8,6 +8,15 @@ https://github.com/caarlos0/svu
 brew install caarlos0/tap/svu
 ```
 
+## Usage
+
+This tool should be used within a repo that is initializd with git. Otherwise, you get:
+
+```
+user@whatever:/scripts# svu
+svu: error: failed to get current tag for repo: fatal: not a git repository (or any of the parent directories): .git
+```
+
 ## Print the Next Tag
 
 ```
