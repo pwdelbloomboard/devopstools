@@ -167,10 +167,10 @@ variables:
 * So what would our .pythonPublish look like?
 
 ```
-.pythonPublish:
+.pipPublish:
   image: $IMAGE
   stage: build
-  script: /scripts/python_publish.sh
+  script: /scripts/pip_publish.sh
   rules:
     - if: (some rules where we wouldn't want this to happen)
       when: never
@@ -179,5 +179,43 @@ variables:
       when: on_success
     - if: $PYTHON_PUBLISH_FORCE
       when: on_success
+```
+
+
+##### Building a pip_publish Script
+
+* The pip_publish script included within the extended .pipPublish: yaml is the meat of how pip's get published.
+* For more on how to build a pip_publish Script:
+
+* [pip-publish-script.md](/about-pythonpackage/pip-publish-script.md)
+
+##### Predefined CI/CD Pipelines
+
+Any script ran on a Docker container which is running within a Pipeline on a Gitlab Runner are available to be output to be available for a script command within a job.
+
+E.g.: https://docs.gitlab.com/ee/ci/variables/index.html#list-all-variables
+
+Basically, the script can be called as it is ran on a Gitlab Runner, e.g.:
 
 ```
+job_name:
+  script:
+    - export
+    # - 'dir env:'  # Use this for PowerShell
+```
+
+That Gitlab Runner is essentially running a container which we specify, or if we don't specify, then a default Ruby image. This container will then by default have access to all of the Gitlab Predefined Variables, e.g.:
+
+* [Gitlab Predefined Variables](https://docs.gitlab.com/ee/ci/variables/predefined_variables.html)
+
+For example:
+
+```
+CHAT_CHANNEL	10.6	all	The Source chat channel that triggered the ChatOps command.
+CHAT_INPUT	10.6	all	The additional arguments passed with the ChatOps command.
+CHAT_USER_ID	14.4	all	The chat service’s user ID of the user who triggered the ChatOps command.
+
+etc..
+```
+
+* Many of these variables are critical to putting together a script and a full pipeline.
