@@ -65,3 +65,43 @@ You can also add a suffix.
 $ svu major --suffix rc
 v1.0.0-rc
 ```
+
+### Usage Help File
+
+```
+$ svu --help
+usage: svu [<flags>] <command> [<args> ...]
+
+semantic version util
+
+Flags:
+  -h, --help                     Show context-sensitive help (also try --help-long and --help-man).
+      --metadata                 discards pre-release and build metadata if disabled (--no-metadata)
+      --pattern=PATTERN          limits calculations to be based on tags matching the given pattern
+      --pre-release              discards pre-release metadata if disabled (--no-pre-release)
+      --build                    discards build metadata if disabled (--no-build)
+      --prefix="v"               set a custom prefix
+      --suffix=SUFFIX            set a custom a custom suffix (metadata and/or prerelease)
+      --strip-prefix             strips the prefix from the tag
+      --tag-mode=current-branch  determines if latest tag of the current or all branches will be used
+  -v, --version                  Show application version.
+
+Commands:
+  help [<command>...]
+    Show help.
+
+  next* [<flags>]
+    prints the next version based on the git log
+
+  major
+    new major version
+
+  minor
+    new minor version
+
+  patch
+    new patch version
+
+  current
+    prints current version
+```
