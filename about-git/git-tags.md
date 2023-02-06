@@ -101,3 +101,10 @@ Note: switching to 'v2.0.0'.
 
 * Given the helpfulness of tags, another layer for structuring tags is warranted.
 * This can be accomplished with [svu](/about-svu/svu.md)
+
+For an example of how this could be done, using "svu patch --strip-prefix" would take off the "v" prefix and iterate the largest previous tag. So if the largest previous tag was 0.0.31, then we would get to 0.0.31.
+
+```
+$ svu patch --strip-prefix
+0.0.32
+```

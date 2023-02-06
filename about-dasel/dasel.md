@@ -53,6 +53,36 @@ echo '{  "email": "contact@tomwright.me", "name": "Tom"}' | dasel delete -r json
 
 ### Using Dasel on a File
 
+* To display a particular point of data:
+
 ```
 PROJECTNAME=$(dasel -f whatever.toml '.project.name')
+```
+
+* To replace a value in a toml file:
+
+```
+dasel put -r toml -f whatever.toml -t string -v 'apple' '.project.name'
+```
+
+* or a version, for example:
+
+```
+dasel put -r toml -f whatever.toml -t string -v '0.0.33' '.project.version'
+```
+
+* Using [svu](/about-svu) in conjunction with dasel:
+
+```
+# get the current version from the git tag
+CURRENT_VERSION=$(svu current --strip-prefix)
+# get the next version from the git tag
+NEXT_VERSION_PATCH=$(svu patch --strip-prefix)
+
+# change to current version
+dasel put -r toml -f whatever.toml -t string -v $CURRENT_VERSION '.project.version'
+
+# change to patch version
+dasel put -r toml -f whatever.toml -t string -v $NEXT_VERSION_PATCH '.project.version'
+
 ```
