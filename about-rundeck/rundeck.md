@@ -62,19 +62,13 @@ Going deeper into the job, the actual job code itself can be inspected under, "D
 
 ![](/img/pointperytonateachother_definition.png)
 
-Rundeck does not have version control, the code for this job is stored directly within Rundeck.
+Rundeck does not have version control, the code for jobs is stored directly within Rundeck - however, there is a way around this - outside repos can be cloned into the Rundeck server, and those repos can contain compiled scripts which can be called within Rundeck job scripts.
 
-
-### Understanding the Context
-
-* First, we have to understand the context 
-
-* Are variables being updated? Why are they being updated? Are we asking certain applications on certain branches being asked to point to one another?
-* Is this an override?  Are you overriding a variable in SSM?
-* Are you using branch slugs rather than branch names?
-* Can you understand the manual implementation of this job?
 ### Getting to the Job
 
+* You can get to the job in question by opening up the project and clicking on the job.
+* Steps can be added based upon the built-in features and plugins witihn Rundeck within the, "Workflow."
+* Scripts can be added within the workflow as well.
 
 ### Rundeck Plugins
 
@@ -85,9 +79,6 @@ Official Rundeck Plugins listing:
 https://docs.rundeck.com/plugins/?$
 
 * Rundeck has a variety of plugins, from integrations with third party services to all sorts of neat tricks.
-
-
-
 
 # Resources
 
