@@ -2,10 +2,8 @@
 
 ### Next (order of priority)
 
-* [rundeck](/about-rundeck) ...[50%]
-* [gitlab](/about-gitlab) ... [80%] (pipelines, oauth applications)
 * [airflow](/about-airflow) ... [10%] (installing packages)
-* [cherrypy](/about-cherrypy) ... [30%] (installing packages)
+* [cherrypy](/about-cherrypy) ... [50%] (installing packages)
 * [istio](/about-istio) ... [0%] (SSL redirection in Kubeflow)
 
 ### Needed Soon (alphabetical)
@@ -45,7 +43,6 @@
 ### Heavily Updated Since Last Cycle, More Or Less Done for Now
 
 * [registries](/about-registries) ... [80%]
-
 ### Not Urgent Yet (alphabetical)
 
 * [ansible](/about-ansible)
@@ -95,10 +92,12 @@
 * [docker](/about-docker/) ... [DONE]
 * [feast](/about-feast) ... [80%]
 * [git](/about-git) .. [DONE]
+* [gitlab](/about-gitlab) ... [80%] (pipelines, oauth applications, package repo, ci)
 * [go](/about-go) ... [85%]
 * [grok](/about-grok) ... [DONE%]
 * [k3d/k3s](/about-k3d) ... [DONE]
 * [kustomize](/about-kustomize) ... [90%]
+* [rundeck](/about-rundeck) ...[80%] (running jobs, creating jobs, using variables)
 * SRE School ...[DONE]
 * [shellcheck](/about-shellcheck) ...[DONE]
 * [ssm](/about-ssm) ... [DONE]
