@@ -1,0 +1,4 @@
+#!/bin/bash
+
+echo "Building image and tagging with name: python3p9bullseye/apiserver "
+docker build -t python3p9bullseye/apiserver .

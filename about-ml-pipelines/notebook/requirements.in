@@ -1,0 +1,5 @@
+joblib==1.2.0
+jupyterlab==3.0.16
+numpy==1.23.0 # 22 Jun 2022
+pandas==1.5.2 # 22 Nov 2022
+scikit-learn==1.2.0 # 8 Dec 2022
