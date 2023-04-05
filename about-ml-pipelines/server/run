@@ -1,0 +1,6 @@
+#!/bin/bash
+
+./buildimageandtag
+
+echo "Running image in temporary container name: python3p9bullseye/apiserver "
+docker run --rm --name python3p9bullseye-apiserver-c-throwaway -p 8889:8889 python3p9bullseye/apiserver /bin/bash
