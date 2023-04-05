@@ -19,6 +19,7 @@ class Server(object):
 
     @cherrypy.expose
     def index(self):
+        cherrypy.session['fieldname'] = 'fieldvalue';
         return "Hello World!"
 
     @cherrypy.expose
