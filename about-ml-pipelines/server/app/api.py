@@ -1,69 +1,81 @@
-import requests
+# import requests
 import cherrypy
-import sklearn
 import joblib
+import json
+import pandas as pd
+
 
 # load our model
 lr = joblib.load('/home/app/model/model.joblib')
-
-# establish session
-# session = requests.Session()
-# session_cookie = ''
-
-#def query(model_name, version, json):
-#    model_api = "/api/" + model_name + "/" + str(version) + "/"
-#    response = session.post(HOST + model_api, headers=HEADERS, json=json)
-#    return response
+model_columns = joblib.load("/home/app/model/model_columns.joblib")
 
 class Server(object):
 
     @cherrypy.expose
     def index(self):
-        cherrypy.session['fieldname'] = 'fieldvalue';
-        return "Hello World!"
+        # simple function to test if Server working.
+        return "Hello World"
+    
+class API(object):
+    exposed = True
 
     @cherrypy.expose
-    @cherrypy.tools.json_out()
     @cherrypy.tools.json_in()
-    def query(self):
-        try:
-            json = cherrypy.request.json
-            model = json['model']
-            version = json['version']
-            data = json['data']
-            resp = query(model, version, data)
-            if (resp.status_code != 200):
-                raise cherrypy.HTTPError(500, "Query Error ({})".format(resp.status_code))
-            print(resp.content)
-            return {"result": ast.literal_eval(resp.content.decode('utf-8'))}
-        except KeyError as err:
-            raise cherrypy.HTTPError(400, "Bad Request for key: {}".format(err))
-        except Exception as err:
-            raise cherrypy.HTTPError(500, "Unknown Error: {}".format(err))
+    @cherrypy.tools.json_out()
+    def query(self, *args, **kwargs):
+        # Read the incoming JSON data from the request body
+        data = cherrypy.request.json
 
+        # convert categorical variables into dummy/indicator variables indicating presence
+        query = pd.get_dummies(pd.DataFrame(data))
+        # reindex the columns of query using the model_columns list, adding new columns if missing
+        query = query.reindex(columns=model_columns, fill_value=0)
+        # use lr, the trained ml model and predict based upon reindexed dataframe 
+        prediction = list(lr.predict(query))
+        
+        # this can be set in the default. This indicates to the serer that the response should be interpreted as json data by the client
+        cherrypy.response.headers['Content-Type'] = 'application/json'
+
+        # numpy int64 data type is not JSON seriallizeable by default
+        # need to convert each numpy int64 into a python int
+        json_prediction = json.dumps([int(x) for x in prediction])
+
+        # Return the JSON response as a dictionary.
+        # note, We need to return this as a dict rather than a json object.
+        # If we return it as a jsob object, the key will include backslashes ```\"prediction\":``` to indicate that the double quotes are part of the string.
+        return {"prediction": json_prediction}
 
 def main():
     # global server config - seperate this from the application config
-    cherrypy.config.update({
-    'server.socket_host' : '0.0.0.0',
-    'server.socket_port' : 8889,
-    })
+    global_config = {
+        'server.socket_host': '0.0.0.0',
+        'server.socket_port': 8889,
+    }    
 
-    # applicaton config is provided
-    cherrypy.tree.mount(Server(), '/', {
-        '/' : {
-        'tools.sessions.on' : True,
-        'request.dispatch'  : cherrypy.dispatch.MethodDispatcher(),
-        'tools.sessions.timeout': 60,
-        },
-        '/string' : {
-        'tools.response_headers.on'      : True,
-        'tools.response_headers.headers' : [('Content-Type', 'text/plain')]  
+    server_config = {
+        '/': {
+            'tools.sessions.on': True,
+            'tools.sessions.timeout': 3600,
         }
-    })
+    }
 
-    cherrypy.quickstart(Server())
+    api_config = {
+        '/api': {
+            # map HTTP methods (GET, POST, PUT, DELETE, etc.) to methods in the application class, API()
+            # Sub'request.dispatch': cherrypy.dispatch.MethodDispatcher(API()),
+            'request.dispatch': cherrypy.dispatch.MethodDispatcher(),
+            'tools.sessions.on': True,
+            'tools.response_headers.on': True,
+            # This indicates to the serer that the response should be interpreted as json data by the client
+            'tools.response_headers.headers': [('Content-Type', 'application/json')]
+        }
+    }   
 
+    cherrypy.config.update(global_config)
+    cherrypy.tree.mount(Server(),'/',server_config)
+    cherrypy.tree.mount(API(), '/api', api_config)
+    cherrypy.engine.start()
+    cherrypy.engine.block()
 
 
 if __name__ == "__main__":

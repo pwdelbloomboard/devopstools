@@ -4,7 +4,9 @@
 
 * [airflow](/about-airflow) ... [10%] (installing packages)
 * [cherrypy](/about-cherrypy) ... [50%] (installing packages)
-* [istio](/about-istio) ... [0%] (SSL redirection in Kubeflow)
+* [pytest]
+* [items from code review]
+* [project management filtering]
 
 ### Needed Soon (alphabetical)
 
@@ -63,6 +65,7 @@
 * [elasticache](/about-elasticache)
 * [environments](/about-environments)
 * [gql](/about-gql) ... [80%]
+* [istio](/about-istio) ... [0%] (SSL redirection in Kubeflow)
 * [javascript](/about-javascript)
 * [kops](/about-kops)
 * [kubeflow](/about-kubeflow) ... [80%] (as a user)
