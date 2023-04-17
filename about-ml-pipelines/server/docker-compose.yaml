@@ -9,13 +9,16 @@ services:
     #environment:
     #  - PASSWORD=password
     command:
-      - "/app/start"
+      - "/home/launch/start"
     ports: 
       - 8889:8889
     volumes:
       - type: bind
         source: ./app
-        target: /app/app/
+        target: /home/app/
+      - type: bind
+        source: ./model/model.joblib
+        target: /home/app/model/model.joblib
     extra_hosts:
       - "host.docker.internal:host-gateway"
     tty: true
