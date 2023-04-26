@@ -3,14 +3,16 @@
 ### Next (order of priority)
 
 * [airflow](/about-airflow) ... [10%] (installing packages)
-* [cherrypy](/about-cherrypy) ... [50%] (installing packages)
-* [pytest]
+* [cherrypy](/about-cherrypy) ... [80%] (installing packages)
+* [pytest](/about-pytest)
+* [pydocs](/about-pydocs)
 * [items from code review]
-* [project management filtering]
+* [smoothness-measurement](/about-smoothness-measurement)
+* [jupyter-auth](/jupyter-auth)
 
 ### Needed Soon (alphabetical)
 
-* [auth](/about-auth) ... [10%]
+* [auth](/about-auth) ... [30%]
 * [ha-ft](/about-haft) ... [5%]
 * [kinesis](/about-kinesis) ... [0%]
 * [nginx](/about-nginx) ... [80%] (using nginx as a load balancer) 
