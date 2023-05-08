@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cityscape at Night</title>
+    <style>
+        canvas {
+            display: block;
+            margin: 0 auto;
+            background-color: #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="nightCityCanvas" width="600" height="300"></canvas>
+    <script>
+        const canvas = document.getElementById('nightCityCanvas');
+        const ctx = canvas.getContext('2d');
+
+        // Night sky background
+        ctx.fillStyle = '#000080';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        // Draw the moon
+        ctx.fillStyle = '#FFFACD';
+        ctx.beginPath();
+        ctx.arc(500, 50, 30, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Draw stars
+        ctx.fillStyle = '#FFFFFF';
+        const stars = [
+            { x: 50, y: 20 }, { x: 100, y: 40 }, { x: 250, y: 10 },
+            { x: 300, y: 30 }, { x: 400, y: 50 }, { x: 550, y: 15 },
+        ];
+        for (const star of stars) {
+            ctx.beginPath();
+            ctx.arc(star.x, star.y, 2, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        // Draw buildings
+        const buildings = [
+            { x: 50, y: 150, width: 100, height: 150 },
+            { x: 200, y: 100, width: 80, height: 200 },
+            { x: 320, y: 50, width: 120, height: 250 },
+            { x: 480, y: 120, width: 60, height: 180 },
+            { x: 570, y: 180, width: 20, height: 120 },
+        ];
+
+        ctx.fillStyle = '#333';
+        for (const building of buildings) {
+            ctx.fillRect(building.x, building.y, building.width, building.height);
+        }
+
+        // Draw windows with lights
+        ctx.fillStyle = '#FFFF00';
+        for (const building of buildings) {
+            for (let i = 0; i < building.width; i += 10) {
+                for (let j = 0; j < building.height; j += 20) {
+                    if (Math.random() < 0.5) {
+                        ctx.fillRect(building.x + i, building.y + j, 5, 10);
+                    }
+                }
+            }
+        }
+
+        // Draw ground
+        ctx.fillStyle = '#228B22';
+        ctx.fillRect(0, canvas.height - 20, canvas.width, 20);
+    </script>
+</body>
+</html>

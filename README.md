@@ -4,9 +4,11 @@
 
 * [airflow](/about-airflow) ... [10%] (installing packages)
 * [cherrypy](/about-cherrypy) ... [80%] (installing packages)
-* [pytest](/about-pytest)
-* [pydocs](/about-pydocs)
-* [items from code review]
+* [pytest](/about-python/about-pytest)
+* [pydocs](/about-python/about-pydocs)
+* [python maps](/about-python/about-pythonmaps)
+* [code review]
+* [unit testing]
 * [smoothness-measurement](/about-smoothness-measurement)
 * [jupyter-auth](/jupyter-auth)
 
@@ -102,6 +104,7 @@
 * [grok](/about-grok) ... [DONE%]
 * [k3d/k3s](/about-k3d) ... [DONE]
 * [kustomize](/about-kustomize) ... [90%]
+* [package management](/about-python/about-pythonpackage/)
 * [rundeck](/about-rundeck) ...[80%] (running jobs, creating jobs, using variables)
 * SRE School ...[DONE]
 * [shellcheck](/about-shellcheck) ...[DONE]
@@ -201,17 +204,13 @@
 * endpoint testing
 * integration testing
 * network security
-* package management
 * soc2
 * system calls
-* unit testing
 
 ## Ambiguous
 
-* api
 * network security
 * reading code
-* package management
 * Runbooks
 * AWS library...which library?
 * Adjacent language syntax
@@ -224,9 +223,6 @@
 * Core Automation Tools
 * Fast Graceful Failures
 * Correct Logic
-* Linux Tools - which ones? Some already listed seperately.
-* Automation - anything specific? It's inherently vast.
-
 
 ## Devops Evaluation Rubric
 
@@ -347,7 +343,9 @@
 
 ## Python Production Tools
 
-* [python tools](/python-examples/pythonexamples.md)
+* [python tools](/about-python/python-examples/pythonexamples.md)
+
+
 
 ## Change List
 
