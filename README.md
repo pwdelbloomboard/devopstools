@@ -3,14 +3,15 @@
 ### Next (order of priority)
 
 * [airflow](/about-airflow) ... [10%] (installing packages)
-* [cherrypy](/about-cherrypy) ... [50%] (installing packages)
-* [pytest]
-* [items from code review]
-* [project management filtering]
+* [tox, within the pytest and unittetst directory](/about-python/about-pytest-and-pyutil)
+* [pydocs](/about-python/about-pydocs)
+* [code review]
+* [smoothness-measurement](/about-smoothness-measurement)
+* [jupyter-auth](/jupyter-auth)
 
 ### Needed Soon (alphabetical)
 
-* [auth](/about-auth) ... [10%]
+* [auth](/about-auth) ... [30%]
 * [ha-ft](/about-haft) ... [5%]
 * [kinesis](/about-kinesis) ... [0%]
 * [nginx](/about-nginx) ... [80%] (using nginx as a load balancer) 
@@ -87,6 +88,7 @@
 
 ## Reached Sufficient Level of Completion (Alphabetical)
 
+* [cherrpy](/about-python/about-cherrypy) ... [80%] (installing packages not done yet)
 * [cobra](about-cobra) ... [DONE]
 * [command line](/commandline-examples) ...[85%] (setup scripts, ci scripts)
 * [cronjobs](/about-cronjobs) ... [DONE]
@@ -100,6 +102,9 @@
 * [grok](/about-grok) ... [DONE%]
 * [k3d/k3s](/about-k3d) ... [DONE]
 * [kustomize](/about-kustomize) ... [90%]
+* [package management](/about-python/about-pythonpackage/)
+* [pytest, unittest, tox](/about-python/about-pytest-and-pyutil) ...[DONE]
+* [python maps](/about-python/about-pythonmaps) [map-like data structures are different than python maps] ...[DONE]
 * [rundeck](/about-rundeck) ...[80%] (running jobs, creating jobs, using variables)
 * SRE School ...[DONE]
 * [shellcheck](/about-shellcheck) ...[DONE]
@@ -199,17 +204,13 @@
 * endpoint testing
 * integration testing
 * network security
-* package management
 * soc2
 * system calls
-* unit testing
 
 ## Ambiguous
 
-* api
 * network security
 * reading code
-* package management
 * Runbooks
 * AWS library...which library?
 * Adjacent language syntax
@@ -222,9 +223,6 @@
 * Core Automation Tools
 * Fast Graceful Failures
 * Correct Logic
-* Linux Tools - which ones? Some already listed seperately.
-* Automation - anything specific? It's inherently vast.
-
 
 ## Devops Evaluation Rubric
 
@@ -345,7 +343,9 @@
 
 ## Python Production Tools
 
-* [python tools](/python-examples/pythonexamples.md)
+* [python tools](/about-python/python-examples/pythonexamples.md)
+
+
 
 ## Change List
 
