@@ -3,12 +3,9 @@
 ### Next (order of priority)
 
 * [airflow](/about-airflow) ... [10%] (installing packages)
-* [cherrypy](/about-cherrypy) ... [80%] (installing packages)
-* [pytest](/about-python/about-pytest)
+* [tox, within the pytest and unittetst directory](/about-python/about-pytest-and-pyutil)
 * [pydocs](/about-python/about-pydocs)
-* [python maps](/about-python/about-pythonmaps)
 * [code review]
-* [unit testing]
 * [smoothness-measurement](/about-smoothness-measurement)
 * [jupyter-auth](/jupyter-auth)
 
@@ -91,6 +88,7 @@
 
 ## Reached Sufficient Level of Completion (Alphabetical)
 
+* [cherrpy](/about-python/about-cherrypy) ... [80%] (installing packages not done yet)
 * [cobra](about-cobra) ... [DONE]
 * [command line](/commandline-examples) ...[85%] (setup scripts, ci scripts)
 * [cronjobs](/about-cronjobs) ... [DONE]
@@ -105,6 +103,8 @@
 * [k3d/k3s](/about-k3d) ... [DONE]
 * [kustomize](/about-kustomize) ... [90%]
 * [package management](/about-python/about-pythonpackage/)
+* [pytest, unittest, tox](/about-python/about-pytest-and-pyutil) ...[DONE]
+* [python maps](/about-python/about-pythonmaps) [map-like data structures are different than python maps] ...[DONE]
 * [rundeck](/about-rundeck) ...[80%] (running jobs, creating jobs, using variables)
 * SRE School ...[DONE]
 * [shellcheck](/about-shellcheck) ...[DONE]

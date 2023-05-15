@@ -1,0 +1,21 @@
+version: '3.1'
+
+services:
+  pytest_service:
+    image: python/3p9-bullseye/pytest
+    build: .
+    container_name: python_python_3p9_bullseye_pytest
+    working_dir: /home/volumebindmount
+    # environment:
+    # - PASSWORD=password
+    # command:
+    ports: 
+      - 8888:8888
+    volumes:
+      - type: bind
+        source: ./volumebindmount
+        target: /home/volumebindmount
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    tty: true
+    stdin_open: true
