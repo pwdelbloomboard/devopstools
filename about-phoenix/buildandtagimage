@@ -1,0 +1,5 @@
+#!/bin/bash
+
+echo "Building image and tagging with name: python/3p9-bullseye/cherrypy "
+docker build -t elixir/1p12/phoenix .
+
