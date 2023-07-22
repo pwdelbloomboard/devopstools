@@ -4,17 +4,17 @@ services:
   phoenix_service:
     image: elixir/1p12/phoenix
     build: .
-    container_name: elixir/1p12/phoenix_container
-    working_dir: /home/volumebindmount
+    container_name: elixir-1p12-phoenix_container
+    working_dir: /home/app/
     # environment:
     # - PASSWORD=password
-    # command:
+    command: /home/app/start
     ports:
       - 4000:4000
     volumes:
       - type: bind
-        source: ./volumebindmount
-        target: /home/volumebindmount
+        source: ./volumebindmount/
+        target: /home/app/
     extra_hosts:
       - "host.docker.internal:host-gateway"
     tty: true

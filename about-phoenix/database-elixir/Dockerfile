@@ -5,11 +5,13 @@ FROM elixir:1.12
 WORKDIR /app
 
 # Install hex package manager and rebar
-RUN mix local.hex --force && \
-    mix local.rebar --force
+# RUN mix local.hex --force && \
+#    mix local.rebar --force
 
 # Copy the application source code (if available)
-COPY ./volumebindmount/ .
+COPY ./volumebindmount/ /home/app/
+# Enable start script
+RUN chmod +x /home/app/start
 
 # Set the command to run when the container starts
-CMD ["bash"]
+CMD ["/home/app/start"]
