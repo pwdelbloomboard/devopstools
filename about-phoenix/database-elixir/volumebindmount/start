@@ -9,5 +9,8 @@
 # update dependencies
 ./update.sh
 
+# compile the application
+./compile.sh
+
 # run the application
 ./runnohalt.sh
